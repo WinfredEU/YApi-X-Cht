@@ -23,7 +23,7 @@ import './interfaceMenu.scss'
 
 const confirm = Modal.confirm
 const TreeNode = Tree.TreeNode
-const headHeight = 240 // menu顶部到网页顶部部分的高度
+const headHeight = 240 // menu頂部到網頁頂部部分的高度
 
 @connect(
   state => {
@@ -122,9 +122,9 @@ class InterfaceMenu extends Component {
     const id = data._id
     const catid = data.catid
     const ref = confirm({
-      title: '您确认删除此接口????',
-      content: '温馨提示：接口删除后，无法恢复',
-      okText: '确认',
+      title: '您確認刪除此介面????',
+      content: '溫馨提示：介面刪除后，無法恢復',
+      okText: '確認',
       cancelText: '取消',
       async onOk() {
         await that.props.deleteInterfaceData(id, that.props.projectId)
@@ -144,9 +144,9 @@ class InterfaceMenu extends Component {
   showDelCatConfirm = catid => {
     const that = this
     const ref = confirm({
-      title: '确定删除此接口分类吗？',
-      content: '温馨提示：该操作会删除该分类下所有接口，接口删除后无法恢复',
-      okText: '确认',
+      title: '確定刪除此介面分類嗎？',
+      content: '溫馨提示：該操作會刪除該分類下所有介面，介面刪除后無法恢復',
+      okText: '確認',
       cancelText: '取消',
       async onOk() {
         await that.props.deleteInterfaceCatData(catid, that.props.projectId)
@@ -175,7 +175,7 @@ class InterfaceMenu extends Component {
       if (res.data.errcode !== 0) {
         return message.error(res.data.errmsg)
       }
-      message.success('接口添加成功')
+      message.success('介面新增成功')
       const interfaceId = res.data.data._id
       await this.getList()
       this.props.history.push(`/project/${ this.props.projectId }/interface/api/${ interfaceId}`)
@@ -186,9 +186,9 @@ class InterfaceMenu extends Component {
   }
 
   /**
-   * 复制分类。
+   * 複製分類。
    *
-   * @param cat {{name: string, desc: string, project_id: number, list: any[]}} 分类
+   * @param cat {{name: string, desc: string, project_id: number, list: any[]}} 分類
    */
   copyCategory = async cat => {
     this.setState({catLoading: true})
@@ -213,7 +213,7 @@ class InterfaceMenu extends Component {
     }))
     await this.getList()
     this.props.history.push(`/project/${this.props.projectId}/interface/api/cat_${newCatId}`)
-    message.success('分类复制成功')
+    message.success('分類複製成功')
     this.setState({
       catLoading: false,
       expands: [`cat_${newCatId}`],
@@ -229,7 +229,7 @@ class InterfaceMenu extends Component {
     this.setState({delIcon: id})
   }
 
-  // 数据过滤
+  // 數據過濾
   filterList = list => {
     const that = this
     const arr = []
@@ -313,7 +313,7 @@ class InterfaceMenu extends Component {
 
     if (id.indexOf('cat') === -1) {
       if (dropCatId === dragCatId) {
-        // 同一个分类下的接口交换顺序
+        // 同一個分類下的介面交換順序
         const colList = list[dropCatIndex].list
         const changes = arrayChangeIndex(colList, dragIndex, dropIndex)
         axios.post('/api/interface/up_index', changes).then()
@@ -324,12 +324,12 @@ class InterfaceMenu extends Component {
       this.props.fetchInterfaceListMenu(projectId)
       this.props.fetchInterfaceList({project_id: projectId})
       if (router && isNaN(router.params.actionId)) {
-        // 更新分类list下的数据
+        // 更新分類list下的數據
         const catid = router.params.actionId.substr(4)
         this.props.fetchInterfaceCatList({catid})
       }
     } else {
-      // 分类之间拖动
+      // 分類之間拖動
       const changes = arrayChangeIndex(list, dragIndex - 1, dropIndex - 1)
       axios.post('/api/interface/up_cat_index', changes).then()
       this.props.fetchInterfaceListMenu(this.props.projectId)
@@ -347,7 +347,7 @@ class InterfaceMenu extends Component {
       if (res.data.errcode !== 0) {
         return message.error(res.data.errmsg)
       }
-      message.success('接口添加成功')
+      message.success('介面新增成功')
       const interfaceId = res.data.data._id
       this.props.history.push(`/project/${ this.props.projectId }/interface/api/${ interfaceId}`)
       this.getList()
@@ -366,7 +366,7 @@ class InterfaceMenu extends Component {
       if (res.data.errcode !== 0) {
         return message.error(res.data.errmsg)
       }
-      message.success('接口分类添加成功')
+      message.success('介面分類新增成功')
       this.getList()
       this.props.getProject(data.project_id)
       this.setState({
@@ -394,7 +394,7 @@ class InterfaceMenu extends Component {
       if (res.data.errcode !== 0) {
         return message.error(res.data.errmsg)
       }
-      message.success('接口分类更新成功')
+      message.success('介面分類更新成功')
       this.getList()
       this.props.getProject(data.project_id)
       this.setState({
@@ -408,16 +408,16 @@ class InterfaceMenu extends Component {
     // let menuList = this.state.list;
     const searchBox = (
       <div className='interface-filter'>
-        <Input value={this.state.filter} placeholder='搜索接口' onChange={this.handleFilter} />
+        <Input value={this.state.filter} placeholder='搜索介面' onChange={this.handleFilter} />
         <Button
           type='primary'
           className='btn-filter'
           onClick={() => this.changeModal('add_cat_modal_visible', true)}>
-          添加分类
+          新增分類
         </Button>
         {this.state.visible ? (
           <Modal
-            title='添加接口'
+            title='新增介面'
             visible={this.state.visible}
             footer={null}
             className='addcatmodal'
@@ -435,7 +435,7 @@ class InterfaceMenu extends Component {
 
         {this.state.add_cat_modal_visible ? (
           <Modal
-            title='添加分类'
+            title='新增分類'
             visible={this.state.add_cat_modal_visible}
             footer={null}
             className='addcatmodal'
@@ -451,7 +451,7 @@ class InterfaceMenu extends Component {
 
         {this.state.change_cat_modal_visible ? (
           <Modal
-            title='修改分类'
+            title='修改分類'
             visible={this.state.change_cat_modal_visible}
             footer={null}
             className='addcatmodal'
@@ -510,7 +510,7 @@ class InterfaceMenu extends Component {
                 {item.title}
               </Link>
               <div className='btns'>
-                <Tooltip title='删除接口'>
+                <Tooltip title='刪除介面'>
                   <Icon
                     type='delete'
                     className='interface-delete-icon'
@@ -521,7 +521,7 @@ class InterfaceMenu extends Component {
                     }}
                   />
                 </Tooltip>
-                <Tooltip title='复制接口'>
+                <Tooltip title='複製介面'>
                   <Icon
                     type='copy'
                     className='interface-delete-icon'
@@ -580,7 +580,7 @@ class InterfaceMenu extends Component {
                         this.changeExpands()
                       }}>
                       <Icon type='folder' style={{marginRight: 5}} />
-                      全部接口
+                      全部介面
                     </Link>
                   )}
                 />
@@ -604,7 +604,7 @@ class InterfaceMenu extends Component {
                             {item.name}
                           </Link>
                           <div className='btns'>
-                            <Tooltip title='删除分类'>
+                            <Tooltip title='刪除分類'>
                               <Icon
                                 type='delete'
                                 className='interface-delete-icon'
@@ -615,7 +615,7 @@ class InterfaceMenu extends Component {
                                 }}
                               />
                             </Tooltip>
-                            <Tooltip title='复制分类'>
+                            <Tooltip title='複製分類'>
                               <Icon
                                 type='copy'
                                 className='interface-delete-icon'
@@ -626,7 +626,7 @@ class InterfaceMenu extends Component {
                                 }}
                               />
                             </Tooltip>
-                            <Tooltip title='修改分类'>
+                            <Tooltip title='修改分類'>
                               <Icon
                                 type='edit'
                                 className='interface-delete-icon'
@@ -640,7 +640,7 @@ class InterfaceMenu extends Component {
                                 }}
                               />
                             </Tooltip>
-                            <Tooltip title='添加接口'>
+                            <Tooltip title='新增介面'>
                               <Icon
                                 type='plus'
                                 className='interface-delete-icon'

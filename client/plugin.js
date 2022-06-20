@@ -1,12 +1,12 @@
 /**
- * type component  组件
- *      listener   监听函数
- * mulit 是否绑定多个监听函数
+ * type component  元件
+ *      listener   監聽函式
+ * mulit 是否繫結多個監聽函式
  */
 
 const hooks = {
   /**
-   * 第三方登录 //可参考 yapi-plugin-qsso 插件
+   * 第三方登錄 //可參考 yapi-plugin-qsso 外掛
    */
   third_login: {
     type: 'component',
@@ -14,11 +14,11 @@ const hooks = {
     listener: null,
   },
   /**
-   * 导入数据
+   * 匯入數據
    * @param Object importDataModule
    *
    * @info
-   * 可参考 vendors/exts/yapi-plugin-import-swagger插件
+   * 可參考 vendors/exts/yapi-plugin-import-swagger外掛
    * importDataModule = {};
    */
   import_data: {
@@ -27,7 +27,7 @@ const hooks = {
     listener: [],
   },
   /**
-   * 导出数据
+   * 導出數據
    * @param Object exportDataModule
    * @param projectId
    * @info
@@ -35,7 +35,7 @@ const hooks = {
    * exportDataModule.pdf = {
    *   name: 'Pdf',
    *   route: '/api/plugin/export/pdf',
-   *   desc: '导出项目接口文档为 pdf 文件'
+   *   desc: '導出專案介面文件為 pdf 檔案'
    * }
    */
   export_data: {
@@ -44,23 +44,23 @@ const hooks = {
     listener: [],
   },
   /**
-   * 接口页面 tab 钩子
+   * 介面頁面 tab 鉤子
    * @param InterfaceTabs
    *
    * @info
-   * 可参考 vendors/exts/yapi-plugin-advanced-mock
+   * 可參考 vendors/exts/yapi-plugin-advanced-mock
    * let InterfaceTabs = {
       view: {
         component: View,
-        name: '预览'
+        name: '預覽'
       },
       edit: {
         component: Edit,
-        name: '编辑'
+        name: '編輯'
       },
       run: {
         component: Run,
-        name: '运行'
+        name: '執行'
       }
     }
    */
@@ -70,8 +70,8 @@ const hooks = {
     listener: [],
   },
   /**
-   * 在运行页面或单个测试也里每次发送请求前调用
-   * 可以用插件针对某个接口的请求头或者数据进行修改或者记录
+   * 在執行頁面或單個測試也里每次發送請求前呼叫
+   * 可以用外掛針對某個介面的請求頭或者數據進行修改或者記錄
   */
   before_request: {
     type: 'listener',
@@ -79,8 +79,8 @@ const hooks = {
     listener: [],
   },
   /**
-   * 在运行页面或单个测试也里每次发送完成后调用
-   * 返回值为响应原始值 +
+   * 在執行頁面或單個測試也里每次發送完成後呼叫
+   * 返回值為響應原始值 +
    * {
    *   type: 'inter' | 'case',
    *   projectId: string,
@@ -93,7 +93,7 @@ const hooks = {
     listener: [],
   },
   /**
-   * 在测试集里运行每次发送请求前调用
+   * 在測試集里執行每次發送請求前呼叫
   */
   before_col_request: {
     type: 'listener',
@@ -101,8 +101,8 @@ const hooks = {
     listener: [],
   },
   /**
-   * 在测试集里运行每次发送请求后调用
-   * 返回值为响应原始值 +
+   * 在測試集里執行每次發送請求后呼叫
+   * 返回值為響應原始值 +
    * {
    *   type: 'col',
    *   caseId: string,
@@ -116,27 +116,27 @@ const hooks = {
     listener: [],
   },
   /**
-   * header下拉菜单 menu 钩子
+   * header下拉菜單 menu 鉤子
    * @param HeaderMenu
    *
    * @info
-   * 可参考 vendors/exts/yapi-plugin-statistics
+   * 可參考 vendors/exts/yapi-plugin-statistics
    * let HeaderMenu = {
   user: {
     path: '/user/profile',
-    name: '个人中心',
+    name: '個人中心',
     icon: 'user',
     adminFlag: false
   },
   star: {
     path: '/follow',
-    name: '我的关注',
+    name: '我的關注',
     icon: 'star-o',
     adminFlag: false
   },
   solution: {
     path: '/user/list',
-    name: '用户管理',
+    name: '使用者管理',
     icon: 'solution',
     adminFlag: true
 
@@ -156,12 +156,12 @@ const hooks = {
     listener: [],
   },
   /**
-   * Route路由列表钩子
+   * Route路由列表鉤子
    * @param AppRoute
    *
    * @info
-   * 可参考 vendors/exts/yapi-plugin-statistics
-   * 添加位置在Application.js 中
+   * 可參考 vendors/exts/yapi-plugin-statistics
+   * 新增位置在Application.js 中
    * let AppRoute = {
   home: {
     path: '/',
@@ -200,7 +200,7 @@ const hooks = {
     listener: [],
   },
   /*
-   * 添加 reducer
+   * 新增 reducer
    * @param Object reducerModules
    *
    * @info
@@ -214,15 +214,15 @@ const hooks = {
   },
 
   /*
-   * 添加 subnav 钩子
+   * 新增 subnav 鉤子
    * @param Object reducerModules
    *
    *  let routers = {
-      interface: { name: '接口', path: "/project/:id/interface/:action", component:Interface },
-      activity: { name: '动态', path: "/project/:id/activity", component:  Activity},
-      data: { name: '数据管理', path: "/project/:id/data",  component: ProjectData},
-      members: { name: '成员管理', path: "/project/:id/members" , component: ProjectMember},
-      setting: { name: '设置', path: "/project/:id/setting" , component: Setting}
+      interface: { name: '介面', path: "/project/:id/interface/:action", component:Interface },
+      activity: { name: '動態', path: "/project/:id/activity", component:  Activity},
+      data: { name: '數據管理', path: "/project/:id/data",  component: ProjectData},
+      members: { name: '成員管理', path: "/project/:id/members" , component: ProjectMember},
+      setting: { name: '設定', path: "/project/:id/setting" , component: Setting}
     }
    */
   sub_nav: {
@@ -231,7 +231,7 @@ const hooks = {
     listener: [],
   },
   /*
-   * 添加项目设置 nav
+   * 新增專案設定 nav
    * @param Object routers
    *
    *  let routers = {

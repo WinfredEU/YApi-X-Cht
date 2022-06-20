@@ -87,7 +87,7 @@ Footer.defaultProps = {
       ],
     },
     {
-      title: '团队',
+      title: '團隊',
       iconType: 'team',
       linkList: [
         {
@@ -101,7 +101,7 @@ Footer.defaultProps = {
       ],
     },
     {
-      title: '反馈',
+      title: '反饋',
       iconType: 'aliwangwang-o',
       linkList: [
         {
@@ -122,7 +122,7 @@ Footer.defaultProps = {
           itemLink: 'https://github.com/fjc0k/YApi-X/blob/master/CHANGELOG.md',
         },
         {
-          itemTitle: '使用文档',
+          itemTitle: '使用文件',
           itemLink: 'https://hellosean1025.github.io/yapi/',
         },
       ],

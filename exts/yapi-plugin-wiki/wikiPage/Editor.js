@@ -56,7 +56,7 @@ class WikiEditor extends Component {
             取消
           </Button>
           <Checkbox checked={notice} onChange={onEmailNotice}>
-            通知相关人员
+            通知相關人員
           </Checkbox>
         </div>
       </div>

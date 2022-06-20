@@ -5,23 +5,23 @@ import './ErrMsg.scss';
 import { withRouter } from 'react-router';
 
 /**
- * 错误信息提示
+ * 錯誤資訊提示
  *
  * @component ErrMsg
  * @examplelanguage js
  *
- * * 错误信息提示组件
- * * 错误信息提示组件
+ * * 錯誤資訊提示元件
+ * * 錯誤資訊提示元件
  *
  *
  */
 
 /**
- * 标题
- * 一般用于描述错误信息名称
+ * 標題
+ * 一般用於描述錯誤資訊名稱
  * @property title
  * @type string
- * @description 一般用于描述错误信息名称
+ * @description 一般用於描述錯誤資訊名稱
  * @returns {object}
  */
 @withRouter
@@ -44,35 +44,35 @@ class ErrMsg extends Component {
     if (type) {
       switch (type) {
         case 'noFollow':
-          title = '你还没有关注项目呢';
+          title = '你還沒有關注專案呢';
           desc = (
             <span>
-              先去 <a onClick={() => this.props.history.push('/group')}>“项目广场”</a> 逛逛吧,
-              那里可以添加关注。
+              先去 <a onClick={() => this.props.history.push('/group')}>「專案廣場」</a> 逛逛吧,
+              那裡可以新增關注。
             </span>
           );
           break;
         case 'noInterface':
-          title = '该项目还没有接口呢';
-          desc = '在左侧 “接口列表” 中添加接口';
+          title = '該專案還沒有介面呢';
+          desc = '在左側 「介面列表」 中新增介面';
           break;
         case 'noMemberInProject':
-          title = '该项目还没有成员呢';
+          title = '該專案還沒有成員呢';
           break;
         case 'noMemberInGroup':
-          title = '该分组还没有成员呢';
+          title = '該分組還沒有成員呢';
           break;
         case 'noProject':
-          title = '该分组还没有项目呢';
-          desc = <span>请点击右上角添加项目按钮新建项目</span>;
+          title = '該分組還沒有專案呢';
+          desc = <span>請點選右上角新增專案按鈕新建專案</span>;
           break;
         case 'noData':
-          title = '暂无数据';
-          desc = '先去别处逛逛吧';
+          title = '暫無數據';
+          desc = '先去別處逛逛吧';
           break;
         case 'noChange':
-          title = '没有改动';
-          desc = '该操作未改动 Api 数据';
+          title = '沒有改動';
+          desc = '該操作未改動 Api 數據';
           icon = 'meh-o';
           break;
         default:

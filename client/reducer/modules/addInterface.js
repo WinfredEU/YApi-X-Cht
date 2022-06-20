@@ -16,7 +16,7 @@ const initialState = {
   interfaceName: '',
   url: '',
   method: 'GET',
-  // 默认请求头部有一条数据
+  // 預設請求頭部有一條數據
   seqGroup: [
     {
       id: 0,

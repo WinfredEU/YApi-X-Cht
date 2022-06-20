@@ -46,7 +46,7 @@ class Reg extends Component {
         this.props.regActions(values).then(res => {
           if (res.payload.data.errcode == 0) {
             this.props.history.replace('/group');
-            message.success('注册成功! ');
+            message.success('註冊成功! ');
           }
         });
       }
@@ -56,7 +56,7 @@ class Reg extends Component {
   checkPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
-      callback('两次输入的密码不一致啊!');
+      callback('兩次輸入的密碼不一致啊!');
     } else {
       callback();
     }
@@ -74,10 +74,10 @@ class Reg extends Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSubmit}>
-        {/* 用户名 */}
+        {/* 使用者名稱 */}
         <FormItem style={formItemStyle}>
           {getFieldDecorator('userName', {
-            rules: [{ required: true, message: '请输入用户名!' }]
+            rules: [{ required: true, message: '請輸入使用者名稱!' }]
           })(
             <Input
               style={changeHeight}
@@ -93,7 +93,7 @@ class Reg extends Component {
             rules: [
               {
                 required: true,
-                message: '请输入email!',
+                message: '請輸入email!',
                 pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$/
               }
             ]
@@ -106,13 +106,13 @@ class Reg extends Component {
           )}
         </FormItem>
 
-        {/* 密码 */}
+        {/* 密碼 */}
         <FormItem style={formItemStyle}>
           {getFieldDecorator('password', {
             rules: [
               {
                 required: true,
-                message: '请输入密码!'
+                message: '請輸入密碼!'
               },
               {
                 validator: this.checkConfirm
@@ -128,13 +128,13 @@ class Reg extends Component {
           )}
         </FormItem>
 
-        {/* 密码二次确认 */}
+        {/* 密碼二次確認 */}
         <FormItem style={formItemStyle}>
           {getFieldDecorator('confirm', {
             rules: [
               {
                 required: true,
-                message: '请再次输入密码密码!'
+                message: '請再次輸入密碼密碼!'
               },
               {
                 validator: this.checkPassword
@@ -150,7 +150,7 @@ class Reg extends Component {
           )}
         </FormItem>
 
-        {/* 注册按钮 */}
+        {/* 註冊按鈕 */}
         <FormItem style={formItemStyle}>
           <Button
             style={changeHeight}
@@ -158,7 +158,7 @@ class Reg extends Component {
             htmlType="submit"
             className="login-form-button"
           >
-            注册
+            註冊
           </Button>
         </FormItem>
       </Form>

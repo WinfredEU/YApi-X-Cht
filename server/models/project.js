@@ -186,7 +186,7 @@ class projectModel extends baseModel {
       .exec()
   }
 
-  // 获取项目数量统计
+  // 獲取專案數量統計
   getProjectListCount() {
     return this.model.countDocuments()
   }

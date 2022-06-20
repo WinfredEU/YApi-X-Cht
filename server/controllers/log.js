@@ -27,14 +27,14 @@ class logController extends baseController {
   }
 
   /**
-   * 获取动态列表
+   * 獲取動態列表
    * @interface /log/list
    * @method GET
    * @category log
    * @foldnumber 10
-   * @param {Number} typeid 动态类型id， 不能为空
-   * @param {Number} [page] 分页页码
-   * @param {Number} [limit] 分页大小
+   * @param {Number} typeid 動態型別id， 不能為空
+   * @param {Number} [page] 分頁頁碼
+   * @param {Number} [limit] 分頁大小
    * @returns {Object}
    * @example /log/list
    */
@@ -46,10 +46,10 @@ class logController extends baseController {
       type = ctx.request.query.type,
       selectValue = ctx.request.query.selectValue;
     if (!typeid) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, 'typeid不能为空'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, 'typeid不能為空'));
     }
     if (!type) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, 'type不能为空'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, 'type不能為空'));
     }
     try {
       if (type === 'group') {
@@ -70,7 +70,7 @@ class logController extends baseController {
           item = item.toObject();
           if (item.type === 'project') {
             item.content =
-              `在 <a href="/project/${item.typeid}">${projectDatas[item.typeid].name}</a> 项目: ` +
+              `在 <a href="/project/${item.typeid}">${projectDatas[item.typeid].name}</a> 專案: ` +
               item.content;
           }
           projectLogList[index] = item;
@@ -94,12 +94,12 @@ class logController extends baseController {
     }
   }
   /**
-   * 获取特定cat_id下最新修改的动态信息
+   * 獲取特定cat_id下最新修改的動態資訊
    * @interface /log/list_by_update
    * @method post
    * @category log
    * @foldnumber 10
-   * @param {Number} typeid 动态类型id， 不能为空
+   * @param {Number} typeid 動態型別id， 不能為空
    * @returns {Object}
    * @example /log/list
    */

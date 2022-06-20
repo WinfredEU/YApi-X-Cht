@@ -68,7 +68,7 @@ class ProjectList extends Component {
     });
   }
 
-  // 修改线上域名的协议类型 (http/https)
+  // 修改線上域名的協議型別 (http/https)
   @autobind
   protocolChange(value) {
     this.setState({
@@ -76,7 +76,7 @@ class ProjectList extends Component {
     });
   }
 
-  // 获取 ProjectCard 组件的关注事件回调，收到后更新数据
+  // 獲取 ProjectCard 元件的關注事件回撥，收到后更新數據
 
   receiveRes = () => {
     this.props.fetchProjectList(this.props.currGroup._id, this.props.currPage);
@@ -85,12 +85,12 @@ class ProjectList extends Component {
   componentWillReceiveProps(nextProps) {
     this.props.setBreadcrumb([{ name: '' + (nextProps.currGroup.group_name || '') }]);
 
-    // 切换分组
+    // 切換分組
     if (this.props.currGroup !== nextProps.currGroup && nextProps.currGroup._id) {
       this.props.fetchProjectList(nextProps.currGroup._id, this.props.currPage);
     }
 
-    // 切换项目列表
+    // 切換專案列表
     if (this.props.projectList !== nextProps.projectList) {
       // console.log(nextProps.projectList);
       const data = nextProps.projectList.map((item, index) => {
@@ -127,7 +127,7 @@ class ProjectList extends Component {
     const Follow = () => {
       return followProject.length ? (
         <Row>
-          <h3 className="owner-type">我的关注</h3>
+          <h3 className="owner-type">我的關注</h3>
           {followProject.map((item, index) => {
             return (
               <Col xs={8} lg={6} xxl={4} key={index}>
@@ -141,7 +141,7 @@ class ProjectList extends Component {
     const NoFollow = () => {
       return noFollow.length ? (
         <Row style={{ borderBottom: '1px solid #eee', marginBottom: '15px' }}>
-          <h3 className="owner-type">我的项目</h3>
+          <h3 className="owner-type">我的專案</h3>
           {noFollow.map((item, index) => {
             return (
               <Col xs={8} lg={6} xxl={4} key={index}>
@@ -168,17 +168,17 @@ class ProjectList extends Component {
       <div style={{ paddingTop: '24px' }} className="m-panel card-panel card-panel-s project-list">
         <Row className="project-list-header">
           <Col span={16} style={{ textAlign: 'left' }}>
-            {this.props.currGroup.group_name} 分组共 ({projectData.length}) 个项目
+            {this.props.currGroup.group_name} 分組共 ({projectData.length}) 個專案
           </Col>
           <Col span={8}>
             {isShow ? (
               <Link to="/add-project">
-                <Button type="primary">添加项目</Button>
+                <Button type="primary">新增專案</Button>
               </Link>
             ) : (
-              <Tooltip title="您没有权限,请联系该分组组长或管理员">
+              <Tooltip title="您沒有許可權,請聯繫該分組組長或管理員">
                 <Button type="primary" disabled>
-                  添加项目
+                  新增專案
                 </Button>
               </Tooltip>
             )}

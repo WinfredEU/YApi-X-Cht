@@ -33,15 +33,15 @@ class ProjectToken extends Component {
 
   copyToken = () => {
     copy(this.props.token);
-    message.success('已经成功复制到剪切板');
+    message.success('已經成功複製到剪下板');
   };
 
   updateToken = () => {
     let that = this;
     confirm({
-      title: '重新生成key',
-      content: '重新生成之后，之前的key将无法使用，确认重新生成吗？',
-      okText: '确认',
+      title: '重新產生key',
+      content: '重新產生之後，之前的key將無法使用，確認重新產生嗎？',
+      okText: '確認',
       cancelText: '取消',
       async onOk() {
         await that.props.updateToken(that.props.projectId);
@@ -54,41 +54,41 @@ class ProjectToken extends Component {
   render() {
     return (
       <div className="project-token">
-        <h2 className="token-title">工具标识</h2>
+        <h2 className="token-title">工具標識</h2>
         <div className="message">
-          每个项目都有唯一的标识token，用户可以使用这个token值来请求项目 openapi.
+          每個專案都有唯一的標識token，使用者可以使用這個token值來請求專案 openapi.
         </div>
         <div className="token">
           <span>
             token: <span className="token-message">{this.props.token}</span>
           </span>
-          <Tooltip title="复制">
+          <Tooltip title="複製">
             <Icon className="token-btn" type="copy" onClick={this.copyToken} />
           </Tooltip>
           {this.props.curProjectRole === 'admin' || this.props.curProjectRole === 'owner' ? (
-            <Tooltip title="刷新">
+            <Tooltip title="重新整理">
               <Icon className="token-btn" type="reload" onClick={this.updateToken} />
             </Tooltip>
           ) : null}
         </div>
         <div className="blockquote">
-          为确保项目内数据的安全性和私密性，请勿轻易将该token暴露给项目组外用户。
+          為確保專案內數據的安全性和私密性，請勿輕易將該token暴露給專案組外使用者。
         </div>
         <br />
-        <h2  className="token-title">open接口：</h2>
-        <p><a target="_blank" rel="noopener noreferrer"   href="https://hellosean1025.github.io/yapi/openapi.html">详细接口文档</a></p>
+        <h2  className="token-title">open介面：</h2>
+        <p><a target="_blank" rel="noopener noreferrer"   href="https://hellosean1025.github.io/yapi/openapi.html">詳細介面文件</a></p>
         <div>
           <ul className="open-api">
-            <li>/api/open/run_auto_test [运行自动化测试]</li>
-            <li>/api/open/import_data [导入数据]</li>
-            <li>/api/interface/add [新增接口]</li>
-            <li>/api/interface/save [保存接口]</li>
-            <li>/api/interface/up [更新接口]</li>
-            <li>/api/interface/get [获取接口]</li>
-            <li>/api/interface/list [获取接口列表]</li>
-            <li>/api/interface/list_menu [获取接口菜单]</li>
-            <li>/api/interface/add_cat [新增接口分类]</li>
-            <li>/api/interface/getCatMenu [获取所有分类]</li>
+            <li>/api/open/run_auto_test [執行自動化測試]</li>
+            <li>/api/open/import_data [匯入數據]</li>
+            <li>/api/interface/add [新增介面]</li>
+            <li>/api/interface/save [儲存介面]</li>
+            <li>/api/interface/up [更新介面]</li>
+            <li>/api/interface/get [獲取介面]</li>
+            <li>/api/interface/list [獲取介面列表]</li>
+            <li>/api/interface/list_menu [獲取介面菜單]</li>
+            <li>/api/interface/add_cat [新增介面分類]</li>
+            <li>/api/interface/getCatMenu [獲取所有分類]</li>
           </ul>
         </div>
       </div>

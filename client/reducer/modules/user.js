@@ -31,7 +31,7 @@ const initialState = {
   //   name: 'name',
   //   href: 'group'
   // }, {
-  //   name: '当前页面'
+  //   name: '目前頁面'
   // }]
   breadcrumb: [],
   studyTip: 0,

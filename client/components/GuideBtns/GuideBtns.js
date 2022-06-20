@@ -22,7 +22,7 @@ class GuideBtns extends Component {
     isLast: PropTypes.bool
   };
 
-  // 点击下一步
+  // 點選下一步
   nextStep = () => {
     this.props.changeStudyTip();
     if (this.props.isLast) {
@@ -30,7 +30,7 @@ class GuideBtns extends Component {
     }
   };
 
-  // 点击退出指引
+  // 點選退出指引
   exitGuide = () => {
     this.props.finishStudy();
   };

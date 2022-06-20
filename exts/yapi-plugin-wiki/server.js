@@ -12,7 +12,7 @@ module.exports = function() {
 
   this.bindHook('add_router', function(addRouter) {
     addRouter({
-      // 获取wiki信息
+      // 獲取wiki資訊
       controller: controller,
       method: 'get',
       path: 'wiki_desc/get',
@@ -20,7 +20,7 @@ module.exports = function() {
     });
 
     addRouter({
-      // 更新wiki信息
+      // 更新wiki資訊
       controller: controller,
       method: 'post',
       path: 'wiki_desc/up',

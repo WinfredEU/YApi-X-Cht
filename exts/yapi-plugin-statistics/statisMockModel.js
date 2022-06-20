@@ -14,7 +14,7 @@ class statisMockModel extends baseModel {
             interface_id: { type: Number, required: true },
             project_id: { type: Number, required: true },
             group_id: { type: Number, required: true },
-            time: Number, //'时间戳'
+            time: Number, //'時間戳'
             ip: String,
             date: String
         };

@@ -15,18 +15,18 @@ blockquote {
   -webkit-font-smoothing: antialiased;
 }
 
-/* 设置滚动条的样式 */
+/* 設定滾動條的樣式 */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
-/* 外层轨道 */
+/* 外層軌道 */
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset006pxrgba(255, 0, 0, 0.3);
   background: rgba(0, 0, 0, 0.1);
 }
 
-/* 滚动条滑块 */
+/* 滾動條滑塊 */
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background: rgba(0, 0, 0, 0.2);

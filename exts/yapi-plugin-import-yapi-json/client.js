@@ -18,19 +18,19 @@ function importData(importDataModule) {
       return interfaceData;
     } catch (e) {
       console.error(e);
-      message.error('数据格式有误');
+      message.error('數據格式有誤');
     }
   }
 
   if (!importDataModule || typeof importDataModule !== 'object') {
-    console.error('importDataModule 参数Must be Object Type');
+    console.error('importDataModule 參數Must be Object Type');
     return null;
   }
 
   importDataModule.json = {
     name: 'json',
     run: run,
-    desc: 'YApi接口 json数据导入'
+    desc: 'YApi介面 json數據匯入'
   };
 }
 

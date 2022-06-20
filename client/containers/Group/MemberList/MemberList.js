@@ -70,7 +70,7 @@ class MemberList extends Component {
     });
   };
 
-  // 重新获取列表
+  // 重新獲取列表
   reFetchList = () => {
     this.props.fetchGroupMemberList(this.props.currGroup._id).then(res => {
       this.setState({
@@ -80,7 +80,7 @@ class MemberList extends Component {
     });
   };
 
-  // 增 - 添加成员
+  // 增 - 新增成員
 
   handleOk = () => {
     this.props
@@ -98,12 +98,12 @@ class MemberList extends Component {
             inputRole: 'dev',
             inputUids: []
           });
-          message.success(`添加成功! 已成功添加 ${addLength} 人，其中 ${existLength} 人已存在`);
-          this.reFetchList(); // 添加成功后重新获取分组成员列表
+          message.success(`新增成功! 已成功新增 ${addLength} 人，其中 ${existLength} 人已存在`);
+          this.reFetchList(); // 新增成功後重新獲取分組成員列表
         }
       });
   };
-  // 添加成员时 选择新增成员权限
+  // 新增成員時 選擇新增成員許可權
 
   changeNewMemberRole = value => {
     this.setState({
@@ -111,7 +111,7 @@ class MemberList extends Component {
     });
   };
 
-  // 删 - 删除分组成员
+  // 刪 - 刪除分組成員
 
   deleteConfirm = member_uid => {
     return () => {
@@ -119,13 +119,13 @@ class MemberList extends Component {
       this.props.delMember({ id, member_uid }).then(res => {
         if (!res.payload.data.errcode) {
           message.success(res.payload.data.errmsg);
-          this.reFetchList(); // 添加成功后重新获取分组成员列表
+          this.reFetchList(); // 新增成功後重新獲取分組成員列表
         }
       });
     };
   };
 
-  // 改 - 修改成员权限
+  // 改 - 修改成員許可權
   changeUserRole = e => {
     const id = this.props.currGroup._id;
     const role = e.split('-')[0];
@@ -133,12 +133,12 @@ class MemberList extends Component {
     this.props.changeMemberRole({ id, member_uid, role }).then(res => {
       if (!res.payload.data.errcode) {
         message.success(res.payload.data.errmsg);
-        this.reFetchList(); // 添加成功后重新获取分组成员列表
+        this.reFetchList(); // 新增成功後重新獲取分組成員列表
       }
     });
   };
 
-  // 关闭模态框
+  // 關閉模態框
 
   handleCancel = () => {
     this.setState({
@@ -189,7 +189,7 @@ class MemberList extends Component {
     const columns = [
       {
         title:
-          this.props.currGroup.group_name + ' 分组成员 (' + this.state.userInfo.length + ') 人',
+          this.props.currGroup.group_name + ' 分組成員 (' + this.state.userInfo.length + ') 人',
         dataIndex: 'username',
         key: 'username',
         render: (text, record) => {
@@ -215,7 +215,7 @@ class MemberList extends Component {
           this.state.role === 'owner' || this.state.role === 'admin' ? (
             <div className="btn-container">
               <Button className="btn" type="primary" onClick={this.showAddMemberModal}>
-                添加成员
+                新增成員
               </Button>
             </div>
           ) : (
@@ -232,15 +232,15 @@ class MemberList extends Component {
                   className="select"
                   onChange={this.changeUserRole}
                 >
-                  <Option value={'owner-' + record.uid}>组长</Option>
-                  <Option value={'dev-' + record.uid}>开发者</Option>
-                  <Option value={'guest-' + record.uid}>访客</Option>
+                  <Option value={'owner-' + record.uid}>組長</Option>
+                  <Option value={'dev-' + record.uid}>開發者</Option>
+                  <Option value={'guest-' + record.uid}>訪客</Option>
                 </Select>
                 <Popconfirm
                   placement="topRight"
-                  title="你确定要删除吗? "
+                  title="你確定要刪除嗎? "
                   onConfirm={this.deleteConfirm(record.uid)}
-                  okText="确定"
+                  okText="確定"
                   cancelText=""
                 >
                   <Button type="danger" icon="delete" className="btn-danger" />
@@ -249,13 +249,13 @@ class MemberList extends Component {
               </div>
             );
           } else {
-            // 非管理员可以看到权限 但无法修改
+            // 非管理員可以看到許可權 但無法修改
             if (record.role === 'owner') {
-              return '组长';
+              return '組長';
             } else if (record.role === 'dev') {
-              return '开发者';
+              return '開發者';
             } else if (record.role === 'guest') {
-              return '访客';
+              return '訪客';
             } else {
               return '';
             }
@@ -283,14 +283,14 @@ class MemberList extends Component {
       <div className="m-panel">
         {this.state.visible ? (
           <Modal
-            title="添加成员"
+            title="新增成員"
             visible={this.state.visible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
           >
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label usernamelabel">用户名: </div>
+                <div className="label usernamelabel">使用者名稱: </div>
               </Col>
               <Col span="15">
                 <UsernameAutoComplete callbackState={this.onUserSelect} />
@@ -298,13 +298,13 @@ class MemberList extends Component {
             </Row>
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label usernameauth">权限: </div>
+                <div className="label usernameauth">許可權: </div>
               </Col>
               <Col span="15">
                 <Select defaultValue="dev" className="select" onChange={this.changeNewMemberRole}>
-                  <Option value="owner">组长</Option>
-                  <Option value="dev">开发者</Option>
-                  <Option value="guest">访客</Option>
+                  <Option value="owner">組長</Option>
+                  <Option value="dev">開發者</Option>
+                  <Option value="guest">訪客</Option>
                 </Select>
               </Col>
             </Row>

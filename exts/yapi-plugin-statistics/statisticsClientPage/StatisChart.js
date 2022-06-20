@@ -24,7 +24,7 @@ class StatisChart extends Component {
     this.getMockData();
   }
 
-  // 获取mock 请求次数信息
+  // 獲取mock 請求次數資訊
   async getMockData() {
     let result = await axios.get('/api/plugin/statismock/get');
     if (result.data.errcode === 0) {
@@ -44,7 +44,7 @@ class StatisChart extends Component {
       <div>
         <Spin spinning={this.state.showLoading}>
           <div className="statis-chart-content">
-            <h3 className="statis-title">mock 接口访问总数为：{mockCount.toLocaleString()}</h3>
+            <h3 className="statis-title">mock 介面訪問總數為：{mockCount.toLocaleString()}</h3>
             <div className="statis-chart">
               <LineChart
                 width={width}
@@ -58,7 +58,7 @@ class StatisChart extends Component {
                 <Tooltip />
                 <Legend />
                 <Line
-                  name="mock统计值"
+                  name="mock統計值"
                   type="monotone"
                   dataKey="count"
                   stroke="#8884d8"
@@ -66,7 +66,7 @@ class StatisChart extends Component {
                 />
               </LineChart>
             </div>
-            <div className="statis-footer">过去3个月mock接口调用情况</div>
+            <div className="statis-footer">過去3個月mock介面呼叫情況</div>
           </div>
         </Spin>
       </div>

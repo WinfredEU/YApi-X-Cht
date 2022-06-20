@@ -34,7 +34,7 @@ export default class Services extends Component {
       <div className="project-services">
         <section className="news-box m-panel">
           <div className="token">
-            <h5>安装工具</h5>
+            <h5>安裝工具</h5>
             <pre>{`
   npm i sm2tsservice -D
   `}</pre>
@@ -63,12 +63,12 @@ export default class Services extends Component {
   }
   `}
             </pre>
-            <h5>生成services代码</h5>
+            <h5>產生services程式碼</h5>
             <pre>{`
   (./node_modules/.bin/)sm2tsservice --clear
   `}</pre>
           </div>
-          <a href="https://github.com/gogoyqj/sm2tsservice">更多说明 sm2tsservice</a>
+          <a href="https://github.com/gogoyqj/sm2tsservice">更多說明 sm2tsservice</a>
         </section>
       </div>
     );

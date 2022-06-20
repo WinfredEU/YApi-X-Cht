@@ -13,7 +13,7 @@ function install() {
 
   if (exist) {
     throw new Error(
-      'init.lock文件已存在，请确认您是否已安装。如果需要重新安装，请删掉init.lock文件',
+      'init.lock檔案已存在，請確認您是否已安裝。如果需要重新安裝，請刪掉init.lock檔案',
     )
   }
 
@@ -138,12 +138,12 @@ function setupSql() {
         function () {
           fs.ensureFileSync(yapi.path.join(yapi.WEBROOT_RUNTIME, 'init.lock'))
           console.log(
-            `初始化管理员账号成功,账号名："${yapi.WEBCONFIG.adminAccount}"，密码："${yapi.WEBCONFIG.adminPassword || 'ymfe.org'}"`,
+            `初始化管理員賬號成功,賬號名："${yapi.WEBCONFIG.adminAccount}"，密碼："${yapi.WEBCONFIG.adminPassword || 'ymfe.org'}"`,
           ); // eslint-disable-line
           process.exit(0)
         },
         function (err) {
-          throw new Error(`初始化管理员账号 "${yapi.WEBCONFIG.adminAccount}" 失败, ${err.message}`); // eslint-disable-line
+          throw new Error(`初始化管理員賬號 "${yapi.WEBCONFIG.adminAccount}" 失敗, ${err.message}`); // eslint-disable-line
         },
       )
     })

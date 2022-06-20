@@ -10,7 +10,7 @@ function arrUnique(arr1, arr2) {
 
 const noticeObj = {
   mail: {
-    title: '邮件',
+    title: '郵件',
     hander: (emails, title, content)=>{
       yapi.commons.sendMail({
         to: emails,
@@ -49,7 +49,7 @@ yapi.commons.sendNotice = async function(projectId, data) {
       try{
         noticeItem.hander(emails, data.title, data.content)
       }catch(err){
-        yapi.commons.log('发送' + (noticeItem.title || key) + '失败' + err.message,  'error')
+        yapi.commons.log('發送' + (noticeItem.title || key) + '失敗' + err.message,  'error')
       }
     })
     // yapi.commons.sendMail({
@@ -58,6 +58,6 @@ yapi.commons.sendNotice = async function(projectId, data) {
     //   subject: data.title
     // });
   } catch (e) {
-    yapi.commons.log('发送失败：' + e, 'error');
+    yapi.commons.log('發送失敗：' + e, 'error');
   }
 };

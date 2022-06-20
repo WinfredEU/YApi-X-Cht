@@ -2,7 +2,7 @@ const yapi = require('../yapi.js');
 const baseModel = require('./base.js');
 
 /**
- * 接口分类
+ * 介面分類
  */
 class interfaceCat extends baseModel {
   getName() {

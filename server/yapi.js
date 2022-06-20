@@ -6,7 +6,7 @@ const config = require('../../config.json')
 const insts = new Map()
 let mail
 
-const WEBROOT = path.resolve(__dirname, '..') //路径
+const WEBROOT = path.resolve(__dirname, '..') //路徑
 const WEBROOT_SERVER = __dirname
 const WEBROOT_RUNTIME = path.resolve(__dirname, '../..')
 const WEBROOT_LOG = path.join(WEBROOT_RUNTIME, 'log')
@@ -19,7 +19,7 @@ if (WEBCONFIG.mail && WEBCONFIG.mail.enable) {
 }
 
 /**
- * 获取一个model实例，如果不存在则创建一个新的返回
+ * 獲取一個model實例，如果不存在則建立一個新的返回
  * @param {*} m class
  * @example
  * yapi.getInst(groupModel, arg1, arg2)

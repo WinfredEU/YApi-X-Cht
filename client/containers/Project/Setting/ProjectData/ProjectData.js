@@ -47,7 +47,7 @@ function handleExportRouteParams(url, status, isWiki) {
 // exportDataModule.pdf = {
 //   name: 'Pdf',
 //   route: '/api/interface/download_crx',
-//   desc: '导出项目接口文档为 pdf 文件'
+//   desc: '導出專案介面文件為 pdf 檔案'
 // }
 @connect(
   state => {
@@ -117,9 +117,9 @@ class ProjectData extends Component {
       console.log(info.file, info.fileList);
     }
     if (status === 'done') {
-      message.success(`${info.file.name} 文件上传成功`);
+      message.success(`${info.file.name} 檔案上傳成功`);
     } else if (status === 'error') {
-      message.error(`${info.file.name} 文件上传失败`);
+      message.error(`${info.file.name} 檔案上傳失敗`);
     }
   };
 
@@ -137,10 +137,10 @@ class ProjectData extends Component {
     );
   };
 
-  // 本地文件上传
+  // 本地檔案上傳
   handleFile = info => {
     if (!this.state.curImportType) {
-      return message.error('请选择导入数据的方式');
+      return message.error('請選擇匯入數據的方式');
     }
     if (this.state.selectCatid) {
       this.setState({ showLoading: true });
@@ -149,15 +149,15 @@ class ProjectData extends Component {
       reader.onload = async res => {
         res = await importDataModule[this.state.curImportType].run(res.target.result);
         if (this.state.dataSync === 'merge') {
-          // 开启同步
+          // 開啟同步
           this.showConfirm(res);
         } else {
-          // 未开启同步
+          // 未開啟同步
           await this.handleAddInterface(res);
         }
       };
     } else {
-      message.error('请选择上传的默认分类');
+      message.error('請選擇上傳的預設分類');
     }
   };
 
@@ -177,12 +177,12 @@ class ProjectData extends Component {
     });
     let domainData = result.payload.data.data;
     const ref = confirm({
-      title: '您确认要进行数据同步????',
+      title: '您確認要進行數據同步????',
       width: 600,
       okType: 'danger',
       iconType: 'exclamation-circle',
       className: 'dataImport-confirm',
-      okText: '确认',
+      okText: '確認',
       cancelText: '取消',
       content: (
         <div className="postman-dataImport-modal">
@@ -195,7 +195,7 @@ class ProjectData extends Component {
               );
             })}
           </div>
-          <p className="info">温馨提示： 数据同步后，可能会造成原本的修改数据丢失</p>
+          <p className="info">溫馨提示： 數據同步后，可能會造成原本的修改數據丟失</p>
         </div>
       ),
       async onOk() {
@@ -222,40 +222,40 @@ class ProjectData extends Component {
     });
   };
 
-  // 处理导入信息同步
+  // 處理匯入資訊同步
   onChange = checked => {
     this.setState({
       dataSync: checked
     });
   };
 
-  // 处理swagger URL 导入
+  // 處理swagger URL 匯入
   handleUrlChange = checked => {
     this.setState({
       isSwaggerUrl: checked
     });
   };
 
-  // 记录输入的url
+  // 記錄輸入的url
   swaggerUrlInput = url => {
     this.setState({
       swaggerUrl: url
     });
   };
 
-  // url导入上传
+  // url匯入上傳
   onUrlUpload = async () => {
     if (!this.state.curImportType) {
-      return message.error('请选择导入数据的方式');
+      return message.error('請選擇匯入數據的方式');
     }
 
     if (!this.state.swaggerUrl) {
-      return message.error('url 不能为空');
+      return message.error('url 不能為空');
     }
     if (this.state.selectCatid) {
       this.setState({ showLoading: true });
       try {
-        // 处理swagger url 导入
+        // 處理swagger url 匯入
         await this.props.handleSwaggerUrlData(this.state.swaggerUrl);
         // let result = json5_parse(this.props.swaggerUrlData)
         let res = await importDataModule[this.state.curImportType].run(this.props.swaggerUrlData);
@@ -263,7 +263,7 @@ class ProjectData extends Component {
           // merge
           this.showConfirm(res);
         } else {
-          // 未开启同步
+          // 未開啟同步
           await this.handleAddInterface(res);
         }
       } catch (e) {
@@ -271,16 +271,16 @@ class ProjectData extends Component {
         message.error(e.message);
       }
     } else {
-      message.error('请选择上传的默认分类');
+      message.error('請選擇上傳的預設分類');
     }
   };
 
-  // 处理导出接口是全部还是公开
+  // 處理導出介面是全部還是公開
   handleChange = e => {
     this.setState({ exportContent: e.target.value });
   };
 
-  //  处理是否开启wiki导出
+  //  處理是否開啟wiki導出
   handleWikiChange = e => {
     this.setState({
       isWiki: e.target.checked
@@ -321,13 +321,13 @@ class ProjectData extends Component {
             <div className="dataImportCon">
               <div>
                 <h3>
-                  数据导入&nbsp;
+                  數據匯入&nbsp;
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://hellosean1025.github.io/yapi/documents/data.html"
                   >
-                    <Tooltip title="点击查看文档">
+                    <Tooltip title="點選檢視文件">
                       <Icon type="question-circle-o" />
                     </Tooltip>
                   </a>
@@ -335,7 +335,7 @@ class ProjectData extends Component {
               </div>
               <div className="dataImportTile">
                 <Select
-                  placeholder="请选择导入数据的方式"
+                  placeholder="請選擇匯入數據的方式"
                   value={this.state.curImportType}
                   onChange={this.handleImportType}
                 >
@@ -353,7 +353,7 @@ class ProjectData extends Component {
                   value={this.state.selectCatid + ''}
                   showSearch
                   style={{ width: '100%' }}
-                  placeholder="请选择数据导入的默认分类"
+                  placeholder="請選擇數據匯入的預設分類"
                   optionFilterProp="children"
                   onChange={this.selectChange.bind(this)}
                   filterOption={(input, option) =>
@@ -371,21 +371,21 @@ class ProjectData extends Component {
               </div>
               <div className="dataSync">
                 <span className="label">
-                  数据同步&nbsp;
+                  數據同步&nbsp;
                   <Tooltip
                     title={
                       <div>
                         <h3 style={{ color: 'white' }}>普通模式</h3>
-                        <p>不导入已存在的接口</p>
+                        <p>不匯入已存在的介面</p>
                         <br />
-                        <h3 style={{ color: 'white' }}>智能合并</h3>
+                        <h3 style={{ color: 'white' }}>智慧合併</h3>
                         <p>
-                          已存在的接口，将合并返回数据的 response，适用于导入了 swagger
-                          数据，保留对数据结构的改动
+                          已存在的介面，將合併返回數據的 response，適用於匯入了 swagger
+                          數據，保留對數據結構的改動
                         </p>
                         <br />
-                        <h3 style={{ color: 'white' }}>完全覆盖</h3>
-                        <p>不保留旧数据，完全使用新数据，适用于接口定义完全交给后端定义</p>
+                        <h3 style={{ color: 'white' }}>完全覆蓋</h3>
+                        <p>不保留舊數據，完全使用新數據，適用於介面定義完全交給後端定義</p>
                       </div>
                     }
                   >
@@ -394,8 +394,8 @@ class ProjectData extends Component {
                 </span>
                 <Select value={this.state.dataSync} onChange={this.onChange}>
                   <Option value="normal">普通模式</Option>
-                  <Option value="good">智能合并</Option>
-                  <Option value="merge">完全覆盖</Option>
+                  <Option value="good">智慧合併</Option>
+                  <Option value="merge">完全覆蓋</Option>
                 </Select>
 
                 {/* <Switch checked={this.state.dataSync} onChange={this.onChange} /> */}
@@ -403,8 +403,8 @@ class ProjectData extends Component {
               {this.state.curImportType === 'swagger' && (
                 <div className="dataSync">
                   <span className="label">
-                    开启url导入&nbsp;
-                    <Tooltip title="swagger url 导入">
+                    開啟url匯入&nbsp;
+                    <Tooltip title="swagger url 匯入">
                       <Icon type="question-circle-o" />
                     </Tooltip>{' '}
                     &nbsp;&nbsp;
@@ -425,17 +425,17 @@ class ProjectData extends Component {
                     onClick={this.onUrlUpload}
                     loading={this.state.showLoading}
                   >
-                    上传
+                    上傳
                   </Button>
                 </div>
               ) : (
                 <div className="import-content">
-                  <Spin spinning={this.state.showLoading} tip="上传中...">
+                  <Spin spinning={this.state.showLoading} tip="上傳中...">
                     <Dragger {...uploadMess}>
                       <p className="ant-upload-drag-icon">
                         <Icon type="inbox" />
                       </p>
-                      <p className="ant-upload-text">点击或者拖拽文件到上传区域</p>
+                      <p className="ant-upload-text">點選或者拖拽檔案到上傳區域</p>
                       <p
                         className="ant-upload-hint"
                         onClick={e => {
@@ -461,10 +461,10 @@ class ProjectData extends Component {
               }}
             >
               <div>
-                <h3>数据导出</h3>
+                <h3>數據導出</h3>
               </div>
               <div className="dataImportTile">
-                <Select placeholder="请选择导出数据的方式" onChange={this.handleExportType}>
+                <Select placeholder="請選擇導出數據的方式" onChange={this.handleExportType}>
                   {Object.keys(exportDataModule).map(name => {
                     return (
                       <Option key={name} value={name}>
@@ -477,8 +477,8 @@ class ProjectData extends Component {
 
               <div className="dataExport">
                 <RadioGroup defaultValue="all" onChange={this.handleChange}>
-                  <Radio value="all">全部接口</Radio>
-                  <Radio value="open">公开接口</Radio>
+                  <Radio value="all">全部介面</Radio>
+                  <Radio value="open">公開介面</Radio>
                 </RadioGroup>
               </div>
               <div className="export-content">
@@ -491,7 +491,7 @@ class ProjectData extends Component {
                       href={exportHref}>
                       <Button className="export-button" type="primary" size="large">
                         {' '}
-                        导出{' '}
+                        導出{' '}
                       </Button>
                     </a>
                     <Checkbox
@@ -500,8 +500,8 @@ class ProjectData extends Component {
                       className="wiki-btn"
                       disabled={this.state.curExportType === 'json'}
                     >
-                      添加wiki&nbsp;
-                      <Tooltip title="开启后 html 和 markdown 数据导出会带上wiki数据">
+                      新增wiki&nbsp;
+                      <Tooltip title="開啟后 html 和 markdown 數據導出會帶上wiki數據">
                         <Icon type="question-circle-o" />
                       </Tooltip>{' '}
                     </Checkbox>
@@ -509,7 +509,7 @@ class ProjectData extends Component {
                 ) : (
                   <Button disabled className="export-button" type="primary" size="large">
                     {' '}
-                    导出{' '}
+                    導出{' '}
                   </Button>
                 )}
               </div>

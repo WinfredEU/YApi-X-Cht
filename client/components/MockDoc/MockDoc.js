@@ -2,9 +2,9 @@ import './MockDoc.scss';
 import React, { PureComponent as Component } from 'react';
 import PropTypes from 'prop-types';
 
-// 组件用法 <MockDoc mock= mockData doc= docData />
-// mockData: mock数据 格式为json
-// docData：docData数据 格式为array
+// 元件用法 <MockDoc mock= mockData doc= docData />
+// mockData: mock數據 格式為json
+// docData：docData數據 格式為array
 
 class MockDoc extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class MockDoc extends Component {
       <div className="MockDoc">
         {htmlData.map(function(item, i) {
           {
-            /*//类型：Object  必有字段  备注：qwqwqw*/
+            /*//型別：Object  必有欄位  備註：qwqwqw*/
           }
           if (item.mes) {
             var mes = [];
@@ -38,21 +38,21 @@ class MockDoc extends Component {
               ? mes.push(
                   <span key={i} className="keymes">
                     {' '}
-                    / /类型：{item.mes.type}
+                    / /型別：{item.mes.type}
                   </span>
                 )
               : '';
             item.mes.required
               ? mes.push(
                   <span key={i + 1} className="keymes">
-                    必有字段
+                    必有欄位
                   </span>
                 )
               : '';
             item.mes.desc
               ? mes.push(
                   <span key={i + 2} className="keymes">
-                    备注：{item.mes.desc}
+                    備註：{item.mes.desc}
                   </span>
                 )
               : '';
@@ -92,14 +92,14 @@ MockDoc.defaultProps = {
     }
   },
   doc: [
-    { type: 'strisng', key: 'ersrcode', required: true, desc: '错误编码' },
-    { type: 'number', key: 'data[]', required: true, desc: '返回数据' },
-    { type: 'object', key: 'data[].name', required: true, desc: '数据名' },
-    { type: 'object', key: 'data[].name1[].name3', required: true, desc: '数据名1' },
-    { type: 'object', key: 'data1', required: true, desc: '数据名1' },
-    { type: 'object', key: 'data3.err', required: true, desc: '数据名1' },
-    { type: 'object', key: 'data3', required: true, desc: '数据名1' },
-    { type: 'object', key: 'data3.arr[]', required: true, desc: '数据名1' }
+    { type: 'strisng', key: 'ersrcode', required: true, desc: '錯誤編碼' },
+    { type: 'number', key: 'data[]', required: true, desc: '返回數據' },
+    { type: 'object', key: 'data[].name', required: true, desc: '數據名' },
+    { type: 'object', key: 'data[].name1[].name3', required: true, desc: '數據名1' },
+    { type: 'object', key: 'data1', required: true, desc: '數據名1' },
+    { type: 'object', key: 'data3.err', required: true, desc: '數據名1' },
+    { type: 'object', key: 'data3', required: true, desc: '數據名1' },
+    { type: 'object', key: 'data3.arr[]', required: true, desc: '數據名1' }
   ]
 };
 function produceSpace(count) {

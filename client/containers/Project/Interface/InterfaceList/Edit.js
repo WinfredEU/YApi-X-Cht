@@ -64,7 +64,7 @@ class InterfaceEdit extends Component {
     this.props.fetchInterfaceData(params.id).then();
     if (result.data.errcode === 0) {
       this.props.updateInterfaceData(params);
-      message.success('保存成功');
+      message.success('儲存成功');
     } else {
       message.error(result.data.errmsg);
     }
@@ -84,7 +84,7 @@ class InterfaceEdit extends Component {
     let domain = location.hostname + (location.port !== '' ? ':' + location.port : '');
     let s,
       initData = false;
-    //因后端 node 仅支持 ws， 暂不支持 wss
+    //因後端 node 僅支援 ws， 暫不支援 wss
     let wsProtocol = location.protocol === 'https:' ? 'wss' : 'ws';
 
     setTimeout(() => {
@@ -130,14 +130,14 @@ class InterfaceEdit extends Component {
           curdata: this.props.curdata,
           status: 1
         });
-        console.warn('websocket 连接失败，将导致多人编辑同一个接口冲突。');
+        console.warn('websocket 連線失敗，將導致多人編輯同一個介面衝突。');
       };
     } catch (e) {
       this.setState({
         curdata: this.props.curdata,
         status: 1
       });
-      console.error('websocket 连接失败，将导致多人编辑同一个接口冲突。');
+      console.error('websocket 連線失敗，將導致多人編輯同一個介面衝突。');
     }
   }
 
@@ -162,7 +162,7 @@ class InterfaceEdit extends Component {
 
     if (result.data.errcode === 0) {
       await this.props.getProject(id);
-      message.success('保存成功');
+      message.success('儲存成功');
     } else {
       message.error(result.data.errmsg);
     }
@@ -204,18 +204,18 @@ class InterfaceEdit extends Component {
             <Link to={'/user/profile/' + this.state.curdata.uid}>
               <b>{this.state.curdata.username}</b>
             </Link>
-            <span>正在编辑该接口，请稍后再试...</span>
+            <span>正在編輯該介面，請稍後再試...</span>
           </div>
         ) : null}
-        {this.state.status === 0 && '正在加载，请耐心等待...'}
+        {this.state.status === 0 && '正在載入，請耐心等待...'}
 
         <Modal
-          title="Tag 设置"
+          title="Tag 設定"
           width={680}
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
-          okText="保存"
+          okText="儲存"
         >
           <div className="tag-modal-center">
             <ProjectTag tagMsg={tag} ref={this.tagSubmit} />

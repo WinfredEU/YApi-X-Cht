@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const autoIncrement = require('../utils/mongoose-auto-increment');
 
 /**
- * 所有的model都需要继承baseModel, 且需要 getSchema和getName方法，不然会报错
+ * 所有的model都需要繼承baseModel, 且需要 getSchema和getName方法，不然會報錯
  */
 
 class baseModel {
@@ -28,14 +28,14 @@ class baseModel {
   }
 
   /**
-   * 可通过覆盖此方法生成其他自增字段
+   * 可通過覆蓋此方法產生其他自增欄位
    */
   getPrimaryKey() {
     return '_id';
   }
 
   /**
-   * 获取collection的schema结构
+   * 獲取collection的schema結構
    */
   getSchema() {
     yapi.commons.log('Model Class need getSchema function', 'error');

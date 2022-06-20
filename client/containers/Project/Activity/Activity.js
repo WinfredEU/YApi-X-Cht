@@ -30,7 +30,7 @@ class Activity extends Component {
           <div style={{ display: 'none' }} className="logHead">
             {/*<Breadcrumb />*/}
             <div className="projectDes">
-              <p>高效、易用、可部署的API管理平台</p>
+              <p>高效、易用、可部署的API管理平臺</p>
             </div>
             <div className="Mockurl">
               <span>Mock地址：</span>
@@ -43,7 +43,7 @@ class Activity extends Component {
               </p>
               <Button type="primary">
                 <a href={`/api/project/download?project_id=${this.props.match.params.id}`}>
-                  下载Mock数据
+                  下載Mock數據
                 </a>
               </Button>
             </div>

@@ -16,7 +16,7 @@
   "scripts": {
     "build-client": "cross-env NODE_ENV=production ykit pack -m",
     "dev": "npm run dev-prepare && concurrently -n sever,client \"npx kill-port 3000 && npm run dev-server\" \"npm run dev-client\"",
-    "dev-prepare": "echo '{\"port\":3000,\"adminAccount\":\"admin@docker.yapi\",\"adminPassword\":\"admin\",\"db\":{\"servername\":\"localhost\",\"port\":37017,\"DATABASE\":\"yapi\"},\"mail\":{\"enable\":false},\"ldapLogin\":{\"enable\":false},\"closeRegister\":true,\"plugins\":[]}' > ../config.json && docker run --rm -d -p 37017:27017 -v $PWD/.data:/data/db mongo:4.4.5 || true && node --unhandled-rejections strict ./server/install.js || true",
+    "dev-prepare": "echo '{\"port\":3000,\"adminAccount\":\"admin@docker.yapi\",\"adminPassword\":\"admin\",\"db\":{\"servername\":\"172.16.88.230\",\"port\":37017,\"DATABASE\":\"yapi\"},\"mail\":{\"enable\":false},\"ldapLogin\":{\"enable\":false},\"closeRegister\":true,\"plugins\":[]}' > ../config.json && docker run --rm -d -p 37017:27017 -v $PWD/.data:/data/db mongo:4.4.5 || true && node --unhandled-rejections strict ./server/install.js || true",
     "dev-client": "npm run dev-copy-icon && ykit s -p 4000",
     "dev-copy-icon": "cpr static/iconfont iconfont -d",
     "dev-server": "nodemon server/app.js dev -L",

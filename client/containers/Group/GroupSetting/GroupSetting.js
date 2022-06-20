@@ -70,20 +70,20 @@ class GroupSetting extends Component {
     });
   }
 
-  // 修改分组名称
+  // 修改分組名稱
   changeName = e => {
     this.setState({
       currGroupName: e.target.value
     });
   };
-  // 修改分组描述
+  // 修改分組描述
   changeDesc = e => {
     this.setState({
       currGroupDesc: e.target.value
     });
   };
 
-  // 修改自定义字段名称
+  // 修改自定義欄位名稱
   changeCustomName = e => {
     let custom_field1_rule = this.state.custom_field1_enable ? !e.target.value : false;
     this.setState({
@@ -92,7 +92,7 @@ class GroupSetting extends Component {
     });
   };
 
-  // 修改开启状态
+  // 修改開啟狀態
   changeCustomEnable = e => {
     let custom_field1_rule = e ? !this.state.custom_field1_name : false;
     this.setState({
@@ -106,7 +106,7 @@ class GroupSetting extends Component {
     this.initState(this.props);
   }
 
-  // 点击“查看危险操作”按钮
+  // 點選「檢視危險操作」按鈕
   toggleDangerOptions = () => {
     // console.log(this.state.showDangerOptions);
     this.setState({
@@ -114,7 +114,7 @@ class GroupSetting extends Component {
     });
   };
 
-  // 编辑分组信息
+  // 編輯分組資訊
   editGroup = async () => {
     const id = this.props.currGroup._id;
     if (this.state.custom_field1_rule) {
@@ -143,14 +143,14 @@ class GroupSetting extends Component {
     }
   };
 
-  // 删除分组
+  // 刪除分組
 
   deleteGroup = async () => {
     const that = this;
     const { currGroup } = that.props;
     const res = await this.props.deleteGroup({ id: currGroup._id });
     if (!res.payload.data.errcode) {
-      message.success('删除成功');
+      message.success('刪除成功');
       await that.props.fetchGroupList();
       const currGroup = that.props.groupList[0] || { group_name: '', group_desc: '' };
       that.setState({ groupList: that.props.groupList });
@@ -158,20 +158,20 @@ class GroupSetting extends Component {
     }
   };
 
-  // 删除分组的二次确认
+  // 刪除分組的二次確認
   showConfirm = () => {
     const that = this;
     confirm({
-      title: '确认删除 ' + that.props.currGroup.group_name + ' 分组吗？',
+      title: '確認刪除 ' + that.props.currGroup.group_name + ' 分組嗎？',
       content: (
         <div style={{ marginTop: '10px', fontSize: '13px', lineHeight: '25px' }}>
           <Alert
-            message="警告：此操作非常危险,会删除该分组下面所有项目和接口，并且无法恢复!"
+            message="警告：此操作非常危險,會刪除該分組下面所有專案和介面，並且無法恢復!"
             type="warning"
           />
           <div style={{ marginTop: '16px' }}>
             <p>
-              <b>请输入分组名称确认此操作:</b>
+              <b>請輸入分組名稱確認此操作:</b>
             </p>
             <Input id="group_name" />
           </div>
@@ -180,7 +180,7 @@ class GroupSetting extends Component {
       onOk() {
         const groupName = trim(document.getElementById('group_name').value);
         if (that.props.currGroup.group_name !== groupName) {
-          message.error('分组名称有误');
+          message.error('分組名稱有誤');
           return new Promise((resolve, reject) => {
             reject('error');
           });
@@ -194,7 +194,7 @@ class GroupSetting extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    // 切换分组时，更新分组信息并关闭删除分组操作
+    // 切換分組時，更新分組資訊並關閉刪除分組操作
     if (this.props.currGroup._id !== nextProps.currGroup._id) {
       this.initState(nextProps);
       this.setState({
@@ -208,12 +208,12 @@ class GroupSetting extends Component {
       <div className="m-panel card-panel card-panel-s panel-group">
         <Row type="flex" justify="space-around" className="row" align="middle">
           <Col span={4} className="label">
-            分组名：
+            分組名：
           </Col>
           <Col span={20}>
             <Input
               size="large"
-              placeholder="请输入分组名称"
+              placeholder="請輸入分組名稱"
               value={this.state.currGroupName}
               onChange={this.changeName}
             />
@@ -221,13 +221,13 @@ class GroupSetting extends Component {
         </Row>
         <Row type="flex" justify="space-around" className="row" align="middle">
           <Col span={4} className="label">
-            简介：
+            簡介：
           </Col>
           <Col span={20}>
             <TextArea
               size="large"
               rows={3}
-              placeholder="请输入分组描述"
+              placeholder="請輸入分組描述"
               value={this.state.currGroupDesc}
               onChange={this.changeDesc}
             />
@@ -235,14 +235,14 @@ class GroupSetting extends Component {
         </Row>
         <Row type="flex" justify="space-around" className="row" align="middle">
           <Col span={4} className="label">
-            接口自定义字段&nbsp;
-            <Tooltip title={'可以在接口中添加 额外字段 数据'}>
+            介面自定義欄位&nbsp;
+            <Tooltip title={'可以在介面中新增 額外欄位 數據'}>
               <Icon type="question-circle-o" style={{ width: '10px' }} />
             </Tooltip> ：
           </Col>
           <Col span={12} style={{ position: 'relative' }}>
             <Input
-              placeholder="请输入自定义字段名称"
+              placeholder="請輸入自定義欄位名稱"
               style={{ borderColor: this.state.custom_field1_rule ? '#f5222d' : '' }}
               value={this.state.custom_field1_name}
               onChange={this.changeCustomName}
@@ -251,17 +251,17 @@ class GroupSetting extends Component {
               className="custom-field-rule"
               style={{ display: this.state.custom_field1_rule ? 'block' : 'none' }}
             >
-              自定义字段名称不能为空
+              自定義欄位名稱不能為空
             </div>
           </Col>
           <Col span={2} className="label">
-            开启：
+            開啟：
           </Col>
           <Col span={6}>
             <Switch
               checked={this.state.custom_field1_enable}
-              checkedChildren="开"
-              unCheckedChildren="关"
+              checkedChildren="開"
+              unCheckedChildren="關"
               onChange={this.changeCustomEnable}
             />
           </Col>
@@ -273,12 +273,12 @@ class GroupSetting extends Component {
             </Button>
           </Col>
         </Row>
-        {/* 只有超级管理员能删除分组 */}
+        {/* 只有超級管理員能刪除分組 */}
         {this.props.curUserRole === 'admin' ? (
           <Row type="flex" justify="center" className="danger-container">
             <Col span={24} className="title">
               <h2 className="content">
-                <Icon type="exclamation-circle-o" /> 危险操作
+                <Icon type="exclamation-circle-o" /> 危險操作
               </h2>
               <Button onClick={this.toggleDangerOptions}>
                 查 看<Icon type={this.state.showDangerOptions ? 'up' : 'down'} />
@@ -287,12 +287,12 @@ class GroupSetting extends Component {
             {this.state.showDangerOptions ? (
               <Card hoverable={true} className="card-danger" style={{ width: '100%' }}>
                 <div className="card-danger-content">
-                  <h3>删除分组</h3>
-                  <p>分组一旦删除，将无法恢复数据，请慎重操作！</p>
-                  <p>只有超级管理员有权限删除分组。</p>
+                  <h3>刪除分組</h3>
+                  <p>分組一旦刪除，將無法恢復數據，請慎重操作！</p>
+                  <p>只有超級管理員有許可權刪除分組。</p>
                 </div>
                 <Button type="danger" ghost className="card-danger-btn" onClick={this.showConfirm}>
-                  删除
+                  刪除
                 </Button>
               </Card>
             ) : null}

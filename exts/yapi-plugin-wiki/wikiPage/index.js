@@ -55,7 +55,7 @@ class WikiPage extends Component {
       return null;
     }
   }
-  // 结束编辑websocket
+  // 結束編輯websocket
   endWebSocket = () => {
     try {
       if (this.state.status === 'CLOSE') {
@@ -69,12 +69,12 @@ class WikiPage extends Component {
     }
   };
 
-  // 处理多人编辑冲突问题
+  // 處理多人編輯衝突問題
   handleConflict = () => {
     // console.log(location)
     let domain = location.hostname + (location.port !== '' ? ':' + location.port : '');
     let s;
-    //因后端 node 仅支持 ws， 暂不支持 wss
+    //因後端 node 僅支援 ws， 暫不支援 wss
     let wsProtocol = location.protocol === 'https:' ? 'wss' : 'ws';
     s = new WebSocket(
       wsProtocol +
@@ -119,18 +119,18 @@ class WikiPage extends Component {
       this.setState({
         status: 'CLOSE'
       });
-      console.warn('websocket 连接失败，将导致多人编辑同一个接口冲突。');
+      console.warn('websocket 連線失敗，將導致多人編輯同一個介面衝突。');
     };
   };
 
-  // 点击编辑按钮 发送 websocket 获取数据
+  // 點選編輯按鈕 發送 websocket 獲取數據
   onEditor = () => {
     // this.WebSocket.send('editor');
     const sendEditor = () => {
       this.WebSocket.send('editor');
     };
     this.handleWebsocketAccidentClose(sendEditor, status => {
-      // 如果websocket 启动不成功用户依旧可以对wiki 进行编辑
+      // 如果websocket 啟動不成功使用者依舊可以對wiki 進行編輯
       if (!status) {
         this.setState({
           isEditor: !this.state.isEditor
@@ -139,13 +139,13 @@ class WikiPage extends Component {
     });
   };
 
-  // 处理websocket  意外断开问题
+  // 處理websocket  意外斷開問題
   handleWebsocketAccidentClose = (fn, callback) => {
-    // websocket 是否启动
+    // websocket 是否啟動
     if (this.WebSocket) {
-      // websocket 断开
+      // websocket 斷開
       if (this.WebSocket.readyState !== 1) {
-        message.error('websocket 链接失败，请重新刷新页面');
+        message.error('websocket 鏈接失敗，請重新重新整理頁面');
       } else {
         fn();
       }
@@ -155,7 +155,7 @@ class WikiPage extends Component {
     }
   };
 
-  //  获取数据
+  //  獲取數據
   handleData = async params => {
     let result = await axios.get('/api/plugin/wiki_desc/get', { params });
     if (result.data.errcode === 0) {
@@ -170,11 +170,11 @@ class WikiPage extends Component {
         });
       }
     } else {
-      message.error(`请求数据失败： ${result.data.errmsg}`);
+      message.error(`請求數據失敗： ${result.data.errmsg}`);
     }
   };
 
-  // 数据上传
+  // 數據上傳
   onUpload = async (desc, markdown) => {
     const currProjectId = this.props.match.params.id;
     let option = {
@@ -188,18 +188,18 @@ class WikiPage extends Component {
       await this.handleData({ project_id: currProjectId });
       this.setState({ isEditor: false });
     } else {
-      message.error(`更新失败： ${result.data.errmsg}`);
+      message.error(`更新失敗： ${result.data.errmsg}`);
     }
     this.endWebSocket();
     // this.WebSocket.send('end');
   };
-  // 取消编辑
+  // 取消編輯
   onCancel = () => {
     this.setState({ isEditor: false });
     this.endWebSocket();
   };
 
-  // 邮件通知
+  // 郵件通知
   onEmailNotice = e => {
     this.setState({
       notice: e.target.checked
@@ -223,7 +223,7 @@ class WikiPage extends Component {
                 <Link to={`/user/profile/${editUid || uid}`}>
                   <b>{editName || username}</b>
                 </Link>
-                <span>正在编辑该wiki，请稍后再试...</span>
+                <span>正在編輯該wiki，請稍後再試...</span>
               </div>
             )}
           </div>

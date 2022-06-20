@@ -37,8 +37,8 @@ module.exports = function (jsondiffpatch, formattersHtml, curDiffData) {
   const valueMaps = {
     1: '必需',
     0: '非必需',
-    text: '文本',
-    file: '文件',
+    text: '文字',
+    file: '檔案',
     undone: '未完成',
     done: '已完成',
   }
@@ -74,7 +74,7 @@ module.exports = function (jsondiffpatch, formattersHtml, curDiffData) {
 
   if (curDiffData && typeof curDiffData === 'object' && curDiffData.current) {
     const {current, old, type} = curDiffData
-    // wiki 信息的diff 输出
+    // wiki 資訊的diff 輸出
     if (type === 'wiki') {
       if (current !== old) {
         diffView.push({
@@ -86,13 +86,13 @@ module.exports = function (jsondiffpatch, formattersHtml, curDiffData) {
     }
     if (current.path !== old.path) {
       diffView.push({
-        title: 'Api 路径',
+        title: 'Api 路徑',
         content: diffText(old.path, current.path),
       })
     }
     if (current.title !== old.title) {
       diffView.push({
-        title: 'Api 名称',
+        title: 'Api 名稱',
         content: diffText(old.title, current.title),
       })
     }
@@ -106,21 +106,21 @@ module.exports = function (jsondiffpatch, formattersHtml, curDiffData) {
 
     if (current.catid !== old.catid) {
       diffView.push({
-        title: '分类 id',
+        title: '分類 id',
         content: diffText(old.catid, current.catid),
       })
     }
 
     if (current.status !== old.status) {
       diffView.push({
-        title: '接口状态',
+        title: '介面狀態',
         content: diffText(valueMaps[old.status], valueMaps[current.status]),
       })
     }
 
     if (current.tag !== old.tag) {
       diffView.push({
-        title: '接口tag',
+        title: '介面tag',
         content: diffText(old.tag, current.tag),
       })
     }

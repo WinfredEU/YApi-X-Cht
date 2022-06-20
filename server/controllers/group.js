@@ -9,9 +9,9 @@ const interfaceCaseModel = require('../models/interfaceCase.js');
 const _ = require('underscore')
 
 const rolename = {
-  owner: '组长',
-  dev: '开发者',
-  guest: '访客'
+  owner: '組長',
+  dev: '開發者',
+  guest: '訪客'
 };
 
 class groupController extends baseController {
@@ -86,12 +86,12 @@ class groupController extends baseController {
   }
 
   /**
-   * 查询项目分组
+   * 查詢專案分組
    * @interface /group/get
    * @method GET
    * @category group
    * @foldnumber 10
-   * @param {String} id 项目分组ID
+   * @param {String} id 專案分組ID
    * @returns {Object}
    * @example
    */
@@ -105,31 +105,31 @@ class groupController extends baseController {
       let role = await this.getProjectRole(params.id, 'group');
       result.role = role;
       if (result.type === 'private') {
-        result.group_name = '个人空间';
+        result.group_name = '個人空間';
       }
       ctx.body = yapi.commons.resReturn(result);
     }
   }
 
   /**
-   * 添加项目分组
+   * 新增專案分組
    * @interface /group/add
    * @method POST
    * @category group
    * @foldnumber 10
-   * @param {String} group_name 项目分组名称，不能为空
-   * @param {String} [group_desc] 项目分组描述
-   * @param {String} [owner_uids]  组长[uid]
+   * @param {String} group_name 專案分組名稱，不能為空
+   * @param {String} [group_desc] 專案分組描述
+   * @param {String} [owner_uids]  組長[uid]
    * @returns {Object}
    * @example ./api/group/add.json
    */
   async add(ctx) {
     let params = ctx.params;
 
-    // 新版每个人都有权限添加分组
+    // 新版每個人都有許可權新增分組
     
     // if (this.getRole() !== 'admin') {
-    //   return (ctx.body = yapi.commons.resReturn(null, 401, '没有权限'));
+    //   return (ctx.body = yapi.commons.resReturn(null, 401, '沒有許可權'));
     // }
 
     let owners = [];
@@ -155,7 +155,7 @@ class groupController extends baseController {
     let checkRepeat = await groupInst.checkRepeat(params.group_name);
 
     if (checkRepeat > 0) {
-      return (ctx.body = yapi.commons.resReturn(null, 401, '项目分组名已存在'));
+      return (ctx.body = yapi.commons.resReturn(null, 401, '專案分組名已存在'));
     }
 
     let data = {
@@ -178,7 +178,7 @@ class groupController extends baseController {
     ]);
     let username = this.getUsername();
     yapi.commons.saveLog({
-      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 新增了分组 <a href="/group/${
+      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 新增了分組 <a href="/group/${
         result._id
       }">${params.group_name}</a>`,
       type: 'group',
@@ -190,7 +190,7 @@ class groupController extends baseController {
   }
 
   /**
-   * 获取用户数据
+   * 獲取用戶數據
    * @param uid
    * @param role
    * @returns {Promise.<*>}
@@ -232,14 +232,14 @@ class groupController extends baseController {
   }
 
   /**
-   * 添加项目分组成员
+   * 新增專案分組成員
    * @interface /group/add_member
    * @method POST
    * @category group
    * @foldnumber 10
-   * @param {String} id 项目分组id
-   * @param {String} member_uids 项目分组成员[uid]
-   * @param {String} role 成员角色，owner or dev or guest
+   * @param {String} id 專案分組id
+   * @param {String} member_uids 專案分組成員[uid]
+   * @param {String} role 成員角色，owner or dev or guest
    * @returns {Object}
    * @example
    */
@@ -273,7 +273,7 @@ class groupController extends baseController {
       });
       members = members.join('、');
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 新增了分组成员 ${members} 为 ${
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 新增了分組成員 ${members} 為 ${
           rolename[params.role]
         }`,
         type: 'group',
@@ -291,14 +291,14 @@ class groupController extends baseController {
   }
 
   /**
-   * 修改项目分组成员角色
+   * 修改專案分組成員角色
    * @interface /group/change_member_role
    * @method POST
    * @category group
    * @foldnumber 10
-   * @param {String} id 项目分组id
-   * @param {String} member_uid 项目分组成员uid
-   * @param {String} role 权限 ['owner'|'dev']
+   * @param {String} id 專案分組id
+   * @param {String} member_uid 專案分組成員uid
+   * @param {String} role 許可權 ['owner'|'dev']
    * @returns {Object}
    * @example
    */
@@ -308,10 +308,10 @@ class groupController extends baseController {
 
     var check = await groupInst.checkMemberRepeat(params.id, params.member_uid);
     if (check === 0) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '分组成员不存在'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, '分組成員不存在'));
     }
     if ((await this.checkAuth(params.id, 'group', 'danger')) !== true) {
-      return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'));
+      return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'));
     }
 
     params.role = ['owner', 'dev', 'guest'].find(v => v === params.role) || 'dev';
@@ -321,9 +321,9 @@ class groupController extends baseController {
 
     let groupUserdata = await this.getUserdata(params.member_uid, params.role);
     yapi.commons.saveLog({
-      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更改了分组成员 <a href="/user/profile/${
+      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更改了分組成員 <a href="/user/profile/${
         params.member_uid
-      }">${groupUserdata ? groupUserdata.username : ''}</a> 的权限为 "${rolename[params.role]}"`,
+      }">${groupUserdata ? groupUserdata.username : ''}</a> 的許可權為 "${rolename[params.role]}"`,
       type: 'group',
       uid: this.getUid(),
       username: username,
@@ -333,12 +333,12 @@ class groupController extends baseController {
   }
 
   /**
-   * 获取所有项目成员
+   * 獲取所有專案成員
    * @interface /group/get_member_list
    * @method GET
    * @category group
    * @foldnumber 10
-   * @param {String} id 项目分组id
+   * @param {String} id 專案分組id
    * @returns {Object}
    * @example
    */
@@ -351,13 +351,13 @@ class groupController extends baseController {
   }
 
   /**
-   * 删除项目成员
+   * 刪除專案成員
    * @interface /group/del_member
    * @method POST
    * @category group
    * @foldnumber 10
-   * @param {String} id 项目分组id
-   * @param {String} member_uid 项目分组成员uid
+   * @param {String} id 專案分組id
+   * @param {String} member_uid 專案分組成員uid
    * @returns {Object}
    * @example
    */
@@ -367,10 +367,10 @@ class groupController extends baseController {
     let groupInst = yapi.getInst(groupModel);
     var check = await groupInst.checkMemberRepeat(params.id, params.member_uid);
     if (check === 0) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '分组成员不存在'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, '分組成員不存在'));
     }
     if ((await this.checkAuth(params.id, 'group', 'danger')) !== true) {
-      return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'));
+      return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'));
     }
 
     let result = await groupInst.delMember(params.id, params.member_uid);
@@ -378,7 +378,7 @@ class groupController extends baseController {
 
     let groupUserdata = await this.getUserdata(params.member_uid, params.role);
     yapi.commons.saveLog({
-      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 删除了分组成员 <a href="/user/profile/${
+      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 刪除了分組成員 <a href="/user/profile/${
         params.member_uid
       }">${groupUserdata ? groupUserdata.username : ''}</a>`,
       type: 'group',
@@ -390,7 +390,7 @@ class groupController extends baseController {
   }
 
   /**
-   * 获取项目分组列表
+   * 獲取專案分組列表
    * @interface /group/list
    * @method get
    * @category group
@@ -452,7 +452,7 @@ class groupController extends baseController {
     }
     if (privateGroup) {
       privateGroup = privateGroup.toObject();
-      privateGroup.group_name = '个人空间';
+      privateGroup.group_name = '個人空間';
       privateGroup.role = 'owner';
       newResult.unshift(privateGroup);
     }
@@ -461,10 +461,10 @@ class groupController extends baseController {
   }
 
   /**
-   * 删除项目分组
+   * 刪除專案分組
    * @interface /group/del
    * @method post
-   * @param {String} id 项目分组id
+   * @param {String} id 專案分組id
    * @category group
    * @foldnumber 10
    * @returns {Object}
@@ -472,7 +472,7 @@ class groupController extends baseController {
    */
   async del(ctx) {
     if (this.getRole() !== 'admin') {
-      return (ctx.body = yapi.commons.resReturn(null, 401, '没有权限'));
+      return (ctx.body = yapi.commons.resReturn(null, 401, '沒有許可權'));
     }
 
     let groupInst = yapi.getInst(groupModel);
@@ -497,12 +497,12 @@ class groupController extends baseController {
   }
 
   /**
-   * 更新项目分组
+   * 更新專案分組
    * @interface /group/up
    * @method post
-   * @param {String} id 项目分组id
-   * @param {String} group_name 项目分组名称
-   * @param {String} group_desc 项目分组描述
+   * @param {String} id 專案分組id
+   * @param {String} group_name 專案分組名稱
+   * @param {String} group_desc 專案分組描述
    * @category group
    * @foldnumber 10
    * @returns {Object}
@@ -513,7 +513,7 @@ class groupController extends baseController {
     let params = ctx.params;
 
     if ((await this.checkAuth(params.id, 'group', 'danger')) !== true) {
-      return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'));
+      return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'));
     }
 
     let result = await groupInst.up(params.id, params);
@@ -521,7 +521,7 @@ class groupController extends baseController {
     yapi.commons.saveLog({
       content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了 <a href="/group/${
         params.id
-      }">${params.group_name}</a> 分组`,
+      }">${params.group_name}</a> 分組`,
       type: 'group',
       uid: this.getUid(),
       username: username,

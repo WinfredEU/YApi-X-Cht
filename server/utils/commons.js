@@ -178,7 +178,7 @@ exports.expireDate = day => {
 
 exports.sendMail = (options, cb) => {
   if (!yapi.mail) return false;
-  options.subject = options.subject ? options.subject + '-YApi 平台' : 'YApi 平台';
+  options.subject = options.subject ? options.subject + '-YApi 平臺' : 'YApi 平臺';
 
   cb =
     cb ||
@@ -258,7 +258,7 @@ exports.handleVarPath = (pathname, params) => {
 };
 
 /**
- * 验证一个 path 是否合法
+ * 驗證一個 path 是否合法
  */
 exports.verifyPath = path => {
   // ref: https://urlregex.com/ -> HTML5
@@ -266,7 +266,7 @@ exports.verifyPath = path => {
 };
 
 /**
- * 沙盒执行 js 代码
+ * 沙盒執行 js 程式碼
  * @sandbox Object context
  * @script String script
  * @return sandbox
@@ -321,7 +321,7 @@ exports.ltrim = ltrim;
 exports.rtrim = rtrim;
 
 /**
- * 处理请求参数类型，String 字符串去除两边空格，Number 使用parseInt 转换为数字
+ * 處理請求參數型別，String 字串去除兩邊空格，Number 使用parseInt 轉換為數字
  * @params Object {a: ' ab ', b: ' 123 '}
  * @keys Object {a: 'string', b: 'number'}
  * @return Object {a: 'ab', b: 123}
@@ -368,7 +368,7 @@ exports.validateParams = (schema2, params) => {
   const validate = ajv.compile(schema);
   let valid = validate(params);
 
-  let message = '请求参数 ';
+  let message = '請求參數 ';
   if (!valid) {
     localize.zh(validate.errors);
     message += ajv.errorsText(validate.errors, { separator: '\n' });
@@ -426,13 +426,13 @@ exports.createAction = (router, baseurl, routerController, action, path, method,
         await inst[action].call(inst, ctx);
       } else {
         if (ws === true) {
-          ctx.ws.send('请登录...');
+          ctx.ws.send('請登錄...');
         } else {
-          ctx.body = yapi.commons.resReturn(null, 40011, '请登录...');
+          ctx.body = yapi.commons.resReturn(null, 40011, '請登錄...');
         }
       }
     } catch (err) {
-      ctx.body = yapi.commons.resReturn(null, 40011, '服务器出错...');
+      ctx.body = yapi.commons.resReturn(null, 40011, '伺服器出錯...');
       yapi.commons.log(err, 'error');
     }
   });
@@ -440,8 +440,8 @@ exports.createAction = (router, baseurl, routerController, action, path, method,
 
 /**
  *
- * @param {*} params 接口定义的参数
- * @param {*} val  接口case 定义的参数值
+ * @param {*} params 介面定義的參數
+ * @param {*} val  介面case 定義的參數值
  */
 function handleParamsValue(params, val) {
   let value = {};
@@ -538,13 +538,13 @@ exports.runCaseScript = async function runCaseScript(params, colId, interfaceId)
     if(colData.checkHttpCodeIs200){
       let status = +params.response.status;
       if(status !== 200){
-        throw ('Http status code 不是 200，请检查(该规则来源于于 [测试集->通用规则配置] )')
+        throw ('Http status code 不是 200，請檢查(該規則來源於于 [測試集->通用規則配置] )')
       }
     }
   
     if(colData.checkResponseField.enable){
       if(params.response.body[colData.checkResponseField.name] != colData.checkResponseField.value){
-        throw (`返回json ${colData.checkResponseField.name} 值不是${colData.checkResponseField.value}，请检查(该规则来源于于 [测试集->通用规则配置] )`)
+        throw (`返回json ${colData.checkResponseField.name} 值不是${colData.checkResponseField.value}，請檢查(該規則來源於于 [測試集->通用規則配置] )`)
       }
     }
 
@@ -555,8 +555,8 @@ exports.runCaseScript = async function runCaseScript(params, colId, interfaceId)
         let schema = JSON.parse(interfaceData.res_body);
         let result = schemaValidator(schema, context.body)
         if(!result.valid){
-          throw (`返回Json 不符合 response 定义的数据结构,原因: ${result.message}
-数据结构如下：
+          throw (`返回Json 不符合 response 定義的數據結構,原因: ${result.message}
+數據結構如下：
 ${JSON.stringify(schema,null,2)}`)
         }
       }
@@ -564,18 +564,18 @@ ${JSON.stringify(schema,null,2)}`)
 
     if(colData.checkScript.enable){
       let globalScript = colData.checkScript.content;
-      // script 是断言
+      // script 是斷言
       if (globalScript) {
-        logs.push('执行脚本：' + globalScript)
+        logs.push('執行指令碼：' + globalScript)
         result = yapi.commons.sandbox(context, globalScript);
       }
     }
 
 
     let script = params.script;
-    // script 是断言
+    // script 是斷言
     if (script) {
-      logs.push('执行脚本:' + script)
+      logs.push('執行指令碼:' + script)
       result = yapi.commons.sandbox(context, script);
     }
     result.logs = logs;
@@ -603,7 +603,7 @@ exports.getUserdata = async function getUserdata(uid, role) {
   };
 };
 
-// 处理mockJs脚本
+// 處理mockJs指令碼
 exports.handleMockScript = function(script, context) {
   let sandbox = {
     header: context.ctx.header,

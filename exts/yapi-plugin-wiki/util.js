@@ -1,9 +1,9 @@
-// 时间
+// 時間
 const convert2Decimal = num => (num > 9 ? num : `0${num}`);
 
 /**
- * 格式化 年、月、日、时、分、秒
- * @param val {Object or String or Number} 日期对象 或是可new Date的对象或时间戳
+ * 格式化 年、月、日、時、分、秒
+ * @param val {Object or String or Number} 日期對像 或是可new Date的對象或時間戳
  * @return {String} 2017-01-20 20:00:00
  */
 exports.formatDate = val => {

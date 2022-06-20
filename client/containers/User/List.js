@@ -76,7 +76,7 @@ class List extends Component {
       .then(
         res => {
           if (res.data.errcode === 0) {
-            message.success('已删除此用户');
+            message.success('已刪除此使用者');
             let userlist = this.state.data;
             userlist = userlist.filter(item => {
               return item._id != uid;
@@ -95,7 +95,7 @@ class List extends Component {
   };
 
   async componentWillMount() {
-    this.props.setBreadcrumb([{ name: '用户管理' }]);
+    this.props.setBreadcrumb([{ name: '使用者管理' }]);
   }
 
   handleSearch = value => {
@@ -135,7 +135,7 @@ class List extends Component {
     }
     let columns = [
       {
-        title: '用户名',
+        title: '使用者名稱',
         dataIndex: 'username',
         key: 'username',
         width: 180,
@@ -149,7 +149,7 @@ class List extends Component {
         key: 'email'
       },
       {
-        title: '用户角色',
+        title: '使用者角色',
         dataIndex: 'role',
         key: 'role',
         width: 150
@@ -169,15 +169,15 @@ class List extends Component {
             <span>
               {/* <span className="ant-divider" /> */}
               <Popconfirm
-                title="确认删除此用户?"
+                title="確認刪除此使用者?"
                 onConfirm={() => {
                   this.confirm(item._id);
                 }}
-                okText="确定"
+                okText="確定"
                 cancelText="取消"
               >
                 <a style={{ display: 'block', textAlign: 'center' }} href="#">
-                  删除
+                  刪除
                 </a>
               </Popconfirm>
             </span>
@@ -209,11 +209,11 @@ class List extends Component {
     return (
       <section className="user-table">
         <div className="user-search-wrapper">
-          <h2 style={{ marginBottom: '10px' }}>用户总数：{this.state.total}位</h2>
+          <h2 style={{ marginBottom: '10px' }}>使用者總數：{this.state.total}位</h2>
           <Search
             onChange={e => this.handleSearch(e.target.value)}
             onSearch={this.handleSearch}
-            placeholder="请输入用户名"
+            placeholder="請輸入使用者名稱"
           />
         </div>
         <Table

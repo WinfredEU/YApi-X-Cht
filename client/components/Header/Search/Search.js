@@ -45,14 +45,14 @@ export default class Srch extends Component {
   };
 
   onSelect = async (value, option) => {
-    if (option.props.type === '分组') {
+    if (option.props.type === '分組') {
       this.props.changeMenuItem('/group');
       this.props.history.push('/group/' + option.props['id']);
       this.props.setCurrGroup({ group_name: value, _id: option.props['id'] - 0 });
-    } else if (option.props.type === '项目') {
+    } else if (option.props.type === '專案') {
       await this.props.fetchGroupMsg(option.props['groupId']);
       this.props.history.push('/project/' + option.props['id']);
-    } else if (option.props.type === '接口') {
+    } else if (option.props.type === '介面') {
       await this.props.fetchInterfaceListMenu(option.props['projectId']);
       this.props.history.push(
         '/project/' + option.props['projectId'] + '/interface/api/' + option.props['id']
@@ -72,36 +72,36 @@ export default class Srch extends Component {
                 case 'group':
                   dataSource.push(
                     <Option
-                      key={`分组${item._id}`}
-                      type="分组"
+                      key={`分組${item._id}`}
+                      type="分組"
                       value={`${item.groupName}`}
                       id={`${item._id}`}
                     >
-                      {`分组: ${item.groupName}`}
+                      {`分組: ${item.groupName}`}
                     </Option>
                   );
                   break;
                 case 'project':
                   dataSource.push(
                     <Option
-                      key={`项目${item._id}`}
-                      type="项目"
+                      key={`專案${item._id}`}
+                      type="專案"
                       id={`${item._id}`}
                       groupId={`${item.groupId}`}
                     >
-                      {`项目: ${item.name}`}
+                      {`專案: ${item.name}`}
                     </Option>
                   );
                   break;
                 case 'interface':
                   dataSource.push(
                     <Option
-                      key={`接口${item._id}`}
-                      type="接口"
+                      key={`介面${item._id}`}
+                      type="介面"
                       id={`${item._id}`}
                       projectId={`${item.projectId}`}
                     >
-                      {`接口: ${item.title}`}
+                      {`介面: ${item.title}`}
                     </Option>
                   );
                   break;
@@ -114,7 +114,7 @@ export default class Srch extends Component {
             dataSource: dataSource
           });
         } else {
-          console.log('查询项目或分组失败');
+          console.log('查詢專案或分組失敗');
         }
       })
       .catch(err => {
@@ -148,7 +148,7 @@ export default class Srch extends Component {
         >
           <Input
             prefix={<Icon type="search" className="srch-icon" />}
-            placeholder="搜索分组/项目/接口"
+            placeholder="搜索分組/專案/介面"
             className="search-input"
           />
         </AutoComplete>

@@ -115,13 +115,13 @@ function postman(importDataModule) {
 
       return interfaceData;
     } catch (e) {
-      message.error('文件格式必须为JSON');
+      message.error('檔案格式必須為JSON');
     }
   }
 
   function importPostman(data, key) {
     let reflect = {
-      //数据字段映射关系
+      //數據欄位對映關係
       title: 'name',
       path: 'url',
       method: 'method',
@@ -217,7 +217,7 @@ function postman(importDataModule) {
       }
     } catch (err) {
       console.log(err.message);
-      message.error(`${err.message}, 导入的postman格式有误`);
+      message.error(`${err.message}, 匯入的postman格式有誤`);
     }
     return res;
   }
@@ -251,14 +251,14 @@ function postman(importDataModule) {
   };
 
   if (!importDataModule || typeof importDataModule !== 'object') {
-    console.error('obj参数必需是一个对象');
+    console.error('obj參數必需是一個對像');
     return null;
   }
 
   importDataModule.postman = {
     name: 'Postman',
     run: run,
-    desc: '注意：只支持json格式数据'
+    desc: '注意：只支援json格式數據'
   };
 }
 

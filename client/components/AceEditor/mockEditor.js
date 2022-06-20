@@ -11,36 +11,36 @@ const MockExtra = require('common/mock-extra.js');
 
 var langTools = ace.acequire('ace/ext/language_tools'),
   wordList = [
-    { name: '字符串', mock: '@string' },
-    { name: '自然数', mock: '@natural' },
-    { name: '浮点数', mock: '@float' },
-    { name: '字符', mock: '@character' },
-    { name: '布尔', mock: '@boolean' },
+    { name: '字串', mock: '@string' },
+    { name: '自然數', mock: '@natural' },
+    { name: '浮點數', mock: '@float' },
+    { name: '字元', mock: '@character' },
+    { name: '布爾', mock: '@boolean' },
     { name: 'url', mock: '@url' },
     { name: '域名', mock: '@domain' },
     { name: 'ip地址', mock: '@ip' },
     { name: 'id', mock: '@id' },
     { name: 'guid', mock: '@guid' },
-    { name: '当前时间', mock: '@now' },
-    { name: '时间戳', mock: '@timestamp' },
+    { name: '目前時間', mock: '@now' },
+    { name: '時間戳', mock: '@timestamp' },
     { name: '日期', mock: '@date' },
-    { name: '时间', mock: '@time' },
-    { name: '日期时间', mock: '@datetime' },
-    { name: '图片连接', mock: '@image' },
-    { name: '图片data', mock: '@imageData' },
-    { name: '颜色', mock: '@color' },
-    { name: '颜色hex', mock: '@hex' },
-    { name: '颜色rgba', mock: '@rgba' },
-    { name: '颜色rgb', mock: '@rgb' },
-    { name: '颜色hsl', mock: '@hsl' },
-    { name: '整数', mock: '@integer' },
+    { name: '時間', mock: '@time' },
+    { name: '日期時間', mock: '@datetime' },
+    { name: '圖片連線', mock: '@image' },
+    { name: '圖片data', mock: '@imageData' },
+    { name: '顏色', mock: '@color' },
+    { name: '顏色hex', mock: '@hex' },
+    { name: '顏色rgba', mock: '@rgba' },
+    { name: '顏色rgb', mock: '@rgb' },
+    { name: '顏色hsl', mock: '@hsl' },
+    { name: '整數', mock: '@integer' },
     { name: 'email', mock: '@email' },
-    { name: '大段文本', mock: '@paragraph' },
+    { name: '大段文字', mock: '@paragraph' },
     { name: '句子', mock: '@sentence' },
-    { name: '单词', mock: '@word' },
-    { name: '大段中文文本', mock: '@cparagraph' },
-    { name: '中文标题', mock: '@ctitle' },
-    { name: '标题', mock: '@title' },
+    { name: '單詞', mock: '@word' },
+    { name: '大段中文文字', mock: '@cparagraph' },
+    { name: '中文標題', mock: '@ctitle' },
+    { name: '標題', mock: '@title' },
     { name: '姓名', mock: '@name' },
     { name: '中文姓名', mock: '@cname' },
     { name: '中文姓', mock: '@cfirst' },
@@ -48,16 +48,16 @@ var langTools = ace.acequire('ace/ext/language_tools'),
     { name: '英文姓', mock: '@first' },
     { name: '英文名', mock: '@last' },
     { name: '中文句子', mock: '@csentence' },
-    { name: '中文词组', mock: '@cword' },
+    { name: '中文詞組', mock: '@cword' },
     { name: '地址', mock: '@region' },
     { name: '省份', mock: '@province' },
     { name: '城市', mock: '@city' },
-    { name: '地区', mock: '@county' },
-    { name: '转换为大写', mock: '@upper' },
-    { name: '转换为小写', mock: '@lower' },
-    { name: '挑选（枚举）', mock: '@pick' },
-    { name: '打乱数组', mock: '@shuffle' },
-    { name: '协议', mock: '@protocol' }
+    { name: '地區', mock: '@county' },
+    { name: '轉換為大寫', mock: '@upper' },
+    { name: '轉換為小寫', mock: '@lower' },
+    { name: '挑選（列舉）', mock: '@pick' },
+    { name: '打亂陣列', mock: '@shuffle' },
+    { name: '協議', mock: '@protocol' }
   ];
 
 let dom = ace.acequire('ace/lib/dom');
@@ -83,7 +83,7 @@ function run(options) {
       var obj = json5.parse(json);
       curData.format = true;
       curData.jsonData = obj;
-      curData.mockData = () => Mock.mock(MockExtra(obj, {})); //为防止时时 mock 导致页面卡死的问题，改成函数式需要用到再计算
+      curData.mockData = () => Mock.mock(MockExtra(obj, {})); //為防止時時 mock 導致頁面卡死的問題，改成函式式需要用到再計算
     } catch (e) {
       curData.format = e.message;
     }
@@ -186,7 +186,7 @@ function run(options) {
 /**
  * mockEditor({
       container: 'req_body_json', //dom的id
-      data: that.state.req_body_json, //初始化数据
+      data: that.state.req_body_json, //初始化數據
       onChange: function (d) {
         that.setState({
           req_body_json: d.text

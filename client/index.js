@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom'
 import {LocaleProvider} from 'antd'
 import {Provider} from 'react-redux'
 
-// 由于 antd 组件的默认文案是英文，所以需要修改为中文
+// 由於 antd 元件的預設文案是英文，所以需要修改爲中文
 import zhCN from 'antd/lib/locale-provider/zh_CN'
 
 const store = createStore()

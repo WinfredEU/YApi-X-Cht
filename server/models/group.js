@@ -90,7 +90,7 @@ class groupModel extends baseModel {
       group_name: name
     });
   }
-  //  分组数量统计
+  //  分組數量統計
   getGroupListCount() {
     return this.model.countDocuments({ type: 'public' });
   }

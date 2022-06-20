@@ -57,7 +57,7 @@ export default class MockCol extends Component {
         });
         record.res_body = JSON.stringify(result.data);
       }
-      // 参数过滤schema形式
+      // 參數過濾schema形式
       if (this.props.currInterface.req_body_is_json_schema) {
         let result = await axios.post('/api/interface/schema2json', {
           schema: json5_parse(this.props.currInterface.req_body_other),
@@ -91,7 +91,7 @@ export default class MockCol extends Component {
     }
     await axios.post('/api/plugin/advmock/case/save', caseData).then(async res => {
       if (res.data.errcode === 0) {
-        message.success(this.state.isAdd ? '添加成功' : '保存成功');
+        message.success(this.state.isAdd ? '新增成功' : '儲存成功');
         await this.props.fetchMockCol(interface_id);
         this.setState({ caseDesModalVisible: false });
       } else {
@@ -104,7 +104,7 @@ export default class MockCol extends Component {
     const interface_id = this.props.match.params.actionId;
     await axios.post('/api/plugin/advmock/case/del', { id }).then(async res => {
       if (res.data.errcode === 0) {
-        message.success('删除成功');
+        message.success('刪除成功');
         await this.props.fetchMockCol(interface_id);
       } else {
         message.error(res.data.errmsg);
@@ -112,7 +112,7 @@ export default class MockCol extends Component {
     });
   };
 
-  // mock case 可以设置开启的关闭
+  // mock case 可以設定開啟的關閉
   openMockCase = async (id , enable=true)=> {
     const interface_id = this.props.match.params.actionId;
 
@@ -157,7 +157,7 @@ export default class MockCol extends Component {
       });
     ipFilters = Object.keys(Object.assign(ipObj)).map(value => {
       if (!value) {
-        value = '无过滤';
+        value = '無過濾';
       }
       return { text: value, value };
     });
@@ -166,7 +166,7 @@ export default class MockCol extends Component {
     });
     const columns = [
       {
-        title: '期望名称',
+        title: '期望名稱',
         dataIndex: 'name',
         key: 'name'
       },
@@ -181,18 +181,18 @@ export default class MockCol extends Component {
           return text;
         },
         onFilter: (value, record) =>
-          (record.ip === value && record.ip_enable) || (value === '无过滤' && !record.ip_enable),
+          (record.ip === value && record.ip_enable) || (value === '無過濾' && !record.ip_enable),
         filters: ipFilters
       },
       {
-        title: '创建人',
+        title: '建立人',
         dataIndex: 'username',
         key: 'username',
         onFilter: (value, record) => record.username === value,
         filters: userFilters
       },
       {
-        title: '编辑时间',
+        title: '編輯時間',
         dataIndex: 'up_time',
         key: 'up_time',
         render: text => formatTime(text)
@@ -208,24 +208,24 @@ export default class MockCol extends Component {
               <div>
                 <span style={{ marginRight: 5 }}>
                   <Button size="small" onClick={this.openModal(recode)}>
-                    编辑
+                    編輯
                   </Button>
                 </span>
                 <span style={{ marginRight: 5 }}>
                   <Popconfirm
-                    title="你确定要删除这条期望?"
+                    title="你確定要刪除這條期望?"
                     onConfirm={() => this.deleteCase(_id)}
-                    okText="确定"
+                    okText="確定"
                     cancelText="取消"
                   >
                     <Button size="small" onClick={() => {}}>
-                      删除
+                      刪除
                     </Button>
                   </Popconfirm>
                 </span>
                 <span>
                   <Button size="small" onClick={() => this.openMockCase(_id, recode.case_enable)}>
-                    {recode.case_enable ? <span>已开启</span> : <span>未开启</span>}
+                    {recode.case_enable ? <span>已開啟</span> : <span>未開啟</span>}
                   </Button>
                 </span>
               </div>
@@ -239,7 +239,7 @@ export default class MockCol extends Component {
       <div>
         <div style={{ marginBottom: 8 }}>
           <Button type="primary" onClick={this.openModal(initCaseData, true)} disabled={isGuest}>
-            添加期望
+            新增期望
           </Button>
           <a
             target="_blank"
@@ -247,7 +247,7 @@ export default class MockCol extends Component {
             href={constants.docHref.adv_mock_case}
             style={{ marginLeft: 8 }}
           >
-            <Tooltip title="点击查看文档">
+            <Tooltip title="點選檢視文件">
               <Icon type="question-circle-o" />
             </Tooltip>
           </a>

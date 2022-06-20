@@ -17,7 +17,7 @@ async function handle(
   port,
 ) {
   const taskNotice = _.throttle((index, len) => {
-    messageSuccess(`正在导入，已执行任务 ${index + 1} 个，共 ${len} 个`)
+    messageSuccess(`正在匯入，已執行任務 ${index + 1} 個，共 ${len} 個`)
   }, 3000)
 
   const handleAddCat = async cats => {
@@ -67,7 +67,7 @@ async function handle(
     let successNum = len
     let existNum = 0
     if (len === 0) {
-      messageError(`解析数据为空`)
+      messageError(`解析數據為空`)
       callback({showLoading: false})
       return
     }
@@ -106,7 +106,7 @@ async function handle(
       data.token = token
 
       if (dataSync !== 'normal') {
-        // 开启同步功能
+        // 開啟同步功能
         count++
         let apipath = '/api/interface/save'
         if (isNode) {
@@ -122,7 +122,7 @@ async function handle(
           existNum = existNum + result.data.data.length
         }
       } else {
-        // 未开启同步功能
+        // 未開啟同步功能
         count++
         let apipath = '/api/interface/add'
         if (isNode) {
@@ -136,14 +136,14 @@ async function handle(
           }
           if (result.data.errcode === 40033) {
             callback({showLoading: false})
-            messageError('没有权限')
+            messageError('沒有許可權')
             break
           }
         }
       }
       if (count === len) {
         callback({showLoading: false})
-        messageSuccess(`成功导入接口 ${successNum} 个, 已存在的接口 ${existNum} 个`)
+        messageSuccess(`成功匯入介面 ${successNum} 個, 已存在的介面 ${existNum} 個`)
         return
       }
 

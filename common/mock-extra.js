@@ -1,6 +1,6 @@
 /**
  * @author suxiaoxin
- * @info  mockJs 功能增强脚本
+ * @info  mockJs 功能增強指令碼
  */
 const strRegex = /\${([a-zA-Z]+)\.?([a-zA-Z0-9_.]*)\}/i
 const varSplit = '.'

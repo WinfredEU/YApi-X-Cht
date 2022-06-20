@@ -17,7 +17,7 @@ class advMockController extends baseController {
     let id = ctx.query.interface_id;
     let mockData = await this.Model.get(id);
     if (!mockData) {
-      return (ctx.body = yapi.commons.resReturn(null, 408, 'mock脚本不存在'));
+      return (ctx.body = yapi.commons.resReturn(null, 408, 'mock指令碼不存在'));
     }
     return (ctx.body = yapi.commons.resReturn(mockData));
   }
@@ -28,7 +28,7 @@ class advMockController extends baseController {
       let auth = await this.checkAuth(params.project_id, 'project', 'edit');
 
       if (!auth) {
-        return (ctx.body = yapi.commons.resReturn(null, 40033, '没有权限'));
+        return (ctx.body = yapi.commons.resReturn(null, 40033, '沒有許可權'));
       }
 
       if (!params.interface_id) {
@@ -102,7 +102,7 @@ class advMockController extends baseController {
     }
 
     if (!params.res_body) {
-      return (ctx.body = yapi.commons.resReturn(null, 408, '请输入 Response Body'));
+      return (ctx.body = yapi.commons.resReturn(null, 408, '請輸入 Response Body'));
     }
 
     let data = {

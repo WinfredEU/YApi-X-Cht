@@ -47,27 +47,27 @@ const Panel = Collapse.Panel;
 export const InsertCodeMap = [
   {
     code: 'assert.equal(status, 200)',
-    title: '断言 httpCode 等于 200'
+    title: '斷言 httpCode 等於 200'
   },
   {
     code: 'assert.equal(body.code, 0)',
-    title: '断言返回数据 code 是 0'
+    title: '斷言返回數據 code 是 0'
   },
   {
     code: 'assert.notEqual(status, 404)',
-    title: '断言 httpCode 不是 404'
+    title: '斷言 httpCode 不是 404'
   },
   {
     code: 'assert.notEqual(body.code, 40000)',
-    title: '断言返回数据 code 不是 40000'
+    title: '斷言返回數據 code 不是 40000'
   },
   {
     code: 'assert.deepEqual(body, {"code": 0})',
-    title: '断言对象 body 等于 {"code": 0}'
+    title: '斷言對像 body 等於 {"code": 0}'
   },
   {
     code: 'assert.notDeepEqual(body, {"code": 0})',
-    title: '断言对象 body 不等于 {"code": 0}'
+    title: '斷言對像 body 不等於 {"code": 0}'
   }
 ];
 
@@ -84,7 +84,7 @@ const ParamsNameComponent = props => {
         )}
         {desc && (
           <div>
-            备注： <span className="table-desc">{desc}</span>
+            備註： <span className="table-desc">{desc}</span>
           </div>
         )}
       </div>
@@ -110,9 +110,9 @@ ParamsNameComponent.propTypes = {
 };
 export default class Run extends Component {
   static propTypes = {
-    data: PropTypes.object, //接口原有数据
-    save: PropTypes.func, //保存回调方法
-    type: PropTypes.string, //enum[case, inter], 判断是在接口页面使用还是在测试集
+    data: PropTypes.object, //介面原有數據
+    save: PropTypes.func, //儲存回撥方法
+    type: PropTypes.string, //enum[case, inter], 判斷是在介面頁面使用還是在測試集
     curUid: PropTypes.number.isRequired,
     interfaceId: PropTypes.number.isRequired,
     projectId: PropTypes.number.isRequired
@@ -185,7 +185,7 @@ export default class Run extends Component {
     return true;
   }
 
-  // 整合header信息
+  // 整合header資訊
   handleReqHeader = (value, env) => {
     let index = value
       ? env.findIndex(item => {
@@ -226,7 +226,7 @@ export default class Run extends Component {
 
     const { req_body_other, req_body_type, req_body_is_json_schema } = data;
     let body = req_body_other;
-    // 运行时才会进行转换
+    // 執行時才會進行轉換
     if (
       this.props.type === 'inter' &&
       req_body_type === 'json' &&
@@ -253,8 +253,8 @@ export default class Run extends Component {
         (res, key) => {
           res[key] = (data[key] || []).map(item => {
             if (
-              item.type !== 'file' // 不是文件类型
-                && (item.value == null || item.value === '') // 初始值为空
+              item.type !== 'file' // 不是檔案型別
+                && (item.value == null || item.value === '') // 初始值為空
                 && item.example != null // 有示例值
             ) {
               item.value = item.example;
@@ -425,10 +425,10 @@ export default class Run extends Component {
       });
     }
 
-    // 对 返回值数据结构 和定义的 返回数据结构 进行 格式校验
+    // 對 返回值數據結構 和定義的 返回數據結構 進行 格式校驗
     let validResult = this.resBodyValidator(this.props.data, result.body);
     if (!validResult.valid) {
-      this.setState({ test_valid_msg: `返回参数 ${validResult.message}` });
+      this.setState({ test_valid_msg: `返回參數 ${validResult.message}` });
     } else {
       this.setState({ test_valid_msg: '' });
     }
@@ -444,7 +444,7 @@ export default class Run extends Component {
     })
   };
 
-  // 返回数据与定义数据的比较判断
+  // 返回數據與定義數據的比較判斷
   resBodyValidator = (interfaceData, test_res_body) => {
     const { res_body_type, res_body_is_json_schema, res_body } = interfaceData;
     let validResult = { valid: true };
@@ -488,7 +488,7 @@ export default class Run extends Component {
     this.setState({ req_body_form: bodyForm });
   };
 
-  // 模态框的相关操作
+  // 模態框的相關操作
   showModal = (val, index, type) => {
     let inputValue = '';
     let cursurPosition;
@@ -496,10 +496,10 @@ export default class Run extends Component {
       // req_body
       let editor = this.aceEditor.editor.editor;
       cursurPosition = editor.session.doc.positionToIndex(editor.selection.getCursor());
-      // 获取选中的数据
+      // 獲取選中的數據
       inputValue = this.getInstallValue(val || '', cursurPosition).val;
     } else {
-      // 其他input 输入
+      // 其他input 輸入
       let oTxt1 = document.getElementById(`${type}_${index}`);
       cursurPosition = oTxt1.selectionStart;
       inputValue = this.getInstallValue(val || '', cursurPosition).val;
@@ -515,7 +515,7 @@ export default class Run extends Component {
     });
   };
 
-  // 点击插入
+  // 點選插入
   handleModalOk = val => {
     const { inputIndex, modalType } = this.state;
     if (modalType === 'req_body_other') {
@@ -527,7 +527,7 @@ export default class Run extends Component {
     this.setState({ modalVisible: false });
   };
 
-  // 根据鼠标位置往req_body中动态插入数据
+  // 根據滑鼠位置往req_body中動態插入數據
   changeInstallBody = (type, value) => {
     const pathParam = deepCopyJson(this.state[type]);
     // console.log(pathParam)
@@ -540,7 +540,7 @@ export default class Run extends Component {
     });
   };
 
-  // 获取截取的字符串
+  // 獲取擷取的字串
   getInstallValue = (oldValue, cursurPosition) => {
     let left = oldValue.substr(0, cursurPosition);
     let right = oldValue.substr(cursurPosition);
@@ -550,7 +550,7 @@ export default class Run extends Component {
     let rightPostion = right.indexOf('}}');
     // console.log(leftPostion, leftPostion2,rightPostion, rightPostion2);
     let val = '';
-    // 需要切除原来的变量
+    // 需要切除原來的變數
     if (leftPostion !== -1 && rightPostion !== -1 && leftPostion > leftPostion2) {
       left = left.substr(0, leftPostion);
       right = right.substr(rightPostion + 2);
@@ -563,7 +563,7 @@ export default class Run extends Component {
     };
   };
 
-  // 根据鼠标位置动态插入数据
+  // 根據滑鼠位置動態插入數據
   changeInstallParam = (name, v, index, key) => {
     key = key || 'value';
     const pathParam = deepCopyJson(this.state[name]);
@@ -577,12 +577,12 @@ export default class Run extends Component {
     });
   };
 
-  // 取消参数插入
+  // 取消參數插入
   handleModalCancel = () => {
     this.setState({ modalVisible: false, cursurPosition: -1 });
   };
 
-  // 环境变量模态框相关操作
+  // 環境變數模態框相關操作
   showEnvModal = () => {
     this.setState({
       envModalVisible: true
@@ -633,7 +633,7 @@ export default class Run extends Component {
 
         {this.state.envModalVisible && (
           <Modal
-            title="环境设置"
+            title="環境設定"
             visible={this.state.envModalVisible}
             onOk={this.handleEnvOk}
             onCancel={this.handleEnvCancel}
@@ -663,9 +663,9 @@ export default class Run extends Component {
                   {item.name + '：' + item.domain}
                 </Option>
               ))}
-              <Option value="环境配置" disabled style={{ cursor: 'pointer', color: '#2395f1' }}>
+              <Option value="環境配置" disabled style={{ cursor: 'pointer', color: '#2395f1' }}>
                 <Button type="primary" onClick={this.showEnvModal}>
-                  环境配置
+                  環境配置
                 </Button>
               </Option>
             </Select>
@@ -683,9 +683,9 @@ export default class Run extends Component {
             placement="bottom"
             title={(() => {
               if (hasPlugin) {
-                return '发送请求';
+                return '發送請求';
               } else {
-                return '请安装 cross-request 插件';
+                return '請安裝 cross-request 外掛';
               }
             })()}
           >
@@ -696,18 +696,18 @@ export default class Run extends Component {
               style={{ marginLeft: 10 }}
               icon={loading ? 'loading' : ''}
             >
-              {loading ? '取消' : '发送'}
+              {loading ? '取消' : '發送'}
             </Button>
           </Tooltip>
 
           <Tooltip
             placement="bottom"
             title={() => {
-              return this.props.type === 'inter' ? '保存到测试集' : '更新该用例';
+              return this.props.type === 'inter' ? '儲存到測試集' : '更新該用例';
             }}
           >
             <Button onClick={this.props.save} type="primary" style={{ marginLeft: 10 }}>
-              {this.props.type === 'inter' ? '保存' : '更新'}
+              {this.props.type === 'inter' ? '儲存' : '更新'}
             </Button>
           </Tooltip>
         </div>
@@ -733,7 +733,7 @@ export default class Run extends Component {
                     value={item.value}
                     className="value"
                     onChange={e => this.changeParam('req_params', e.target.value, index)}
-                    placeholder="参数值"
+                    placeholder="參數值"
                     id={`req_params_${index}`}
                     addonAfter={
                       <Icon
@@ -751,7 +751,7 @@ export default class Run extends Component {
               icon="plus"
               onClick={this.addPathParam}
             >
-              添加Path参数
+              新增Path參數
             </Button>
           </Panel>
           <Panel
@@ -786,7 +786,7 @@ export default class Run extends Component {
                     value={item.value}
                     className="value"
                     onChange={e => this.changeParam('req_query', e.target.value, index)}
-                    placeholder="参数值"
+                    placeholder="參數值"
                     id={`req_query_${index}`}
                     addonAfter={
                       <Icon
@@ -799,7 +799,7 @@ export default class Run extends Component {
               );
             })}
             <Button style={{ display: 'none' }} type="primary" icon="plus" onClick={this.addQuery}>
-              添加Query参数
+              新增Query參數
             </Button>
           </Panel>
           <Panel header="HEADERS" key="2" className={req_headers.length === 0 ? 'hidden' : ''}>
@@ -819,7 +819,7 @@ export default class Run extends Component {
                     disabled={!!item.abled}
                     className="value"
                     onChange={e => this.changeParam('req_headers', e.target.value, index)}
-                    placeholder="参数值"
+                    placeholder="參數值"
                     id={`req_headers_${index}`}
                     addonAfter={
                       !item.abled && (
@@ -834,13 +834,13 @@ export default class Run extends Component {
               );
             })}
             <Button style={{ display: 'none' }} type="primary" icon="plus" onClick={this.addHeader}>
-              添加Header
+              新增Header
             </Button>
           </Panel>
           <Panel
             header={
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Tooltip title="F9 全屏编辑">BODY(F9)</Tooltip>
+                <Tooltip title="F9 全屏編輯">BODY(F9)</Tooltip>
               </div>
             }
             key="3"
@@ -859,9 +859,9 @@ export default class Run extends Component {
                   <Button
                     onClick={() => this.showModal(this.state.req_body_other, 0, 'req_body_other')}
                   >
-                    高级参数设置
+                    高級參數設定
                   </Button>
-                  <Tooltip title="高级参数设置只在json字段值中生效">
+                  <Tooltip title="高級參數設定只在json欄位值中生效">
                     {'  '}
                     <Icon type="question-circle-o" />
                   </Tooltip>
@@ -919,7 +919,7 @@ export default class Run extends Component {
                             value={item.value}
                             className="value"
                             onChange={e => this.changeBody(e.target.value, index)}
-                            placeholder="参数值"
+                            placeholder="參數值"
                             id={`req_body_form_${index}`}
                             addonAfter={
                               <Icon
@@ -938,7 +938,7 @@ export default class Run extends Component {
                     icon="plus"
                     onClick={this.addBody}
                   >
-                    添加Form参数
+                    新增Form參數
                   </Button>
                 </div>
               )}
@@ -975,7 +975,7 @@ export default class Run extends Component {
                   message={
                     <span>
                       Warning &nbsp;
-                      <Tooltip title="针对定义为 json schema 的返回数据进行格式校验">
+                      <Tooltip title="針對定義為 json schema 的返回數據進行格式校驗">
                         <Icon type="question-circle-o" />
                       </Tooltip>
                     </span>
@@ -1012,7 +1012,7 @@ export default class Run extends Component {
                     <Checkbox
                       checked={this.state.autoPreview}
                       onChange={e => this.setState({ autoPreview: e.target.checked })}>
-                      <span>自动预览HTML、图片、音视频</span>
+                      <span>自動預覽HTML、圖片、音視訊</span>
                     </Checkbox>
                   </div>
                   {
@@ -1050,17 +1050,17 @@ export default class Run extends Component {
           {this.props.type === 'case' ? (
             <Tabs.TabPane
               className="response-test"
-              tab={<Tooltip title="测试脚本，可断言返回结果，使用方法请查看文档">Test</Tooltip>}
+              tab={<Tooltip title="測試指令碼，可斷言返回結果，使用方法請檢視文件">Test</Tooltip>}
               key="test"
             >
               <h3 style={{ margin: '5px' }}>
-                &nbsp;是否开启:&nbsp;
+                &nbsp;是否開啟:&nbsp;
                 <Switch
                   checked={this.state.enable_script}
                   onChange={e => this.setState({ enable_script: e })}
                 />
               </h3>
-              <p style={{ margin: '10px' }}>注：Test 脚本只有做自动化测试才执行</p>
+              <p style={{ margin: '10px' }}>註：Test 指令碼只有做自動化測試才執行</p>
               <Row>
                 <Col span="18">
                   <AceEditor

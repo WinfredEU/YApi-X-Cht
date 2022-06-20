@@ -18,7 +18,7 @@ import { arrayChangeIndex } from '../../../../common.js';
 const TreeNode = Tree.TreeNode;
 const FormItem = Form.Item;
 const confirm = Modal.confirm;
-const headHeight = 240; // menu顶部到网页顶部部分的高度
+const headHeight = 240; // menu頂部到網頁頂部部分的高度
 
 import './InterfaceColMenu.scss';
 
@@ -30,10 +30,10 @@ const ColModalForm = Form.create()(props => {
       <Form layout="vertical">
         <FormItem label="集合名">
           {getFieldDecorator('colName', {
-            rules: [{ required: true, message: '请输入集合命名！' }]
+            rules: [{ required: true, message: '請輸入集合命名！' }]
           })(<Input />)}
         </FormItem>
-        <FormItem label="简介">{getFieldDecorator('colDesc')(<Input type="textarea" />)}</FormItem>
+        <FormItem label="簡介">{getFieldDecorator('colDesc')(<Input type="textarea" />)}</FormItem>
       </Form>
     </Modal>
   );
@@ -47,7 +47,7 @@ const ColModalForm = Form.create()(props => {
       isRander: state.interfaceCol.isRander,
       currCaseId: state.interfaceCol.currCaseId,
       // list: state.inter.list,
-      // 当前项目的信息
+      // 目前專案的資訊
       curProject: state.project.currProject
       // projectList: state.project.projectList
     };
@@ -136,7 +136,7 @@ export default class InterfaceColMenu extends Component {
       this.setState({
         colModalVisible: false
       });
-      message.success(colModalType === 'edit' ? '修改集合成功' : '添加集合成功');
+      message.success(colModalType === 'edit' ? '修改集合成功' : '新增集合成功');
       // await this.props.fetchInterfaceColList(project_id);
       this.getList();
     } else {
@@ -174,14 +174,14 @@ export default class InterfaceColMenu extends Component {
     let that = this;
     const params = this.props.match.params;
     confirm({
-      title: '您确认删除此测试集合',
-      content: '温馨提示：该操作会删除该集合下所有测试用例，用例删除后无法恢复',
-      okText: '确认',
+      title: '您確認刪除此測試集合',
+      content: '溫馨提示：該操作會刪除該集合下所有測試用例，用例刪除后無法恢復',
+      okText: '確認',
       cancelText: '取消',
       async onOk() {
         const res = await axios.get('/api/col/del_col?col_id=' + colId);
         if (!res.data.errcode) {
-          message.success('删除集合成功');
+          message.success('刪除集合成功');
           const result = await that.getList();
           const nextColId = result.payload.data.data[0]._id;
 
@@ -193,7 +193,7 @@ export default class InterfaceColMenu extends Component {
     });
   };
 
-  // 复制测试集合
+  // 複製測試集合
   copyInterface = async item => {
     if (this._copyInterfaceSign === true) {
       return;
@@ -203,7 +203,7 @@ export default class InterfaceColMenu extends Component {
     let { name } = item;
     name = `${name} copy`;
 
-    // 添加集合
+    // 新增集合
     const add_col_res = await axios.post('/api/col/add_col', { name, desc, project_id });
 
     if (add_col_res.data.errcode) {
@@ -226,17 +226,17 @@ export default class InterfaceColMenu extends Component {
       return;
     }
 
-    // 刷新接口列表
+    // 重新整理介面列表
     // await this.props.fetchInterfaceColList(project_id);
     this.getList();
     this.props.setColData({ isRander: true });
-    message.success('克隆测试集成功');
+    message.success('克隆測試整合功');
   };
 
   showNoDelColConfirm = () => {
     confirm({
-      title: '此测试集合为最后一个集合',
-      content: '温馨提示：建议不要删除'
+      title: '此測試集合為最後一個集合',
+      content: '溫馨提示：建議不要刪除'
     });
   };
   caseCopy = async caseId=> {
@@ -268,16 +268,16 @@ export default class InterfaceColMenu extends Component {
     let that = this;
     const params = this.props.match.params;
     confirm({
-      title: '您确认删除此测试用例',
-      content: '温馨提示：用例删除后无法恢复',
-      okText: '确认',
+      title: '您確認刪除此測試用例',
+      content: '溫馨提示：用例刪除后無法恢復',
+      okText: '確認',
       cancelText: '取消',
       async onOk() {
         const res = await axios.get('/api/col/del_case?caseid=' + caseId);
         if (!res.data.errcode) {
-          message.success('删除用例成功');
+          message.success('刪除用例成功');
           that.getList();
-          // 如果删除当前选中 case，切换路由到集合
+          // 如果刪除目前選中 case，切換路由到集合
           if (+caseId === +that.props.currCaseId) {
             that.props.history.push('/project/' + params.id + '/interface/col/');
           } else {
@@ -327,7 +327,7 @@ export default class InterfaceColMenu extends Component {
     });
     if (!res.data.errcode) {
       this.setState({ importInterVisible: false });
-      message.success('导入集合成功');
+      message.success('匯入集合成功');
       // await this.props.fetchInterfaceColList(project_id);
       this.getList();
 
@@ -368,7 +368,7 @@ export default class InterfaceColMenu extends Component {
 
     if (id.indexOf('col') === -1) {
       if (dropColId === dragColId) {
-        // 同一个测试集合下的接口交换顺序
+        // 同一個測試集合下的介面交換順序
         let caseList = interfaceColList[dropColIndex].caseList;
         let changes = arrayChangeIndex(caseList, dragIndex, dropIndex);
         axios.post('/api/col/up_case_index', changes).then();
@@ -405,10 +405,10 @@ export default class InterfaceColMenu extends Component {
     //       <Menu.Item>
     //         <span onClick={() => {
     //           this.showDelColConfirm(col._id)
-    //         }}>删除集合</span>
+    //         }}>刪除集合</span>
     //       </Menu.Item>
     //       <Menu.Item>
-    //         <span onClick={() => this.showImportInterface(col._id)}>导入接口</span>
+    //         <span onClick={() => this.showImportInterface(col._id)}>匯入介面</span>
     //       </Menu.Item>
     //     </Menu>
     //   )
@@ -458,7 +458,7 @@ export default class InterfaceColMenu extends Component {
             >
               <span className="casename">{interfaceCase.casename}</span>
               <div className="btns">
-                <Tooltip title="删除用例">
+                <Tooltip title="刪除用例">
                   <Icon
                     type="delete"
                     className="interface-delete-icon"
@@ -520,15 +520,15 @@ export default class InterfaceColMenu extends Component {
     return (
       <div>
         <div className="interface-filter">
-          <Input placeholder="搜索测试集合" onChange={this.filterCol} />
-          <Tooltip placement="bottom" title="添加集合">
+          <Input placeholder="搜索測試集合" onChange={this.filterCol} />
+          <Tooltip placement="bottom" title="新增集合">
             <Button
               type="primary"
               style={{ marginLeft: '16px' }}
               onClick={() => this.showColModal('add')}
               className="btn-filter"
             >
-              添加集合
+              新增集合
             </Button>
           </Tooltip>
         </div>
@@ -555,7 +555,7 @@ export default class InterfaceColMenu extends Component {
                       <span>{col.name}</span>
                     </span>
                     <div className="btns">
-                      <Tooltip title="删除集合">
+                      <Tooltip title="刪除集合">
                         <Icon
                           type="delete"
                           style={{ display: list.length > 1 ? '' : 'none' }}
@@ -565,7 +565,7 @@ export default class InterfaceColMenu extends Component {
                           }}
                         />
                       </Tooltip>
-                      <Tooltip title="编辑集合">
+                      <Tooltip title="編輯集合">
                         <Icon
                           type="edit"
                           className="interface-delete-icon"
@@ -575,7 +575,7 @@ export default class InterfaceColMenu extends Component {
                           }}
                         />
                       </Tooltip>
-                      <Tooltip title="导入接口">
+                      <Tooltip title="匯入介面">
                         <Icon
                           type="plus"
                           className="interface-delete-icon"
@@ -618,7 +618,7 @@ export default class InterfaceColMenu extends Component {
         />
 
         <Modal
-          title="导入接口到集合"
+          title="匯入介面到集合"
           visible={importInterVisible}
           onOk={this.handleImportOk}
           onCancel={this.handleImportCancel}

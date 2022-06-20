@@ -70,22 +70,22 @@ class ProjectEnv extends Component {
     });
   };
 
-  // 增加环境变量项
+  // 增加環境變數項
   addParams = (name, data) => {
     let newValue = {};
-    data = { name: '新环境', domain: '', header: [] };
+    data = { name: '新環境', domain: '', header: [] };
     newValue[name] = [].concat(data, this.state[name]);
     this.setState(newValue);
     this.handleClick(0, data);
   };
 
-  // 删除提示信息
+  // 刪除提示資訊
   showConfirm(key, name) {
     let assignValue = this.delParams(key, name);
     this.onSave(assignValue);
   }
 
-  // 删除环境变量项
+  // 刪除環境變數項
   delParams = (key, name) => {
     let curValue = this.state.env;
     let newValue = {};
@@ -102,7 +102,7 @@ class ProjectEnv extends Component {
     this.setState({ delIcon: key });
   };
 
-  // 保存设置
+  // 儲存設定
   async onSave(assignValue) {
     await this.props
       .updateEnv(assignValue)
@@ -117,11 +117,11 @@ class ProjectEnv extends Component {
         }
       })
       .catch(() => {
-        message.error('环境设置不成功 ');
+        message.error('環境設定不成功 ');
       });
   }
 
-  //  提交保存信息
+  //  提交儲存資訊
   onSubmit = (value, index) => {
     let assignValue = {};
     assignValue['env'] = [].concat(this.state.env);
@@ -131,14 +131,14 @@ class ProjectEnv extends Component {
     this.props.onOk && this.props.onOk(assignValue['env'], index);
   };
 
-  // 动态修改环境名称
+  // 動態修改環境名稱
   handleInputChange = (value, currentKey) => {
     let newValue = [].concat(this.state.env);
-    newValue[currentKey].name = value || '新环境';
+    newValue[currentKey].name = value || '新環境';
     this.setState({ env: newValue });
   };
 
-  // 侧边栏拖拽
+  // 側邊欄拖拽
   handleDragMove = name => {
     return (data, from, to) => {
       let newValue = {
@@ -163,16 +163,16 @@ class ProjectEnv extends Component {
           onMouseEnter={() => this.enterItem(index)}
         >
           <span className="env-icon-style">
-            <span className="env-name" style={{ color: item.name === '新环境' && '#2395f1' }}>
+            <span className="env-name" style={{ color: item.name === '新環境' && '#2395f1' }}>
               {item.name}
             </span>
             <Popconfirm
-              title="您确认删除此环境变量?"
+              title="您確認刪除此環境變數?"
               onConfirm={e => {
                 e.stopPropagation();
                 this.showConfirm(index, 'env');
               }}
-              okText="确定"
+              okText="確定"
               cancelText="取消"
             >
               <Icon
@@ -196,11 +196,11 @@ class ProjectEnv extends Component {
               <Row className="first-menu-item menu-item">
                 <div className="env-icon-style">
                   <h3>
-                    环境列表&nbsp;<Tooltip placement="top" title="在这里添加项目的环境配置">
+                    環境列表&nbsp;<Tooltip placement="top" title="在這裡新增專案的環境配置">
                       <Icon type="question-circle-o" />
                     </Tooltip>
                   </h3>
-                  <Tooltip title="添加环境变量">
+                  <Tooltip title="新增環境變數">
                     <Icon type="plus" onClick={() => this.addParams('env')} />
                   </Tooltip>
                 </div>

@@ -66,7 +66,7 @@ class AddInterfaceForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <FormItem {...formItemLayout} label='接口分类'>
+        <FormItem {...formItemLayout} label='介面分類'>
           {getFieldDecorator('catid', {
             initialValue: this.props.catid
               ? this.props.catid + ''
@@ -83,18 +83,18 @@ class AddInterfaceForm extends Component {
             </Select>,
           )}
         </FormItem>
-        <FormItem {...formItemLayout} label='接口名称'>
+        <FormItem {...formItemLayout} label='介面名稱'>
           {getFieldDecorator('title', {
-            rules: nameLengthLimit('接口'),
-          })(<Input placeholder='接口名称' />)}
+            rules: nameLengthLimit('介面'),
+          })(<Input placeholder='介面名稱' />)}
         </FormItem>
 
-        <FormItem {...formItemLayout} label='接口路径'>
+        <FormItem {...formItemLayout} label='介面路徑'>
           {getFieldDecorator('path', {
             rules: [
               {
                 required: true,
-                message: '请输入接口路径!',
+                message: '請輸入介面路徑!',
               },
             ],
           })(
@@ -107,7 +107,7 @@ class AddInterfaceForm extends Component {
         </FormItem>
         <FormItem {...formItemLayout} label='注'>
           <span style={{ color: '#929292' }}>
-            详细的接口数据可以在编辑页面中添加
+            詳細的介面數據可以在編輯頁面中新增
           </span>
         </FormItem>
         <FormItem className='catModalfoot' wrapperCol={{ span: 24, offset: 8 }}>

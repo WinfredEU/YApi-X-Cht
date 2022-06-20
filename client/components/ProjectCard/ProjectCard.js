@@ -62,38 +62,38 @@ class ProjectCard extends Component {
       draftData.name = projectName
     })
     await this.props.copyProjectMsg(newData)
-    message.success('项目复制成功')
+    message.success('專案複製成功')
     this.props.callbackResult()
   };
 
-  // 复制项目的二次确认
+  // 複製專案的二次確認
   handleShowConfirm = () => {
     const that = this
 
     confirm({
-      title: `确认复制 ${ that.props.projectData.name } 项目吗？`,
-      okText: '确认',
+      title: `確認複製 ${ that.props.projectData.name } 專案嗎？`,
+      okText: '確認',
       cancelText: '取消',
       content: (
         <div style={{marginTop: '10px', fontSize: '13px', lineHeight: '25px'}}>
           <Alert
-            message={`该操作将会复制 ${
+            message={`該操作將會複製 ${
               that.props.projectData.name
-            } 下的所有接口集合，但不包括测试集合中的接口`}
+            } 下的所有介面集合，但不包括測試集合中的介面`}
             type='info'
           />
           <div style={{marginTop: '16px'}}>
             <p>
-              <b>项目名称:</b>
+              <b>專案名稱:</b>
             </p>
-            <Input id='project_name' placeholder='项目名称' />
+            <Input id='project_name' placeholder='專案名稱' />
           </div>
         </div>
       ),
       async onOk() {
         const projectName = trim(document.getElementById('project_name').value)
 
-        // 查询项目名称是否重复
+        // 查詢專案名稱是否重複
         const group_id = that.props.projectData.group_id
         await that.props.checkProjectName(projectName, group_id)
         that.copy(projectName)
@@ -108,7 +108,7 @@ class ProjectCard extends Component {
     this.props.delFollow(id).then(res => {
       if (res.payload.data.errcode === 0) {
         this.props.callbackResult()
-        // message.success('已取消关注！');  // 星号已做出反馈 无需重复提醒用户
+        // message.success('已取消關注！');  // 星號已做出反饋 無需重複提醒使用者
       }
     })
   };
@@ -125,7 +125,7 @@ class ProjectCard extends Component {
     this.props.addFollow(param).then(res => {
       if (res.payload.data.errcode === 0) {
         this.props.callbackResult()
-        // message.success('已添加关注！');  // 星号已做出反馈 无需重复提醒用户
+        // message.success('已新增關注！');  // 星號已做出反饋 無需重複提醒使用者
       }
     })
   };
@@ -170,7 +170,7 @@ class ProjectCard extends Component {
           onClick={projectData.follow || inFollowPage ? this.del : this.add}>
           <Tooltip
             placement='rightTop'
-            title={projectData.follow || inFollowPage ? '取消关注' : '添加关注'}>
+            title={projectData.follow || inFollowPage ? '取消關注' : '新增關注'}>
             <Icon
               type={projectData.follow || inFollowPage ? 'star' : 'star-o'}
               className={`icon ${ projectData.follow || inFollowPage ? 'active' : ''}`}
@@ -179,7 +179,7 @@ class ProjectCard extends Component {
         </div>
         {isShow && (
           <div className='copy-btns' onClick={this.handleShowConfirm}>
-            <Tooltip placement='rightTop' title='复制项目'>
+            <Tooltip placement='rightTop' title='複製專案'>
               <Icon type='copy' className='icon' />
             </Tooltip>
           </div>

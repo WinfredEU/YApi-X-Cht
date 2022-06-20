@@ -72,7 +72,7 @@ class exportSwaggerController extends baseController {
         let status = ctx.request.query.status;
 
         if (!pid) {
-            ctx.body = yapi.commons.resReturn(null, 200, 'pid 不为空');
+            ctx.body = yapi.commons.resReturn(null, 200, 'pid 不為空');
         }
         let curProject;
         let tp = '';
@@ -92,12 +92,12 @@ class exportSwaggerController extends baseController {
                     }
                 default:
                     {
-                        ctx.body = yapi.commons.resReturn(null, 400, 'type 无效参数')
+                        ctx.body = yapi.commons.resReturn(null, 400, 'type 無效參數')
                     }
             }
         } catch (error) {
             yapi.commons.log(error, 'error');
-            ctx.body = yapi.commons.resReturn(null, 502, '下载出错');
+            ctx.body = yapi.commons.resReturn(null, 502, '下載出錯');
         }
 
         //Convert to SwaggerV2.0 (OpenAPI 2.0)

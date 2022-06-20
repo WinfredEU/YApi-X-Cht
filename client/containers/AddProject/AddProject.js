@@ -68,7 +68,7 @@ class ProjectList extends Component {
     });
   };
 
-  // 确认添加项目
+  // 確認新增專案
   @autobind
   handleOk(e) {
     const { form, addProject } = this.props;
@@ -81,7 +81,7 @@ class ProjectList extends Component {
         addProject(values).then(res => {
           if (res.payload.data.errcode == 0) {
             form.resetFields();
-            message.success('创建成功! ');
+            message.success('建立成功! ');
             this.props.history.push('/project/' + res.payload.data.data._id + '/interface/api');
           }
         });
@@ -90,7 +90,7 @@ class ProjectList extends Component {
   }
 
   async componentWillMount() {
-    this.props.setBreadcrumb([{ name: '新建项目' }]);
+    this.props.setBreadcrumb([{ name: '新建專案' }]);
     if (!this.props.currGroup._id) {
       await this.props.fetchGroupList();
     }
@@ -109,19 +109,19 @@ class ProjectList extends Component {
       <div className="g-row">
         <div className="g-row m-container">
           <Form>
-            <FormItem {...formItemLayout} label="项目名称">
+            <FormItem {...formItemLayout} label="專案名稱">
               {getFieldDecorator('name', {
-                rules: nameLengthLimit('项目')
+                rules: nameLengthLimit('專案')
               })(<Input />)}
             </FormItem>
 
-            <FormItem {...formItemLayout} label="所属分组">
+            <FormItem {...formItemLayout} label="所屬分組">
               {getFieldDecorator('group', {
                 initialValue: this.state.currGroupId + '',
                 rules: [
                   {
                     required: true,
-                    message: '请选择项目所属的分组!'
+                    message: '請選擇專案所屬的分組!'
                   }
                 ]
               })(
@@ -147,8 +147,8 @@ class ProjectList extends Component {
               {...formItemLayout}
               label={
                 <span>
-                  基本路径&nbsp;
-                  <Tooltip title="接口基本路径，为空是根路径">
+                  基本路徑&nbsp;
+                  <Tooltip title="介面基本路徑，為空是根路徑">
                     <Icon type="question-circle-o" />
                   </Tooltip>
                 </span>
@@ -158,7 +158,7 @@ class ProjectList extends Component {
                 rules: [
                   {
                     required: false,
-                    message: '请输入项目基本路径'
+                    message: '請輸入專案基本路徑'
                   }
                 ]
               })(<Input onBlur={this.handlePath} />)}
@@ -169,14 +169,14 @@ class ProjectList extends Component {
                 rules: [
                   {
                     required: false,
-                    message: '描述不超过144字!',
+                    message: '描述不超過144字!',
                     max: 144
                   }
                 ]
               })(<TextArea rows={4} />)}
             </FormItem>
 
-            <FormItem {...formItemLayout} label="权限">
+            <FormItem {...formItemLayout} label="許可權">
               {getFieldDecorator('project_type', {
                 rules: [
                   {
@@ -188,12 +188,12 @@ class ProjectList extends Component {
                 <RadioGroup>
                   <Radio value="private" className="radio">
                     <Icon type="lock" />私有<br />
-                    <span className="radio-desc">只有组长和项目开发者可以索引并查看项目信息</span>
+                    <span className="radio-desc">只有組長和專案開發者可以索引並檢視專案資訊</span>
                   </Radio>
                   <br />
                   {/* <Radio value="public" className="radio">
-                    <Icon type="unlock" />公开<br />
-                    <span className="radio-desc">任何人都可以索引并查看项目信息</span>
+                    <Icon type="unlock" />公開<br />
+                    <span className="radio-desc">任何人都可以索引並檢視專案資訊</span>
                   </Radio> */}
                 </RadioGroup>
               )}
@@ -202,7 +202,7 @@ class ProjectList extends Component {
           <Row>
             <Col sm={{ offset: 6 }} lg={{ offset: 3 }}>
               <Button className="m-btn" icon="plus" type="primary" onClick={this.handleOk}>
-                创建项目
+                建立專案
               </Button>
             </Col>
           </Row>

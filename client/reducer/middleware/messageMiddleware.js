@@ -5,7 +5,7 @@ export default () => next => action => {
     return;
   }
   if (action.error) {
-    message.error((action.payload && action.payload.message) || '服务器错误');
+    message.error((action.payload && action.payload.message) || '伺服器錯誤');
   } else if (
     action.payload &&
     action.payload.data &&

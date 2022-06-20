@@ -100,8 +100,8 @@ class Interface extends Component {
         <Sider style={{ height: '100%' }} width={300}>
           <div className="left-menu">
             <Tabs type="card" className="tabs-large" activeKey={activeKey} onChange={this.onChange}>
-              <Tabs.TabPane tab="接口列表" key="api" />
-              <Tabs.TabPane tab="测试集合" key="colOrCase" />
+              <Tabs.TabPane tab="介面列表" key="api" />
+              <Tabs.TabPane tab="測試集合" key="colOrCase" />
             </Tabs>
             {activeKey === 'api' ? (
               <InterfaceMenu

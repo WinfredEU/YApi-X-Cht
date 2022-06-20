@@ -111,7 +111,7 @@ export default (state = initialState, action) => {
   }
 };
 
-// 获取某分组下的项目列表
+// 獲取某分組下的專案列表
 export function fetchProjectList(id, pageNum) {
   return {
     type: FETCH_PROJECT_LIST,
@@ -125,7 +125,7 @@ export function fetchProjectList(id, pageNum) {
   };
 }
 
-// 复制项目
+// 複製專案
 export function copyProjectMsg(params) {
   return {
     type: COPY_PROJECT_MSG,
@@ -133,7 +133,7 @@ export function copyProjectMsg(params) {
   };
 }
 
-// 添加项目成员
+// 新增專案成員
 export function addMember(param) {
   return {
     type: ADD_PROJECT_MEMBER,
@@ -141,7 +141,7 @@ export function addMember(param) {
   };
 }
 
-// 删除项目成员
+// 刪除專案成員
 export function delMember(param) {
   return {
     type: DEL_PROJECT_MEMBER,
@@ -149,14 +149,14 @@ export function delMember(param) {
   };
 }
 
-// 修改项目成员权限
+// 修改專案成員許可權
 export function changeMemberRole(param) {
   return {
     type: CHANGE_PROJECT_MEMBER,
     payload: axios.post('/api/project/change_member_role', param)
   };
 }
-// 修改项目成员是否收到消息通知
+// 修改專案成員是否收到訊息通知
 export function changeMemberEmailNotice(param) {
   return {
     type: CHANGE_MEMBER_EMAIL_NOTICE,
@@ -164,7 +164,7 @@ export function changeMemberEmailNotice(param) {
   };
 }
 
-// 获取项目成员列表
+// 獲取專案成員列表
 export function getProjectMemberList(id) {
   return {
     type: GET_PEOJECT_MEMBER,
@@ -195,7 +195,7 @@ export function addProject(data) {
     project_type
   } = data;
 
-  // 过滤项目名称中有html标签存在的情况
+  // 過濾專案名稱中有html標籤存在的情況
   name = htmlFilter(name);
   const param = {
     name,
@@ -215,11 +215,11 @@ export function addProject(data) {
   };
 }
 
-// 修改项目
+// 修改專案
 export function updateProject(data) {
   let { name, project_type, basepath, desc, _id, env, group_id, switch_notice, strice, is_json5, tag } = data;
   
-  // 过滤项目名称中有html标签存在的情况
+  // 過濾專案名稱中有html標籤存在的情況
   name = htmlFilter(name);
   const param = {
     name,
@@ -240,7 +240,7 @@ export function updateProject(data) {
   };
 }
 
-// 修改项目脚本
+// 修改專案指令碼
 export function updateProjectScript(data) {
   return {
     type: PROJECT_UPDATE,
@@ -248,7 +248,7 @@ export function updateProjectScript(data) {
   };
 }
 
-// 修改全局mock
+// 修改全域性mock
 export function updateProjectMock(data) {
   return {
     type: PROJECT_UPDATE,
@@ -256,7 +256,7 @@ export function updateProjectMock(data) {
   };
 }
 
-// 修改项目环境配置
+// 修改專案環境配置
 export function updateEnv(data) {
   const { env, _id } = data;
   const param = {
@@ -269,7 +269,7 @@ export function updateEnv(data) {
   };
 }
 
-// 获取项目环境配置
+// 獲取專案環境配置
 export function getEnv(project_id) {
   return {
     type: PROJECT_GET_ENV,
@@ -277,7 +277,7 @@ export function getEnv(project_id) {
   };
 }
 
-// 修改项目头像
+// 修改專案頭像
 export function upsetProject(param) {
   return {
     type: PROJECT_UPSET,
@@ -285,7 +285,7 @@ export function upsetProject(param) {
   };
 }
 
-// 删除项目
+// 刪除專案
 export function delProject(id) {
   const param = { id };
   return {

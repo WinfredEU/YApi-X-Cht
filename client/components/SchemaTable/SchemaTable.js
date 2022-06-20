@@ -7,18 +7,18 @@ import _ from 'underscore';
 import './index.scss';
 
 const messageMap = {
-  desc: '备注',
-  default: '实例',
+  desc: '備註',
+  default: '實例',
   maximum: '最大值',
   minimum: '最小值',
-  maxItems: '最大数量',
-  minItems: '最小数量',
-  maxLength: '最大长度',
-  minLength: '最小长度',
-  enum: '枚举',
-  enumDesc: '枚举备注',
+  maxItems: '最大數量',
+  minItems: '最小數量',
+  maxLength: '最大長度',
+  minLength: '最小長度',
+  enum: '列舉',
+  enumDesc: '列舉備註',
   uniqueItems: '元素是否都不同',
-  itemType: 'item 类型',
+  itemType: 'item 型別',
   format: 'format',
   itemFormat: 'format',
   mock: 'mock'
@@ -26,13 +26,13 @@ const messageMap = {
 
 const columns = [
   {
-    title: '名称',
+    title: '名稱',
     dataIndex: 'name',
     key: 'name',
     width: 200
   },
   {
-    title: '类型',
+    title: '型別',
     dataIndex: 'type',
     key: 'type',
     width: 100,
@@ -46,16 +46,16 @@ const columns = [
     }
   },
   {
-    title: '是否必须',
+    title: '是否必須',
     dataIndex: 'required',
     key: 'required',
     width: 80,
     render: text => {
-      return <div>{text ? '必须' : '非必须'}</div>;
+      return <div>{text ? '必須' : '非必須'}</div>;
     }
   },
   {
-    title: '默认值',
+    title: '預設值',
     dataIndex: 'default',
     key: 'default',
     width: 80,
@@ -64,7 +64,7 @@ const columns = [
     }
   },
   {
-    title: '备注',
+    title: '備註',
     dataIndex: 'desc',
     key: 'desc',
     render: (text, item) => {
@@ -76,7 +76,7 @@ const columns = [
     }
   },
   {
-    title: '其他信息',
+    title: '其他資訊',
     dataIndex: 'sub',
     key: 'sub',
     width: 180,

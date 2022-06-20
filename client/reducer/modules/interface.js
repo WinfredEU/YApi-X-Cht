@@ -18,7 +18,7 @@ const FETCH_INTERFACE_CAT_LIST = 'yapi/interface/FETCH_INTERFACE_CAT_LIST';
 const initialState = {
   curdata: {},
   list: [],
-  editStatus: false, // 记录编辑页面是否有编辑,
+  editStatus: false, // 記錄編輯頁面是否有編輯,
   totalTableList: [],
   catTableList: [],
   count: 0,
@@ -71,7 +71,7 @@ export default (state = initialState, action) => {
   }
 };
 
-// 记录编辑页面是否有编辑
+// 記錄編輯頁面是否有編輯
 export function changeEditStatus(status) {
   return {
     type: CHANGE_EDIT_STATUS,

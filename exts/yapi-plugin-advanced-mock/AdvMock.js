@@ -36,7 +36,7 @@ class AdvMock extends Component {
     };
     axios.post('/api/plugin/advmock/save', params).then(res => {
       if (res.data.errcode === 0) {
-        message.success('保存成功');
+        message.success('儲存成功');
       } else {
         message.error(res.data.errmsg);
       }
@@ -106,7 +106,7 @@ class AdvMock extends Component {
         <div style={{ textAlign: 'center', marginBottom: 20 }}>
           <Radio.Group value={tab} size="large" onChange={this.handleTapChange}>
             <Radio.Button value="case">期望</Radio.Button>
-            <Radio.Button value="script">脚本</Radio.Button>
+            <Radio.Button value="script">指令碼</Radio.Button>
           </Radio.Group>
         </div>
         <div style={{ display: isShowCase ? 'none' : '' }}>
@@ -114,12 +114,12 @@ class AdvMock extends Component {
             <FormItem
               label={
                 <span>
-                  是否开启&nbsp;<a
+                  是否開啟&nbsp;<a
                     target="_blank"
                     rel="noopener noreferrer"
                     href={constants.docHref.adv_mock_script}
                   >
-                    <Tooltip title="点击查看文档">
+                    <Tooltip title="點選檢視文件">
                       <Icon type="question-circle-o" />
                     </Tooltip>
                   </a>
@@ -130,17 +130,17 @@ class AdvMock extends Component {
               <Switch
                 checked={this.state.enable}
                 onChange={this.onChange}
-                checkedChildren="开"
-                unCheckedChildren="关"
+                checkedChildren="開"
+                unCheckedChildren="關"
               />
             </FormItem>
 
-            <FormItem label="Mock脚本" {...formItemLayout}>
+            <FormItem label="Mock指令碼" {...formItemLayout}>
               <div id="mock-script" style={{ minHeight: '500px' }} />
             </FormItem>
             <FormItem {...tailFormItemLayout}>
               <Button type="primary" htmlType="submit">
-                保存
+                儲存
               </Button>
             </FormItem>
           </Form>

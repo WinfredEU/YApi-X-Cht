@@ -11,10 +11,10 @@ const {parseToken} = require('../utils/token')
 class baseController {
   constructor(ctx) {
     this.ctx = ctx
-    //网站上线后，role对象key是不能修改的，value可以修改
+    //網站上線后，role對像key是不能修改的，value可以修改
     this.roles = {
       admin: 'Admin',
-      member: '网站会员',
+      member: '網站會員',
     }
   }
 
@@ -57,7 +57,7 @@ class baseController {
     const params = Object.assign({}, ctx.query, ctx.request.body)
     let token = params.token
 
-    // 如果前缀是 /api/open，执行 parse token 逻辑
+    // 如果字首是 /api/open，執行 parse token 邏輯
     if (token && (openApiRouter.indexOf(ctx.path) > -1 || ctx.path.indexOf('/api/open/') === 0)) {
       const tokens = parseToken(token)
 
@@ -84,11 +84,11 @@ class baseController {
 
       const checkId = await this.getProjectIdByToken(token)
       if (!checkId) {
-        ctx.body = yapi.commons.resReturn(null, 42014, 'token 无效')
+        ctx.body = yapi.commons.resReturn(null, 42014, 'token 無效')
       }
       const projectData = await this.projectModel.get(checkId)
       if (projectData) {
-        ctx.query.pid = checkId // 兼容：/api/plugin/export
+        ctx.query.pid = checkId // 相容：/api/plugin/export
         ctx.params.project_id = checkId
         this.$tokenAuth = true
         this.$uid = tokenUid
@@ -100,7 +100,7 @@ class baseController {
             username: 'system',
           }
         } else {
-          const userInst = yapi.getInst(userModel) //创建user实体
+          const userInst = yapi.getInst(userModel) //建立user實體
           result = await userInst.findById(tokenUid)
         }
 
@@ -128,7 +128,7 @@ class baseController {
       if (!token || !uid) {
         return false
       }
-      const userInst = yapi.getInst(userModel) //创建user实体
+      const userInst = yapi.getInst(userModel) //建立user實體
       const result = await userInst.findById(uid)
       if (!result) {
         return false
@@ -190,7 +190,7 @@ class baseController {
       ])
       body = yapi.commons.resReturn(result)
     } else {
-      body = yapi.commons.resReturn(null, 40011, '请登录...')
+      body = yapi.commons.resReturn(null, 40011, '請登錄...')
     }
 
     body.ladp = await this.checkLDAP()
@@ -220,7 +220,7 @@ class baseController {
         const interfaceInst = yapi.getInst(interfaceModel)
         const interfaceData = await interfaceInst.get(id)
         result.interfaceData = interfaceData
-        // 项目创建者相当于 owner
+        // 專案建立者相當於 owner
         if (interfaceData.uid === this.getUid()) {
           return 'owner'
         }
@@ -232,7 +232,7 @@ class baseController {
         const projectInst = yapi.getInst(projectModel)
         const projectData = await projectInst.get(id)
         if (projectData.uid === this.getUid()) {
-          // 建立项目的人
+          // 建立專案的人
           return 'owner'
         }
         const memberData = _.find(projectData.members, m => {
@@ -256,7 +256,7 @@ class baseController {
       if (type === 'group') {
         const groupInst = yapi.getInst(groupModel)
         const groupData = await groupInst.get(id)
-        // 建立分组的人
+        // 建立分組的人
         if (groupData.uid === this.getUid()) {
           return 'owner'
         }
@@ -284,10 +284,10 @@ class baseController {
   }
 
   /**
-   * 身份验证
-   * @param {*} id type对应的id
+   * 身份驗證
+   * @param {*} id type對應的id
    * @param {*} type enum[interface, project, group]
-   * @param {*} action enum[ danger, edit, view ] danger只有owner或管理员才能操作,edit只要是dev或以上就能执行
+   * @param {*} action enum[ danger, edit, view ] danger只有owner或管理員才能操作,edit只要是dev或以上就能執行
    */
   async checkAuth(id, type, action) {
     const role = await this.getProjectRole(id, type)

@@ -1,15 +1,15 @@
 /**
- * 获取所需要的日期区间点
- * @param time {Number} Number是ele日期区间选择组件返回的结果
- *      Number是之前时刻距离今天的间隔天数，默认是90天
- * @param start {String} 日期对象，日期区间的开始点 '2017-01-17 00:00:00'
+ * 獲取所需要的日期區間點
+ * @param time {Number} Number是ele日期區間選擇元件返回的結果
+ *      Number是之前時刻距離今天的間隔天數，預設是90天
+ * @param start {String} 日期對象，日期區間的開始點 '2017-01-17 00:00:00'
  * @param withToday {Boolean} 是否包含今天
  * @return {Array} ['2017-01-17 00:00:00', '2017-01-20 23:59:59']
  */
 exports.getDateRange = (time = 90, start = false, withToday = true) => {
     const gapTime = time * 24 * 3600 * 1000;
     if (!start) {
-        // 没有规定start时间
+        // 沒有規定start時間
         let endTime = getNowMidnightDate().getTime();
         if (!withToday) {
             endTime -= 86400000;
@@ -21,13 +21,13 @@ exports.getDateRange = (time = 90, start = false, withToday = true) => {
     return [start, this.formatYMD(endTime)];
 }
 
-// 时间
+// 時間
 const convert2Decimal = num => (num > 9 ? num : `0${num}`)
 
 /**
- * 获取距今天之前多少天的所有时间
- *  @param time {Number} Number是ele日期区间选择组件返回的结果
- *      Number是之前时刻距离今天的间隔天数，默认是30天
+ * 獲取距今天之前多少天的所有時間
+ *  @param time {Number} Number是ele日期區間選擇元件返回的結果
+ *      Number是之前時刻距離今天的間隔天數，預設是30天
  *  @return {Array} ['2017-01-17', '2017-01-28', '2017-10-29',...]
  */
 
@@ -44,7 +44,7 @@ exports.getDateInterval = (time = 30) => {
     return timeList;
 }
 
-/**获取2017-10-27 00:00:00 和 2017-10-27 23:59:59的时间戳
+/**獲取2017-10-27 00:00:00 和 2017-10-27 23:59:59的時間戳
  *  @param date {String}  "2017-10-27"
  *  @return {Array} [ 1509033600000, 1509119999000 ]
  */
@@ -56,7 +56,7 @@ exports.getTimeInterval = (date) => {
 }
 
 /**
- * 获取当前时间午夜0点的日期对象
+ * 獲取目前時間午夜0點的日期對像
  */
 const getNowMidnightDate = (time) => {
     let date;
@@ -69,8 +69,8 @@ const getNowMidnightDate = (time) => {
 }
 
 /**
- * 格式化 年、月、日、时、分、秒
- * @param val {Object or String or Number} 日期对象 或是可new Date的对象或时间戳
+ * 格式化 年、月、日、時、分、秒
+ * @param val {Object or String or Number} 日期對像 或是可new Date的對象或時間戳
  * @return {String} 2017-01-20 20:00:00
  */
 const formatDate = val => {
@@ -91,7 +91,7 @@ const formatDate = val => {
 
 /**
  * 格式化年、月、日
- * @param val {Object or String or Number} 日期对象 或是可new Date的对象或时间戳
+ * @param val {Object or String or Number} 日期對像 或是可new Date的對象或時間戳
  * @return {String} 2017-01-20
  */
 exports.formatYMD = (val, joinStr = '-') => {
@@ -108,8 +108,8 @@ exports.formatYMD = (val, joinStr = '-') => {
 
 
 /**
- * 获取所需的时间差值,
- * tip：new Date('2017-01-17 00:00:00')在safari下不可用，需进行替换
+ * 獲取所需的時間差值,
+ * tip：new Date('2017-01-17 00:00:00')在safari下不可用，需進行替換
  * @param Array ['2017-01-17 00:00:00', '2017-01-20 23:59:59']
  * @return {Number} 3
  */
@@ -121,7 +121,7 @@ exports.getDayGapFromRange = dateRange => {
 
 
 /**
- * dateSpacialWithSafari 格式话safari下通用的格式
+ * dateSpacialWithSafari 格式話safari下通用的格式
  * @param str {String} 2017-04-19T11:01:19.074+0800 or 2017-10-10 10:10:10
  * @return {number} date.getTime()
  */
@@ -138,7 +138,7 @@ const dateSpacialWithSafari = str => {
 }
 
 /**
- * 将内存单位从字节(b)变成GB
+ * 將記憶體單位從位元組(b)變成GB
  */
 
 exports.transformBytesToGB = bytes => {

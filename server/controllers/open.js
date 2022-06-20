@@ -81,22 +81,22 @@ class openController extends baseController {
     let warnMessage = ''
 
     /**
-     * 因为以前接口文档写错了，做下兼容
+     * 因為以前介面文件寫錯了，做下相容
      */
     try{
       if(!dataSync &&ctx.params.dataSync){
-        warnMessage = 'importData Api 已废弃 dataSync 传参，请联系管理员将 dataSync 改为 merge.'
+        warnMessage = 'importData Api 已廢棄 dataSync 傳參，請聯繫管理員將 dataSync 改為 merge.'
         dataSync = ctx.params.dataSync
       }
     }catch(e){}
 
     let token = ctx.params.token;
     if (!type || !importDataModule[type]) {
-      return (ctx.body = yapi.commons.resReturn(null, 40022, '不存在的导入方式'));
+      return (ctx.body = yapi.commons.resReturn(null, 40022, '不存在的匯入方式'));
     }
 
     if (!content && !ctx.params.url) {
-      return (ctx.body = yapi.commons.resReturn(null, 40022, 'json 或者 url 参数，不能都为空'));
+      return (ctx.body = yapi.commons.resReturn(null, 40022, 'json 或者 url 參數，不能都為空'));
     }
     try {
       let request = require("request");// let Promise = require('Promise');
@@ -118,7 +118,7 @@ class openController extends baseController {
       }
       content = JSON.parse(content);
     } catch (e) {
-      return (ctx.body = yapi.commons.resReturn(null, 40022, 'json 格式有误:' + e));
+      return (ctx.body = yapi.commons.resReturn(null, 40022, 'json 格式有誤:' + e));
     }
 
     let menuList = await this.interfaceCatModel.list(project_id);
@@ -175,7 +175,7 @@ class openController extends baseController {
   }
   async runAutoTest(ctx) {
     if (!this.$tokenAuth) {
-      return (ctx.body = yapi.commons.resReturn(null, 40022, 'token 验证失败'));
+      return (ctx.body = yapi.commons.resReturn(null, 40022, 'token 驗證失敗'));
     }
     // console.log(1231312)
     const token = ctx.query.token;
@@ -245,9 +245,9 @@ class openController extends baseController {
         }
       });
       if (failedNum === 0) {
-        msg = `一共 ${len} 测试用例，全部验证通过`;
+        msg = `一共 ${len} 測試用例，全部驗證通過`;
       } else {
-        msg = `一共 ${len} 测试用例，${successNum} 个验证通过， ${failedNum} 个未通过。`;
+        msg = `一共 ${len} 測試用例，${successNum} 個驗證通過， ${failedNum} 個未通過。`;
       }
 
       return { msg, len, successNum, failedNum };
@@ -268,17 +268,17 @@ class openController extends baseController {
         ctx.request.origin
       }/api/open/run_auto_test?id=${id}&token=${token}&mode=${ctx.params.mode}`;
       yapi.commons.sendNotice(projectId, {
-        title: `YApi自动化测试报告`,
+        title: `YApi自動化測試報告`,
         content: `
         <html>
         <head>
-        <title>测试报告</title>
+        <title>測試報告</title>
         <meta charset="utf-8" />
         <body>
         <div>
-        <h3>测试结果：</h3>
+        <h3>測試結果：</h3>
         <p>${reportsResult.message.msg}</p>
-        <h3>测试结果详情如下：</h3>
+        <h3>測試結果詳情如下：</h3>
         <p>${autoTestUrl}</p>
         </div>
         </body>
@@ -346,7 +346,7 @@ class openController extends baseController {
       result.params = requestParams;
       if (validRes.length === 0) {
         result.code = 0;
-        result.validRes = [{ message: '验证通过' }];
+        result.validRes = [{ message: '驗證通過' }];
       } else if (validRes.length > 0) {
         result.code = 1;
         result.validRes = validRes;

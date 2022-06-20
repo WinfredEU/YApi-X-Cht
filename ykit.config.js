@@ -67,7 +67,7 @@ module.exports = {
       name: 'antd',
       options: {
         modifyQuery: function (defaultQuery) {
-          // 可查看和编辑 defaultQuery
+          // 可檢視和編輯 defaultQuery
           defaultQuery.plugins = []
           defaultQuery.plugins.push([
             'transform-runtime',
@@ -202,9 +202,9 @@ module.exports = {
     }
   },
   server: {
-    // true/false，默认 false，效果相当于 ykit server --hot
+    // true/false，預設 false，效果相當於 ykit server --hot
     hot: true,
-    // true/false，默认 false，开启后可在当前打开的页面提示打包错误
+    // true/false，預設 false，開啟后可在目前打開的頁面提示打包錯誤
     overlay: false,
   },
   hooks: {},

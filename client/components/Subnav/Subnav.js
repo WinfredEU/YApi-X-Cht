@@ -24,7 +24,7 @@ class Subnav extends Component {
           className="g-row m-subnav-menu"
         >
           {this.props.data.map((item, index) => {
-            // 若导航标题为两个字，则自动在中间加个空格
+            // 若導航標題為兩個字，則自動在中間加個空格
             if (item.name.length === 2) {
               item.name = item.name[0] + ' ' + item.name[1];
             }

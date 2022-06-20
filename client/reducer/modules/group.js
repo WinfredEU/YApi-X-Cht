@@ -76,7 +76,7 @@ export default (state = initialState, action) => {
   }
 };
 
-// 获取 group 信息 (权限信息)
+// 獲取 group 資訊 (許可權資訊)
 export function fetchGroupMsg(id) {
   return {
     type: FETCH_GROUP_MSG,
@@ -86,7 +86,7 @@ export function fetchGroupMsg(id) {
   };
 }
 
-// 添加分组成员
+// 新增分組成員
 export function addMember(param) {
   return {
     type: ADD_GROUP_MEMBER,
@@ -94,7 +94,7 @@ export function addMember(param) {
   };
 }
 
-// 删除分组成员
+// 刪除分組成員
 export function delMember(param) {
   return {
     type: DEL_GROUP_MEMBER,
@@ -102,7 +102,7 @@ export function delMember(param) {
   };
 }
 
-// 修改分组成员权限
+// 修改分組成員許可權
 export function changeMemberRole(param) {
   return {
     type: CHANGE_GROUP_MEMBER,
@@ -110,7 +110,7 @@ export function changeMemberRole(param) {
   };
 }
 
-// 修改分组信息
+// 修改分組資訊
 export function changeGroupMsg(param) {
   return {
     type: CHANGE_GROUP_MESSAGE,
@@ -118,7 +118,7 @@ export function changeGroupMsg(param) {
   };
 }
 
-// 更新左侧的分组列表
+// 更新左側的分組列表
 export function updateGroupList(param) {
   return {
     type: UPDATE_GROUP_LIST,
@@ -126,7 +126,7 @@ export function updateGroupList(param) {
   };
 }
 
-// 删除分组
+// 刪除分組
 export function deleteGroup(param) {
   return {
     type: DEL_GROUP,
@@ -134,7 +134,7 @@ export function deleteGroup(param) {
   };
 }
 
-// 获取分组成员列表
+// 獲取分組成員列表
 export function fetchGroupMemberList(id) {
   return {
     type: FETCH_GROUP_MEMBER,

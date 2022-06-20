@@ -31,11 +31,11 @@ export default class LoginWrap extends Component {
         className="login-form"
         tabBarStyle={{ border: 'none' }}
       >
-        <TabPane tab="登录" key="1">
+        <TabPane tab="登錄" key="1">
           <LoginForm />
         </TabPane>
-        <TabPane tab={"注册"} key="2">
-          {canRegister ? <RegForm /> : <div style={{minHeight: 200}}>管理员已禁止注册，请联系管理员</div>}
+        <TabPane tab={"註冊"} key="2">
+          {canRegister ? <RegForm /> : <div style={{minHeight: 200}}>管理員已禁止註冊，請聯繫管理員</div>}
         </TabPane>
       </Tabs>
     );

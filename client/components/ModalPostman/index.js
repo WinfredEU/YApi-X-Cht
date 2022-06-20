@@ -10,7 +10,7 @@ import { trim } from '../../common.js';
 const { handleParamsValue } = require('common/utils.js');
 const Panel = Collapse.Panel;
 
-// 深拷贝
+// 深拷貝
 function deepEqual(state) {
   return JSON.parse(JSON.stringify(state));
 }
@@ -131,7 +131,7 @@ class ModalPostman extends Component {
       });
     };
   }
-  //  处理常量输入
+  //  處理常量輸入
   handleConstantsInput = val => {
     val = val.replace(/^\{\{(.+)\}\}$/g, '$1');
     this.setState({
@@ -161,16 +161,16 @@ class ModalPostman extends Component {
     );
   };
 
-  //  处理表达式
+  //  處理表達式
   handleValue(val) {
     return handleParamsValue(val, {});
   }
 
-  // 处理错误
+  // 處理錯誤
   handleError() {
     return (
       <Alert
-        message="请求“变量集”尚未运行,所以我们无法从其响应中提取的值。您可以在测试集合中测试这些变量。"
+        message="請求「變數集」尚未執行,所以我們無法從其響應中提取的值。您可以在測試集合中測試這些變數。"
         type="warning"
       />
     );
@@ -189,18 +189,18 @@ class ModalPostman extends Component {
       methodsParamsList: initParamsList
     });
   }
-  // 处理取消插入
+  // 處理取消插入
   handleCancel = () => {
     this.setInit();
     this.props.handleCancel();
   };
 
-  // 处理插入
+  // 處理插入
   handleOk = installValue => {
     this.props.handleOk(installValue);
     this.setInit();
   };
-  // 处理面板切换
+  // 處理面板切換
   handleCollapse = key => {
     this.setState({
       activeKey: key
@@ -231,7 +231,7 @@ class ModalPostman extends Component {
       <Modal
         title={
           <p>
-            <Icon type="edit" /> 高级参数设置
+            <Icon type="edit" /> 高級參數設定
           </p>
         }
         visible={visible}
@@ -255,21 +255,21 @@ class ModalPostman extends Component {
                 >
                   <Panel header={<h3 className="mock-title">常量</h3>} key="1">
                     <Input
-                      placeholder="基础参数值"
+                      placeholder="基礎參數值"
                       value={constantInput}
                       onChange={e => this.handleConstantsInput(e.target.value, index)}
                     />
                   </Panel>
-                  <Panel header={<h3 className="mock-title">mock数据</h3>} key="2">
+                  <Panel header={<h3 className="mock-title">mock數據</h3>} key="2">
                     <MockList click={this.mockClick(index)} clickValue={item.name} />
                   </Panel>
                   {envType === 'case' && (
                     <Panel
                       header={
                         <h3 className="mock-title">
-                          变量&nbsp;<Tooltip
+                          變數&nbsp;<Tooltip
                             placement="top"
-                            title="YApi 提供了强大的变量参数功能，你可以在测试的时候使用前面接口的 参数 或 返回值 作为 后面接口的参数，即使接口之间存在依赖，也可以轻松 一键测试~"
+                            title="YApi 提供了強大的變數參數功能，你可以在測試的時候使用前面介面的 參數 或 返回值 作為 後面介面的參數，即使介面之間存在依賴，也可以輕鬆 一鍵測試~"
                           >
                             <Icon type="question-circle-o" />
                           </Tooltip>
@@ -295,7 +295,7 @@ class ModalPostman extends Component {
         </Row>
         <Row className="modal-postman-expression">
           <Col span={6}>
-            <h3 className="title">表达式</h3>
+            <h3 className="title">表達式</h3>
           </Col>
           <Col span={18}>
             <span className="expression-item">{outputParams()}</span>
@@ -303,7 +303,7 @@ class ModalPostman extends Component {
         </Row>
         <Row className="modal-postman-preview">
           <Col span={6}>
-            <h3 className="title">预览</h3>
+            <h3 className="title">預覽</h3>
           </Col>
           <Col span={18}>
             <h3>{this.handleValue(outputParams()) || (outputParams() && this.handleError())}</h3>

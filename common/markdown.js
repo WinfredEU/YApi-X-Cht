@@ -8,55 +8,55 @@ const json_parse = function (json) {
     return {}
   }
 }
-// 处理字符串换行
+// 處理字串換行
 const handleWrap = str => {
   return _.isString(str) ? str.replace(/\n/gi, '<br/>') : str
 }
 const messageMap = {
-  desc: '备注',
-  default: '实例',
+  desc: '備註',
+  default: '實例',
   maximum: '最大值',
   minimum: '最小值',
-  maxItems: '最大数量',
-  minItems: '最小数量',
-  maxLength: '最大长度',
-  minLength: '最小长度',
+  maxItems: '最大數量',
+  minItems: '最小數量',
+  maxLength: '最大長度',
+  minLength: '最小長度',
   uniqueItems: '元素是否都不同',
-  itemType: 'item 类型',
+  itemType: 'item 型別',
   format: 'format',
-  enum: '枚举',
-  enumDesc: '枚举备注',
+  enum: '列舉',
+  enumDesc: '列舉備註',
   mock: 'mock',
 }
 
 const columns = [
   {
-    title: '名称',
+    title: '名稱',
     dataIndex: 'name',
     key: 'name',
   },
   {
-    title: '类型',
+    title: '型別',
     dataIndex: 'type',
     key: 'type',
   },
   {
-    title: '是否必须',
+    title: '是否必須',
     dataIndex: 'required',
     key: 'required',
   },
   {
-    title: '默认值',
+    title: '預設值',
     dataIndex: 'default',
     key: 'default',
   },
   {
-    title: '备注',
+    title: '備註',
     dataIndex: 'desc',
     key: 'desc',
   },
   {
-    title: '其他信息',
+    title: '其他資訊',
     dataIndex: 'sub',
     key: 'sub',
   },
@@ -67,10 +67,10 @@ function escapeStr(str, isToc) {
 }
 
 function createBaseMessage(basepath, inter) {
-  // 基本信息
-  const baseMessage = `### 基本信息\n\n**Path：** ${basepath + inter.path}\n\n**Method：** ${
+  // 基本資訊
+  const baseMessage = `### 基本資訊\n\n**Path：** ${basepath + inter.path}\n\n**Method：** ${
     inter.method
-  }\n\n**接口描述：**\n${_.isUndefined(inter.desc) ? '' : inter.desc}\n`
+  }\n\n**介面描述：**\n${_.isUndefined(inter.desc) ? '' : inter.desc}\n`
   return baseMessage
 }
 
@@ -78,7 +78,7 @@ function createReqHeaders(req_headers) {
   // Request-headers
   if (req_headers && req_headers.length) {
     let headersTable = `**Headers**\n\n`
-    headersTable += `| 参数名称  | 参数值  |  是否必须 | 示例  | 备注  |\n| ------------ | ------------ | ------------ | ------------ | ------------ |\n`
+    headersTable += `| 參數名稱  | 參數值  |  是否必須 | 示例  | 備註  |\n| ------------ | ------------ | ------------ | ------------ | ------------ |\n`
     for (let j = 0; j < req_headers.length; j++) {
       headersTable += `| ${req_headers[j].name || ''}  |  ${req_headers[j].value || ''} | ${
         +req_headers[j].required === 1 ? '是' : '否'
@@ -92,8 +92,8 @@ function createReqHeaders(req_headers) {
 
 function createPathParams(req_params) {
   if (req_params && req_params.length) {
-    let paramsTable = `**路径参数**\n\n`
-    paramsTable += `| 参数名称 | 示例  | 备注  |\n| ------------ | ------------ | ------------ |\n`
+    let paramsTable = `**路徑參數**\n\n`
+    paramsTable += `| 參數名稱 | 示例  | 備註  |\n| ------------ | ------------ | ------------ |\n`
     for (let j = 0; j < req_params.length; j++) {
       paramsTable += `| ${req_params[j].name || ''} |  ${handleWrap(req_params[j].example)
         || ''} |  ${handleWrap(req_params[j].desc) || ''} |\n`
@@ -106,7 +106,7 @@ function createPathParams(req_params) {
 function createReqQuery(req_query) {
   if (req_query && req_query.length) {
     let headersTable = `**Query**\n\n`
-    headersTable += `| 参数名称  |  是否必须 | 示例  | 备注  |\n| ------------ | ------------ | ------------ | ------------ |\n`
+    headersTable += `| 參數名稱  |  是否必須 | 示例  | 備註  |\n| ------------ | ------------ | ------------ | ------------ |\n`
     for (let j = 0; j < req_query.length; j++) {
       headersTable += `| ${req_query[j].name || ''} | ${
         +req_query[j].required === 1 ? '是' : '否'
@@ -121,7 +121,7 @@ function createReqQuery(req_query) {
 function createReqBody(req_body_type, req_body_form, req_body_other, req_body_is_json_schema) {
   if (req_body_type === 'form' && req_body_form.length) {
     let bodyTable = `**Body**\n\n`
-    bodyTable += `| 参数名称  | 参数类型  |  是否必须 | 示例  | 备注  |\n| ------------ | ------------ | ------------ | ------------ | ------------ |\n`
+    bodyTable += `| 參數名稱  | 參數型別  |  是否必須 | 示例  | 備註  |\n| ------------ | ------------ | ------------ | ------------ | ------------ |\n`
     const req_body = req_body_form
     for (let j = 0; j < req_body.length; j++) {
       bodyTable += `| ${req_body[j].name || ''} | ${req_body[j].type || ''}  |  ${
@@ -182,7 +182,7 @@ function tableCol(col, columns, level) {
             : `<span>${value}</span>`
         break
       case 'required':
-        text = value ? '必须' : '非必须'
+        text = value ? '必須' : '非必須'
         break
       case 'desc':
         text = _.isUndefined(col.childrenDesc)
@@ -203,7 +203,7 @@ function tableCol(col, columns, level) {
 }
 
 function tableBody(dataSource, columns, level) {
-  //  按照columns的顺序排列数据
+  //  按照columns的順序排列數據
   let tpl = ``
   dataSource.map(col => {
     let child = null
@@ -236,7 +236,7 @@ function createSchemaTable(body) {
 }
 
 function createResponse(res_body, res_body_is_json_schema, res_body_type) {
-  const resTitle = `\n### 返回数据\n\n`
+  const resTitle = `\n### 返回數據\n\n`
   if (res_body) {
     if (res_body_is_json_schema && res_body_type === 'json') {
       const resBody = createSchemaTable(res_body)
@@ -251,13 +251,13 @@ function createResponse(res_body, res_body_is_json_schema, res_body_type) {
 function createInterMarkdown(basepath, listItem, isToc) {
   let mdTemplate = ``
   const toc = `[TOC]\n\n`
-  // 接口名称
+  // 介面名稱
   mdTemplate += `\n## ${escapeStr(`${listItem.title}\n<a id=${listItem.title}> </a>`, isToc)}\n`
   isToc && (mdTemplate += toc)
-  // 基本信息
+  // 基本資訊
   mdTemplate += createBaseMessage(basepath, listItem)
   // Request
-  mdTemplate += `\n### 请求参数\n`
+  mdTemplate += `\n### 請求參數\n`
   // Request-headers
   mdTemplate += createReqHeaders(listItem.req_headers)
   // Request-params
@@ -284,13 +284,13 @@ function createInterMarkdown(basepath, listItem, isToc) {
 
 function createProjectMarkdown(curProject, wikiData) {
   let mdTemplate = ``
-  // 项目名、项目描述
+  // 專案名、專案描述
   const title = `<h1 class="curproject-name"> ${curProject.name} </h1>`
 
   mdTemplate += `\n ${title} \n ${curProject.desc || ''}\n\n`
 
-  // 增加公共wiki信息展示
-  mdTemplate += wikiData ? `\n### 公共信息\n${wikiData.desc || ''}\n` : ''
+  // 增加公共wiki資訊展示
+  mdTemplate += wikiData ? `\n### 公共資訊\n${wikiData.desc || ''}\n` : ''
   return mdTemplate
 }
 
@@ -298,12 +298,12 @@ function createClassMarkdown(curProject, list, isToc) {
   let mdTemplate = ``
   const toc = `[TOC]\n\n`
   list.map(item => {
-    // 分类名称
+    // 分類名稱
     mdTemplate += `\n# ${escapeStr(item.name, isToc)}\n`
     isToc && (mdTemplate += toc)
     for (let i = 0; i < item.list.length; i++) {
-      //循环拼接 接口
-      // 接口内容
+      //循環拼接 介面
+      // 介面內容
       mdTemplate += createInterMarkdown(curProject.basepath, item.list[i], isToc)
     }
   })

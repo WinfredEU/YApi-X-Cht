@@ -73,7 +73,7 @@ class UpDateModal extends Component {
     handleUpdateIndex: PropTypes.number
   };
 
-  // 修改线上域名的协议类型 (http/https)
+  // 修改線上域名的協議型別 (http/https)
   protocolChange = value => {
     this.setState({
       protocol: value
@@ -85,7 +85,7 @@ class UpDateModal extends Component {
     this.props.changeUpdateModal(false, -1);
   };
 
-  // 确认修改
+  // 確認修改
   handleOk = e => {
     e.preventDefault();
     const {
@@ -133,7 +133,7 @@ class UpDateModal extends Component {
     });
   };
 
-  // 项目的修改操作 - 删除一项环境配置
+  // 專案的修改操作 - 刪除一項環境配置
   remove = id => {
     const { form } = this.props;
     // can use data-binding to get
@@ -152,7 +152,7 @@ class UpDateModal extends Component {
     });
   };
 
-  // 项目的修改操作 - 添加一项环境配置
+  // 專案的修改操作 - 新增一項環境配置
   add = () => {
     uuid++;
     const { form } = this.props;
@@ -172,7 +172,7 @@ class UpDateModal extends Component {
     const { isUpdateModalShow, projectList, handleUpdateIndex } = this.props;
     let initFormValues = {};
     let envMessage = [];
-    // 如果列表存在且用户点击修改按钮时，设置表单默认值
+    // 如果列表存在且使用者點選修改按鈕時，設定表單預設值
     if (projectList.length !== 0 && handleUpdateIndex !== -1) {
       // console.log(projectList[handleUpdateIndex]);
       const { name, basepath, desc, env } = projectList[handleUpdateIndex];
@@ -187,11 +187,11 @@ class UpDateModal extends Component {
     getFieldDecorator('envs', { initialValue: envMessage });
     const envs = getFieldValue('envs');
     const formItems = envs.map((k, index) => {
-      const secondIndex = 'next' + index; // 为保证key的唯一性
+      const secondIndex = 'next' + index; // 為保證key的唯一性
       return (
         <Row key={index} type="flex" justify="space-between" align={index === 0 ? 'middle' : 'top'}>
           <Col span={10} offset={2}>
-            <FormItem label={index === 0 ? <span>环境名称</span> : ''} required={false} key={index}>
+            <FormItem label={index === 0 ? <span>環境名稱</span> : ''} required={false} key={index}>
               {getFieldDecorator(`envs-name-${index}`, {
                 validateTrigger: ['onChange', 'onBlur'],
                 initialValue: envMessage.length !== 0 ? k.name : '',
@@ -202,26 +202,26 @@ class UpDateModal extends Component {
                     validator(rule, value, callback) {
                       if (value) {
                         if (value.length === 0) {
-                          callback('请输入环境域名');
+                          callback('請輸入環境域名');
                         } else if (!/\S/.test(value)) {
-                          callback('请输入环境域名');
+                          callback('請輸入環境域名');
                         } else if (/prd/.test(value)) {
-                          callback('环境域名不能是"prd"');
+                          callback('環境域名不能是"prd"');
                         } else {
                           return callback();
                         }
                       } else {
-                        callback('请输入环境域名');
+                        callback('請輸入環境域名');
                       }
                     }
                   }
                 ]
-              })(<Input placeholder="请输入环境名称" style={{ width: '90%', marginRight: 8 }} />)}
+              })(<Input placeholder="請輸入環境名稱" style={{ width: '90%', marginRight: 8 }} />)}
             </FormItem>
           </Col>
           <Col span={10}>
             <FormItem
-              label={index === 0 ? <span>环境域名</span> : ''}
+              label={index === 0 ? <span>環境域名</span> : ''}
               required={false}
               key={secondIndex}
             >
@@ -232,25 +232,25 @@ class UpDateModal extends Component {
                   {
                     required: false,
                     whitespace: true,
-                    message: '请输入环境域名',
+                    message: '請輸入環境域名',
                     validator(rule, value, callback) {
                       if (value) {
                         if (value.length === 0) {
-                          callback('请输入环境域名');
+                          callback('請輸入環境域名');
                         } else if (!/\S/.test(value)) {
-                          callback('请输入环境域名');
+                          callback('請輸入環境域名');
                         } else {
                           return callback();
                         }
                       } else {
-                        callback('请输入环境域名');
+                        callback('請輸入環境域名');
                       }
                     }
                   }
                 ]
               })(
                 <Input
-                  placeholder="请输入环境域名"
+                  placeholder="請輸入環境域名"
                   style={{ width: '90%', marginRight: 8 }}
                   addonBefore={getFieldDecorator(`envs-protocol-${index}`, {
                     initialValue:
@@ -273,7 +273,7 @@ class UpDateModal extends Component {
             </FormItem>
           </Col>
           <Col span={2}>
-            {/* 新增的项中，只有最后一项有删除按钮 */}
+            {/* 新增的項中，只有最後一項有刪除按鈕 */}
             {(envs.length > 0 && k._id) || envs.length == index + 1 ? (
               <Icon
                 className="dynamic-delete-button"
@@ -289,19 +289,19 @@ class UpDateModal extends Component {
     });
     return (
       <Modal
-        title="修改项目"
+        title="修改專案"
         visible={isUpdateModalShow}
         onOk={this.handleOk}
         onCancel={this.handleCancel}
       >
         <Form>
-          <FormItem {...formItemLayout} label="项目名称">
+          <FormItem {...formItemLayout} label="專案名稱">
             {getFieldDecorator('name', {
               initialValue: initFormValues.name,
               rules: [
                 {
                   required: true,
-                  message: '请输入项目名称!'
+                  message: '請輸入專案名稱!'
                 }
               ]
             })(<Input />)}
@@ -311,8 +311,8 @@ class UpDateModal extends Component {
             {...formItemLayout}
             label={
               <span>
-                线上域名&nbsp;
-                <Tooltip title="将根据配置的线上域名访问mock数据">
+                線上域名&nbsp;
+                <Tooltip title="將根據配置的線上域名訪問mock數據">
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
@@ -323,7 +323,7 @@ class UpDateModal extends Component {
               rules: [
                 {
                   required: true,
-                  message: '请输入项目线上域名!'
+                  message: '請輸入專案線上域名!'
                 }
               ]
             })(
@@ -342,8 +342,8 @@ class UpDateModal extends Component {
             {...formItemLayout}
             label={
               <span>
-                基本路径&nbsp;
-                <Tooltip title="基本路径为空表示根路径">
+                基本路徑&nbsp;
+                <Tooltip title="基本路徑為空表示根路徑">
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
@@ -354,7 +354,7 @@ class UpDateModal extends Component {
               rules: [
                 {
                   required: false,
-                  message: '请输入项目基本路径! '
+                  message: '請輸入專案基本路徑! '
                 }
               ]
             })(<Input />)}
@@ -366,7 +366,7 @@ class UpDateModal extends Component {
               rules: [
                 {
                   required: false,
-                  message: '请输入描述!'
+                  message: '請輸入描述!'
                 }
               ]
             })(<TextArea rows={4} />)}
@@ -375,7 +375,7 @@ class UpDateModal extends Component {
           {formItems}
           <FormItem {...formItemLayoutWithOutLabel}>
             <Button type="dashed" onClick={this.add} style={{ width: '60%' }}>
-              <Icon type="plus" /> 添加环境配置
+              <Icon type="plus" /> 新增環境配置
             </Button>
           </FormItem>
         </Form>

@@ -4,23 +4,23 @@ import { Row, Icon, Input, Select, Tooltip } from 'antd';
 import _ from 'underscore';
 const Option = Select.Option;
 
-// 深拷贝
+// 深拷貝
 function deepEqual(state) {
   return JSON.parse(JSON.stringify(state));
 }
 
 const METHODS_LIST = [
   { name: 'md5', type: false, params: [], desc: 'md5加密' },
-  { name: 'lower', type: false, params: [], desc: '所有字母变成小写' },
-  { name: 'length', type: false, params: [], desc: '数据长度' },
-  { name: 'substr', type: true, component: 'doubleInput', params: [], desc: '截取部分字符串' },
+  { name: 'lower', type: false, params: [], desc: '所有字母變成小寫' },
+  { name: 'length', type: false, params: [], desc: '數據長度' },
+  { name: 'substr', type: true, component: 'doubleInput', params: [], desc: '擷取部分字串' },
   { name: 'sha', type: true, component: 'select', params: ['sha1'], desc: 'sha加密' },
   { name: 'base64', type: false, params: [], desc: 'base64加密' },
   { name: 'unbase64', type: false, params: [], desc: 'base64解密' },
-  { name: 'concat', type: true, component: 'input', params: [], desc: '连接字符串' },
-  { name: 'lconcat', type: true, component: 'input', params: [], desc: '左连接' },
-  { name: 'upper', type: false, desc: '所有字母变成大写' },
-  { name: 'number', type: false, desc: '字符串转换为数字类型' }
+  { name: 'concat', type: true, component: 'input', params: [], desc: '連線字串' },
+  { name: 'lconcat', type: true, component: 'input', params: [], desc: '左連線' },
+  { name: 'upper', type: false, desc: '所有字母變成大寫' },
+  { name: 'number', type: false, desc: '字串轉換為數字型別' }
 ];
 
 class MethodsList extends Component {
@@ -63,7 +63,7 @@ class MethodsList extends Component {
     return (
       <Input
         size="small"
-        placeholder="请输入参数"
+        placeholder="請輸入參數"
         value={params[0]}
         onChange={e => this.handleParamsChange(e.target.value, clickIndex, paramsIndex, 0)}
       />
@@ -101,7 +101,7 @@ class MethodsList extends Component {
     return (
       <Select
         value={params[0] || 'sha1'}
-        placeholder="请选择"
+        placeholder="請選擇"
         style={{ width: 150 }}
         size="small"
         onChange={e => this.handleParamsChange(e, clickIndex, paramsIndex, 0)}
@@ -117,7 +117,7 @@ class MethodsList extends Component {
     );
   };
 
-  // 处理参数输入
+  // 處理參數輸入
   handleParamsChange(value, clickIndex, paramsIndex, index) {
     let newList = deepEqual(this.state.list);
     newList[paramsIndex].params[index] = value;
@@ -127,7 +127,7 @@ class MethodsList extends Component {
     this.props.paramsInput(value, clickIndex, index);
   }
 
-  // 组件选择
+  // 元件選擇
   handleComponent(item, clickIndex, index, params) {
     let query = {
       clickIndex: clickIndex,

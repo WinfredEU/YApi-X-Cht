@@ -2,7 +2,7 @@ import swaggerAutoSync from './swaggerAutoSync/swaggerAutoSync.js'
 
 function hander(routers) {
   routers.test = {
-    name: 'Swagger自动同步',
+    name: 'Swagger自動同步',
     component: swaggerAutoSync
   };
 }

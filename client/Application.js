@@ -26,7 +26,7 @@ const alertContent = () => {
     return (
       <Alert
         style={{zIndex: 99}}
-        message={'YApi 的接口测试等功能仅支持 Chrome 浏览器，请使用 Chrome 浏览器获得完整功能。'}
+        message={'YApi 的介面測試等功能僅支援 Chrome 瀏覽器，請使用 Chrome 瀏覽器獲得完整功能。'}
         banner={true}
         closable={true}
       />
@@ -64,7 +64,7 @@ const AppRoute = {
     component: Login,
   },
 }
-// 增加路由钩子
+// 增加路由鉤子
 plugin.emitHook('app_route', AppRoute)
 
 @connect(
@@ -97,7 +97,7 @@ class App extends Component {
   }
 
   showConfirm = (msg, callback) => {
-    // 自定义 window.confirm
+    // 自定義 window.confirm
     // http://reacttraining.cn/web/api/BrowserRouter/getUserConfirmation-func
     const container = document.createElement('div')
     document.body.appendChild(container)

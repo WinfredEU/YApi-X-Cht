@@ -9,7 +9,7 @@ const WikiView = props => {
     <div className="wiki-view-content">
       <div className="wiki-title">
         <Button icon="edit" onClick={onEditor} disabled={!editorEable}>
-          编辑
+          編輯
         </Button>
         {username && (
           <div className="wiki-user">

@@ -20,17 +20,17 @@ class logModel extends baseModel {
       content: { type: String, required: true },
       username: { type: String, required: true },
       add_time: Number,
-      data: Schema.Types.Mixed //用于原始数据存储
+      data: Schema.Types.Mixed //用於原始數據儲存
     };
   }
 
   /**
-   * @param {String} content log内容
-   * @param {Enum} type log类型， ['user', 'group', 'interface', 'project', 'other']
-   * @param {Number} uid 用户id
-   * @param {String} username 用户名
-   * @param {Number} typeid 类型id
-   * @param {Number} add_time 时间
+   * @param {String} content log內容
+   * @param {Enum} type log型別， ['user', 'group', 'interface', 'project', 'other']
+   * @param {Number} uid 使用者id
+   * @param {String} username 使用者名稱
+   * @param {Number} typeid 型別id
+   * @param {Number} add_time 時間
    */
   save(data) {
     let saveData = {

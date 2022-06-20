@@ -1,6 +1,6 @@
 const yapi = require('../yapi.js');
 const baseController = require('./base.js');
-const fs = require('fs'); //引入文件模块
+const fs = require('fs'); //引入檔案模組
 const path = require('path');
 
 class interfaceColController extends baseController {
@@ -9,7 +9,7 @@ class interfaceColController extends baseController {
   }
 
   /**
-   * 测试 get
+   * 測試 get
    * @interface /test/get
    * @method GET
    * @returns {Object}
@@ -18,7 +18,7 @@ class interfaceColController extends baseController {
   async testGet(ctx) {
     try {
       let query = ctx.query;
-      // cookie 检测
+      // cookie 檢測
       ctx.cookies.set('_uid', 12, {
         expires: yapi.commons.expireDate(7),
         httpOnly: true
@@ -30,7 +30,7 @@ class interfaceColController extends baseController {
   }
 
   /**
-   * 测试 code
+   * 測試 code
    * @interface /http/code
    * @method GET
    * @returns {Object}
@@ -48,7 +48,7 @@ class interfaceColController extends baseController {
   }
 
   /**
-   * 测试 post
+   * 測試 post
    * @interface /test/post
    * @method POST
    * @returns {Object}
@@ -64,7 +64,7 @@ class interfaceColController extends baseController {
   }
 
   /**
-   * 测试 单文件上传
+   * 測試 單檔案上傳
    * @interface /test/single/upload
    * @method POST
    * @returns {Object}
@@ -94,18 +94,18 @@ class interfaceColController extends baseController {
           pos += chunk.length;
         }
         fs.writeFileSync(path.join(yapi.WEBROOT_RUNTIME, 'test.text'), data, function(err) {
-          return (ctx.body = yapi.commons.resReturn(null, 402, '写入失败'));
+          return (ctx.body = yapi.commons.resReturn(null, 402, '寫入失敗'));
         });
       });
 
-      ctx.body = yapi.commons.resReturn({ res: '上传成功' });
+      ctx.body = yapi.commons.resReturn({ res: '上傳成功' });
     } catch (e) {
       ctx.body = yapi.commons.resReturn(null, 402, e.message);
     }
   }
 
   /**
-   * 测试 文件上传
+   * 測試 檔案上傳
    * @interface /test/files/upload
    * @method POST
    * @returns {Object}
@@ -116,14 +116,14 @@ class interfaceColController extends baseController {
       let file = ctx.request.body.files.file;
       let newPath = path.join(yapi.WEBROOT_RUNTIME, 'test.text');
       fs.renameSync(file.path, newPath);
-      ctx.body = yapi.commons.resReturn({ res: '上传成功' });
+      ctx.body = yapi.commons.resReturn({ res: '上傳成功' });
     } catch (e) {
       ctx.body = yapi.commons.resReturn(null, 402, e.message);
     }
   }
 
   /**
-   * 测试 put
+   * 測試 put
    * @interface /test/put
    * @method PUT
    * @returns {Object}
@@ -139,7 +139,7 @@ class interfaceColController extends baseController {
   }
 
   /**
-   * 测试 delete
+   * 測試 delete
    * @interface /test/delete
    * @method DELETE
    * @returns {Object}
@@ -155,7 +155,7 @@ class interfaceColController extends baseController {
   }
 
   /**
-   * 测试 head
+   * 測試 head
    * @interface /test/head
    * @method HEAD
    * @returns {Object}
@@ -171,7 +171,7 @@ class interfaceColController extends baseController {
   }
 
   /**
-   * 测试 options
+   * 測試 options
    * @interface /test/options
    * @method OPTIONS
    * @returns {Object}
@@ -187,7 +187,7 @@ class interfaceColController extends baseController {
   }
 
   /**
-   * 测试 patch
+   * 測試 patch
    * @interface /test/patch
    * @method PATCH
    * @returns {Object}
@@ -202,7 +202,7 @@ class interfaceColController extends baseController {
     }
   }
   /**
-   * 测试 raw
+   * 測試 raw
    * @interface /test/raw
    * @method POST
    * @return {Object}
@@ -218,7 +218,7 @@ class interfaceColController extends baseController {
   }
 
   /**
-   * 测试返回值
+   * 測試返回值
    * @interface /test/response
    * @method get
    * @return {Object}

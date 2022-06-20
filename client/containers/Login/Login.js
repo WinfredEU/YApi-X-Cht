@@ -55,14 +55,14 @@ class Login extends Component {
           this.props.loginLdapActions(values).then(res => {
             if (res.payload.data.errcode == 0) {
               this.props.history.replace('/group');
-              message.success('登录成功! ');
+              message.success('登錄成功! ');
             }
           });
         } else {
           this.props.loginActions(values).then(res => {
             if (res.payload.data.errcode == 0) {
               this.props.history.replace('/group');
-              message.success('登录成功! ');
+              message.success('登錄成功! ');
             }
           });
         }
@@ -88,21 +88,21 @@ class Login extends Component {
         ? {}
         : {
             required: true,
-            message: '请输入正确的email!',
+            message: '請輸入正確的email!',
             pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{1,})+$/
           };
     return (
       <Form onSubmit={this.handleSubmit}>
-        {/* 登录类型 (普通登录／LDAP登录) */}
+        {/* 登錄型別 (普通登錄／LDAP登錄) */}
         {isLDAP && (
           <FormItem>
             <RadioGroup defaultValue="ldap" onChange={this.handleFormLayoutChange}>
               <Radio value="ldap">LDAP</Radio>
-              <Radio value="normal">普通登录</Radio>
+              <Radio value="normal">普通登錄</Radio>
             </RadioGroup>
           </FormItem>
         )}
-        {/* 用户名 (Email) */}
+        {/* 使用者名稱 (Email) */}
         <FormItem style={formItemStyle}>
           {getFieldDecorator('email', { rules: [emailRule] })(
             <Input
@@ -113,10 +113,10 @@ class Login extends Component {
           )}
         </FormItem>
 
-        {/* 密码 */}
+        {/* 密碼 */}
         <FormItem style={formItemStyle}>
           {getFieldDecorator('password', {
-            rules: [{ required: true, message: '请输入密码!' }]
+            rules: [{ required: true, message: '請輸入密碼!' }]
           })(
             <Input
               style={changeHeight}
@@ -127,7 +127,7 @@ class Login extends Component {
           )}
         </FormItem>
 
-        {/* 登录按钮 */}
+        {/* 登錄按鈕 */}
         <FormItem style={formItemStyle}>
           <Button
             style={changeHeight}
@@ -135,14 +135,14 @@ class Login extends Component {
             htmlType="submit"
             className="login-form-button"
           >
-            登录
+            登錄
           </Button>
         </FormItem>
 
         {/* <div className="qsso-breakline">
           <span className="qsso-breakword">或</span>
         </div>
-        <Button style={changeHeight} id="qsso-login" type="primary" className="login-form-button" size="large" ghost>QSSO登录</Button> */}
+        <Button style={changeHeight} id="qsso-login" type="primary" className="login-form-button" size="large" ghost>QSSO登錄</Button> */}
       </Form>
     );
   }

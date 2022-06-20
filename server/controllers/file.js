@@ -12,18 +12,18 @@ class fileController extends baseController {
   }
 
   /**
-   * 上传文件。
+   * 上傳檔案。
    */
   async upload(ctx) {
     const {mimeType, name, base64, extra} = ctx.request.body
 
     if (!name || !base64 || !mimeType) {
-      ctx.body = yapi.commons.resReturn(null, 400, '字段缺失')
+      ctx.body = yapi.commons.resReturn(null, 400, '欄位缺失')
       return
     }
 
     if (base64.length > FILE_MAX_SIZE) {
-      ctx.body = yapi.commons.resReturn(null, 400, '文件大小超过限制')
+      ctx.body = yapi.commons.resReturn(null, 400, '檔案大小超過限制')
       return
     }
 
@@ -40,7 +40,7 @@ class fileController extends baseController {
   }
 
   /**
-   * 下载文件。
+   * 下載檔案。
    */
   async download(ctx) {
     const {id} = ctx.request.query
@@ -48,7 +48,7 @@ class fileController extends baseController {
     const file = await this.model.get(id)
 
     if (!file) {
-      ctx.body = yapi.commons.resReturn(null, 404, '文件不存在')
+      ctx.body = yapi.commons.resReturn(null, 404, '檔案不存在')
       return
     }
 

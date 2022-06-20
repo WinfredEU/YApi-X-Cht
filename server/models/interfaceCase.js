@@ -61,7 +61,7 @@ class interfaceCase extends baseModel {
     return m.save();
   }
 
-  //获取全部测试接口信息
+  //獲取全部測試介面資訊
   getInterfaceCaseListCount() {
     return this.model.countDocuments({});
   }

@@ -61,7 +61,7 @@ export default class EasyDragSort extends React.Component {
                 curDragIndex = index;
               },
               /**
-               * 控制 dom 是否可拖动
+               * 控制 dom 是否可拖動
                * @param {*} e
                */
               onMouseDown(e) {

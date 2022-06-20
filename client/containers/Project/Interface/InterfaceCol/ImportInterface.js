@@ -41,7 +41,7 @@ export default class ImportInterface extends Component {
     await this.props.fetchInterfaceListMenu(this.props.currProjectId);
   }
 
-  // 切换项目
+  // 切換專案
   onChange = async val => {
     this.setState({
       project: val,
@@ -150,17 +150,17 @@ export default class ImportInterface extends Component {
 
     const columns = [
       {
-        title: '接口名称',
+        title: '介面名稱',
         dataIndex: 'title',
         width: '30%'
       },
       {
-        title: '接口路径',
+        title: '介面路徑',
         dataIndex: 'path',
         width: '40%'
       },
       {
-        title: '请求方法',
+        title: '請求方法',
         dataIndex: 'method',
         render: item => {
           let methodColor = variable.METHOD_COLOR[item ? item.toLowerCase() : 'get'];
@@ -181,8 +181,8 @@ export default class ImportInterface extends Component {
       {
         title: (
           <span>
-            状态{' '}
-            <Tooltip title="筛选满足条件的接口集合">
+            狀態{' '}
+            <Tooltip title="篩選滿足條件的介面集合">
               <Icon type="question-circle-o" />
             </Tooltip>
           </span>
@@ -221,7 +221,7 @@ export default class ImportInterface extends Component {
     return (
       <div>
         <div className="select-project">
-          <span>选择要导入的项目： </span>
+          <span>選擇要匯入的專案： </span>
           <Select value={this.state.project} style={{ width: 200 }} onChange={this.onChange}>
             {projectList.map(item => {
               return item.projectname ? (

@@ -6,25 +6,25 @@ import axios from 'axios';
 const Option = Select.Option;
 
 /**
- * 用户名输入框自动完成组件
+ * 使用者名稱輸入框自動完成元件
  *
  * @component UsernameAutoComplete
  * @examplelanguage js
  *
- * * 用户名输入框自动完成组件
- * * 用户名输入框自动完成组件
+ * * 使用者名稱輸入框自動完成元件
+ * * 使用者名稱輸入框自動完成元件
  *
  *s
  */
 
 /**
- * 获取自动输入的用户信息
+ * 獲取自動輸入的使用者資訊
  *
- * 获取子组件state
+ * 獲取子元件state
  * @property callbackState
  * @type function
- * @description 类型提示：支持数组传值；也支持用函数格式化字符串：函数有两个参数(scale, index)；
- * 受控属性：滑块滑到某一刻度时所展示的刻度文本信息。如果不需要标签，请将该属性设置为 [] 空列表来覆盖默认转换函数。
+ * @description 型別提示：支援陣列傳值；也支援用函式格式化字串：函式有兩個參數(scale, index)；
+ * 受控屬性：滑塊滑到某一刻度時所展示的刻度文字資訊。如果不需要標籤，請將該屬性設定為 [] 空列表來覆蓋預設轉換函式。
  * @returns {object} {uid: xxx, username: xxx}
  * @examplelanguage js
  * @example
@@ -52,7 +52,7 @@ class UsernameAutoComplete extends Component {
     callbackState: PropTypes.func
   };
 
-  // 搜索回调
+  // 搜索回撥
   handleSearch = value => {
     const params = { q: value };
     // this.lastFetchId += 1;
@@ -72,7 +72,7 @@ class UsernameAutoComplete extends Component {
             id: v.uid
           })
         );
-        // 取回搜索值后，设置 dataSource
+        // 取回搜索值后，設定 dataSource
         this.setState({
           dataSource: userList
         });
@@ -80,7 +80,7 @@ class UsernameAutoComplete extends Component {
     });
   };
 
-  // 选中候选词时
+  // 選中候選詞時
   handleChange = value => {
     this.setState({
       dataSource: [],
@@ -106,10 +106,10 @@ class UsernameAutoComplete extends Component {
       <Select
         mode="multiple"
         style={{ width: '100%' }}
-        placeholder="请输入用户名"
+        placeholder="請輸入使用者名稱"
         filterOption={false}
         optionLabelProp="children"
-        notFoundContent={fetching ? <span style={{ color: 'red' }}> 当前用户不存在</span> : null}
+        notFoundContent={fetching ? <span style={{ color: 'red' }}> 目前使用者不存在</span> : null}
         onSearch={this.handleSearch}
         onChange={this.handleChange}
       >

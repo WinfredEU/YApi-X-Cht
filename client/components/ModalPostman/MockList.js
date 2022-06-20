@@ -43,7 +43,7 @@ class MockList extends Component {
         <Search
           onChange={this.onFilter}
           value={filter}
-          placeholder="搜索mock数据"
+          placeholder="搜索mock數據"
           className="mock-search"
         />
         {list.map((item, index) => {

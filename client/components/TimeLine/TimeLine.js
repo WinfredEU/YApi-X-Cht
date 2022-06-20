@@ -144,11 +144,11 @@ class TimeTree extends Component {
 
     const curDiffData = this.state.curDiffData;
     let logType = {
-      project: '项目',
-      group: '分组',
-      interface: '接口',
-      interface_col: '接口集',
-      user: '用户',
+      project: '專案',
+      group: '分組',
+      interface: '介面',
+      interface_col: '介面集',
+      user: '使用者',
       other: '其他'
     };
 
@@ -168,7 +168,7 @@ class TimeTree extends Component {
 
     children.unshift(
       <Option value="" key="all">
-        选择全部
+        選擇全部
       </Option>
     );
 
@@ -191,12 +191,12 @@ class TimeTree extends Component {
             <div className="logMesHeade">
               <span className="logoTimeago">{timeago(item.add_time)}</span>
               {/*<span className="logusername"><Link to={`/user/profile/${item.uid}`}><Icon type="user" />{item.username}</Link></span>*/}
-              <span className="logtype">{logType[item.type]}动态</span>
+              <span className="logtype">{logType[item.type]}動態</span>
               <span className="logtime">{formatTime(item.add_time)}</span>
             </div>
             <span className="logcontent" dangerouslySetInnerHTML={{ __html: item.content }} />
             <div style={{ padding: '10px 0 0 10px' }}>
-              {interfaceDiff && <Button onClick={() => this.openDiff(item.data)}>改动详情</Button>}
+              {interfaceDiff && <Button onClick={() => this.openDiff(item.data)}>改動詳情</Button>}
             </div>
           </Timeline.Item>
         );
@@ -206,10 +206,10 @@ class TimeTree extends Component {
     }
     let pending =
       this.props.newsData.total <= this.props.curpage ? (
-        <a className="logbidden">以上为全部内容</a>
+        <a className="logbidden">以上為全部內容</a>
       ) : (
         <a className="loggetMore" onClick={this.getMore.bind(this)}>
-          查看更多
+          檢視更多
         </a>
       );
     if (this.state.loading) {
@@ -221,12 +221,12 @@ class TimeTree extends Component {
       <section className="news-timeline">
         <Modal
           style={{ minWidth: '800px' }}
-          title="Api 改动日志"
+          title="Api 改動日誌"
           visible={this.state.visible}
           footer={null}
           onCancel={this.handleCancel}
         >
-          <i>注： 绿色代表新增内容，红色代表删除内容</i>
+          <i>註： 綠色代表新增內容，紅色代表刪除內容</i>
           <div className="project-interface-change-content">
             {diffView.map((item, index) => {
               return (
@@ -243,7 +243,7 @@ class TimeTree extends Component {
         </Modal>
         {this.props.type === 'project' && (
           <Row className="news-search">
-            <Col span="3">选择查询的 Api：</Col>
+            <Col span="3">選擇查詢的 Api：</Col>
             <Col span="10">
               <AutoComplete
                 onSelect={this.handleSelectApi}

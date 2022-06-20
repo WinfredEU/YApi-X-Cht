@@ -32,7 +32,7 @@ function CheckCrossInstall(props) {
         <Alert
           message={(
             <div>
-              运行接口需安装浏览器插件，<a href='https://github.com/fjc0k/YApi-X/tree/master/chrome-extension#readme'>查看安装教程→</a>
+              執行介面需安裝瀏覽器外掛，<a href='https://github.com/fjc0k/YApi-X/tree/master/chrome-extension#readme'>檢視安裝教程→</a>
             </div>
           )}
           type='error'

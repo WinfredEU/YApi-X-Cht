@@ -217,7 +217,7 @@ class interfaceModel extends baseModel {
       .exec()
   }
 
-  //获取全部接口信息
+  //獲取全部介面資訊
   getInterfaceListCount() {
     return this.model.countDocuments({})
   }

@@ -34,7 +34,7 @@ class Content extends Component {
   };
   constructor(props) {
     super(props);
-    this.title = 'YApi-高效、易用、功能强大的可视化接口管理平台';
+    this.title = 'YApi-高效、易用、功能強大的視覺化介面管理平臺';
     this.state = {
       curtab: 'view',
       visible: false,
@@ -86,20 +86,20 @@ class Content extends Component {
       nextTab: key
     });
   };
-  // 确定离开页面
+  // 確定離開頁面
   handleOk = () => {
     this.setState({
       visible: false,
       curtab: this.state.nextTab
     });
   };
-  // 离开编辑页面的提示
+  // 離開編輯頁面的提示
   showModal = () => {
     this.setState({
       visible: true
     });
   };
-  // 取消离开编辑页面
+  // 取消離開編輯頁面
   handleCancel = () => {
     this.setState({
       visible: false
@@ -114,15 +114,15 @@ class Content extends Component {
     let InterfaceTabs = {
       view: {
         component: View,
-        name: '预览'
+        name: '預覽'
       },
       edit: {
         component: Edit,
-        name: '编辑'
+        name: '編輯'
       },
       run: {
         component: Run,
-        name: '运行'
+        name: '執行'
       }
     };
 
@@ -153,14 +153,14 @@ class Content extends Component {
           when={this.state.curtab === 'edit' && this.props.editStatus ? true : false}
           message={() => {
             // this.showModal();
-            return '离开页面会丢失当前编辑的内容，确定要离开吗？';
+            return '離開頁面會丟失當前編輯的內容，確定要離開嗎？';
           }}
         />
         {tabs}
         {tabContent}
         {this.state.visible && (
           <Modal
-            title="你即将离开编辑页面"
+            title="你即將離開編輯頁面"
             visible={this.state.visible}
             onCancel={this.handleCancel}
             footer={[
@@ -168,11 +168,11 @@ class Content extends Component {
                 取 消
               </Button>,
               <Button key="submit" onClick={this.handleOk}>
-                确 定
+                確 定
               </Button>
             ]}
           >
-            <p>离开页面会丢失当前编辑的内容，确定要离开吗？</p>
+            <p>離開頁面會丟失當前編輯的內容，確定要離開嗎？</p>
           </Modal>
         )}
       </div>

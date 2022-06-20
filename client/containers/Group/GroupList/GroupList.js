@@ -22,10 +22,10 @@ import './GroupList.scss';
 
 const tip = (
   <div className="title-container">
-    <h3 className="title">欢迎使用 YApi ~</h3>
+    <h3 className="title">歡迎使用 YApi ~</h3>
     <p>
-      这里的 <b>“个人空间”</b>{' '}
-      是你自己才能看到的分组，你拥有这个分组的全部权限，可以在这个分组里探索 YApi 的功能。
+      這裡的 <b>「個人空間」</b>{' '}
+      是你自己才能看到的分組，你擁有這個分組的全部許可權，可以在這個分組裡探索 YApi 的功能。
     </p>
   </div>
 );
@@ -199,7 +199,7 @@ export default class GroupList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // GroupSetting 组件设置的分组信息，通过redux同步到左侧分组菜单中
+    // GroupSetting 元件設定的分組資訊，通過redux同步到左側分組菜單中
     if (this.props.groupList !== nextProps.groupList) {
       this.setState({
         groupList: nextProps.groupList
@@ -216,20 +216,20 @@ export default class GroupList extends Component {
           <div className="curr-group">
             <div className="curr-group-name">
               <span className="name">{currGroup.group_name}</span>
-              <Tooltip title="添加分组">
+              <Tooltip title="新增分組">
                 <a className="editSet">
                   <Icon className="btn" type="folder-add" onClick={this.showModal} />
                 </a>
               </Tooltip>
             
             </div>
-            <div className="curr-group-desc">简介: {currGroup.group_desc}</div>
+            <div className="curr-group-desc">簡介: {currGroup.group_desc}</div>
           </div>
 
           <div className="group-operate">
             <div className="search">
               <Search
-                placeholder="搜索分类"
+                placeholder="搜索分類"
                 onChange={this.searchGroup}
                 onSearch={v => this.searchGroup(null, v)}
               />
@@ -279,7 +279,7 @@ export default class GroupList extends Component {
         </div>
         {this.state.addGroupModalVisible ? (
           <Modal
-            title="添加分组"
+            title="新增分組"
             visible={this.state.addGroupModalVisible}
             onOk={this.addGroup}
             onCancel={this.hideModal}
@@ -287,23 +287,23 @@ export default class GroupList extends Component {
           >
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label">分组名：</div>
+                <div className="label">分組名：</div>
               </Col>
               <Col span="15">
-                <Input placeholder="请输入分组名称" onChange={this.inputNewGroupName} />
+                <Input placeholder="請輸入分組名稱" onChange={this.inputNewGroupName} />
               </Col>
             </Row>
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label">简介：</div>
+                <div className="label">簡介：</div>
               </Col>
               <Col span="15">
-                <TextArea rows={3} placeholder="请输入分组描述" onChange={this.inputNewGroupDesc} />
+                <TextArea rows={3} placeholder="請輸入分組描述" onChange={this.inputNewGroupDesc} />
               </Col>
             </Row>
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label">组长：</div>
+                <div className="label">組長：</div>
               </Col>
               <Col span="15">
                 <UsernameAutoComplete callbackState={this.onUserSelect} />

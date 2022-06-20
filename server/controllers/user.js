@@ -18,33 +18,33 @@ class userController extends baseController {
   }
 
   /**
-   * 用户登录接口
+   * 使用者登錄介面
    * @interface /user/login
    * @method POST
    * @category user
    * @foldnumber 10
-   * @param {String} email email名称，不能为空
-   * @param  {String} password 密码，不能为空
+   * @param {String} email email名稱，不能為空
+   * @param  {String} password 密碼，不能為空
    * @returns {Object}
    * @example ./api/user/login.json
    */
   async login(ctx) {
-    //登录
-    const userInst = yapi.getInst(userModel) //创建user实体
+    //登錄
+    const userInst = yapi.getInst(userModel) //建立user實體
     const email = ctx.request.body.email
     const password = ctx.request.body.password
 
     if (!email) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, 'email不能为空'))
+      return (ctx.body = yapi.commons.resReturn(null, 400, 'email不能為空'))
     }
     if (!password) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '密码不能为空'))
+      return (ctx.body = yapi.commons.resReturn(null, 400, '密碼不能為空'))
     }
 
     const result = await userInst.findByEmail(email)
 
     if (!result) {
-      return (ctx.body = yapi.commons.resReturn(null, 404, '该用户不存在'))
+      return (ctx.body = yapi.commons.resReturn(null, 404, '該使用者不存在'))
     } else if (yapi.commons.generatePassword(password, result.passsalt) === result.password) {
       this.setLoginCookie(result._id, result.passsalt)
 
@@ -63,11 +63,11 @@ class userController extends baseController {
         'logout success...',
       ))
     }
-    return (ctx.body = yapi.commons.resReturn(null, 405, '密码错误'))
+    return (ctx.body = yapi.commons.resReturn(null, 405, '密碼錯誤'))
   }
 
   /**
-   * 退出登录接口
+   * 退出登錄介面
    * @interface /user/logout
    * @method GET
    * @category user
@@ -93,7 +93,7 @@ class userController extends baseController {
    */
 
   async upStudy(ctx) {
-    const userInst = yapi.getInst(userModel) //创建user实体
+    const userInst = yapi.getInst(userModel) //建立user實體
     const data = {
       up_time: yapi.commons.time(),
       study: true,
@@ -121,13 +121,13 @@ class userController extends baseController {
   }
 
   /**
-   * ldap登录
+   * ldap登錄
    * @interface /user/login_by_ldap
    * @method
    * @category user
    * @foldnumber 10
-   * @param {String} email email名称，不能为空
-   * @param  {String} password 密码，不能为空
+   * @param {String} email email名稱，不能為空
+   * @param  {String} password 密碼，不能為空
    * @returns {Object}
    *
    */
@@ -147,7 +147,7 @@ class userController extends baseController {
       const login = await this.handleThirdLogin(emailParams, username)
 
       if (login === true) {
-        const userInst = yapi.getInst(userModel) //创建user实体
+        const userInst = yapi.getInst(userModel) //建立user實體
         const result = await userInst.findByEmail(emailParams)
         return (ctx.body = yapi.commons.resReturn(
           {
@@ -170,7 +170,7 @@ class userController extends baseController {
     }
   }
 
-  // 处理第三方登录
+  // 處理第三方登錄
   async handleThirdLogin(email, username) {
     let user, data, passsalt
     const userInst = yapi.getInst(userModel)
@@ -178,7 +178,7 @@ class userController extends baseController {
     try {
       user = await userInst.findByEmail(email)
 
-      // 新建用户信息
+      // 新建使用者資訊
       if (!user || !user._id) {
         passsalt = yapi.commons.randStr()
         data = {
@@ -195,7 +195,7 @@ class userController extends baseController {
         await this.handlePrivateGroup(user._id, username, email)
         yapi.commons.sendMail({
           to: email,
-          contents: `<h3>亲爱的用户：</h3><p>您好，感谢使用YApi平台，你的邮箱账号是：${email}</p>`,
+          contents: `<h3>親愛的使用者：</h3><p>您好，感謝使用YApi平臺，你的郵箱賬號是：${email}</p>`,
         })
       }
 
@@ -208,13 +208,13 @@ class userController extends baseController {
   }
 
   /**
-   * 修改用户密码
+   * 修改使用者密碼
    * @interface /user/change_password
    * @method POST
    * @category user
-   * @param {Number} uid 用户ID
-   * @param {Number} [old_password] 旧密码, 非admin用户必须传
-   * @param {Number} password 新密码
+   * @param {Number} uid 使用者ID
+   * @param {Number} [old_password] 舊密碼, 非admin使用者必須傳
+   * @param {Number} password 新密碼
    * @return {Object}
    * @example ./api/user/change_password.json
    */
@@ -223,25 +223,25 @@ class userController extends baseController {
     const userInst = yapi.getInst(userModel)
 
     if (!params.uid) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, 'uid不能为空'))
+      return (ctx.body = yapi.commons.resReturn(null, 400, 'uid不能為空'))
     }
 
     if (!params.password) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '密码不能为空'))
+      return (ctx.body = yapi.commons.resReturn(null, 400, '密碼不能為空'))
     }
 
     const user = await userInst.findById(params.uid)
     if (this.getRole() !== 'admin' && params.uid != this.getUid()) {
-      return (ctx.body = yapi.commons.resReturn(null, 402, '没有权限'))
+      return (ctx.body = yapi.commons.resReturn(null, 402, '沒有許可權'))
     }
 
     if (this.getRole() !== 'admin' || user.role === 'admin') {
       if (!params.old_password) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '旧密码不能为空'))
+        return (ctx.body = yapi.commons.resReturn(null, 400, '舊密碼不能為空'))
       }
 
       if (yapi.commons.generatePassword(params.old_password, user.passsalt) !== user.password) {
-        return (ctx.body = yapi.commons.resReturn(null, 402, '旧密码错误'))
+        return (ctx.body = yapi.commons.resReturn(null, 402, '舊密碼錯誤'))
       }
     }
 
@@ -284,24 +284,24 @@ class userController extends baseController {
   }
 
   /**
-   * 用户注册接口
+   * 使用者註冊介面
    * @interface /user/reg
    * @method POST
    * @category user
    * @foldnumber 10
-   * @param {String} email email名称，不能为空
-   * @param  {String} password 密码，不能为空
-   * @param {String} [username] 用户名
+   * @param {String} email email名稱，不能為空
+   * @param  {String} password 密碼，不能為空
+   * @param {String} [username] 使用者名稱
    * @returns {Object}
    * @example ./api/user/login.json
    */
   async reg(ctx) {
-    //注册
+    //註冊
     if (yapi.WEBCONFIG.closeRegister) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '禁止注册，请联系管理员'))
+      return (ctx.body = yapi.commons.resReturn(null, 400, '禁止註冊，請聯繫管理員'))
     }
     const userInst = yapi.getInst(userModel)
-    let params = ctx.request.body //获取请求的参数,检查是否存在用户名和密码
+    let params = ctx.request.body //獲取請求的參數,檢查是否存在使用者名稱和密碼
 
     params = yapi.commons.handleParams(params, {
       username: 'string',
@@ -310,17 +310,17 @@ class userController extends baseController {
     })
 
     if (!params.email) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '邮箱不能为空'))
+      return (ctx.body = yapi.commons.resReturn(null, 400, '郵箱不能為空'))
     }
 
     if (!params.password) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '密码不能为空'))
+      return (ctx.body = yapi.commons.resReturn(null, 400, '密碼不能為空'))
     }
 
-    const checkRepeat = await userInst.checkRepeat(params.email) //然后检查是否已经存在该用户
+    const checkRepeat = await userInst.checkRepeat(params.email) //然後檢查是否已經存在該使用者
 
     if (checkRepeat > 0) {
-      return (ctx.body = yapi.commons.resReturn(null, 401, '该email已经注册'))
+      return (ctx.body = yapi.commons.resReturn(null, 401, '該email已經註冊'))
     }
 
     const passsalt = yapi.commons.randStr()
@@ -356,9 +356,9 @@ class userController extends baseController {
       })
       yapi.commons.sendMail({
         to: user.email,
-        contents: `<h3>亲爱的用户：</h3><p>您好，感谢使用YApi可视化接口平台,您的账号 ${
+        contents: `<h3>親愛的使用者：</h3><p>您好，感謝使用YApi視覺化介面平臺,您的賬號 ${
           params.email
-        } 已经注册成功</p>`,
+        } 已經註冊成功</p>`,
       })
     } catch (e) {
       ctx.body = yapi.commons.resReturn(null, 401, e.message)
@@ -366,13 +366,13 @@ class userController extends baseController {
   }
 
   /**
-   * 获取用户列表
+   * 獲取使用者列表
    * @interface /user/list
    * @method GET
    * @category user
    * @foldnumber 10
-   * @param {Number} [page] 分页页码
-   * @param {Number} [limit] 分页大小,默认为10条
+   * @param {Number} [page] 分頁頁碼
+   * @param {Number} [limit] 分頁大小,預設為10條
    * @returns {Object}
    * @example
    */
@@ -395,29 +395,29 @@ class userController extends baseController {
   }
 
   /**
-   * 获取用户个人信息
+   * 獲取使用者個人資訊
    * @interface /user/find
    * @method GET
-   * @param id 用户uid
+   * @param id 使用者uid
    * @category user
    * @foldnumber 10
    * @returns {Object}
    * @example
    */
   async findById(ctx) {
-    //根据id获取用户信息
+    //根據id獲取使用者資訊
     try {
       const userInst = yapi.getInst(userModel)
       const id = ctx.request.query.id
 
       if (!id) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, 'uid不能为空'))
+        return (ctx.body = yapi.commons.resReturn(null, 400, 'uid不能為空'))
       }
 
       const result = await userInst.findById(id)
 
       if (!result) {
-        return (ctx.body = yapi.commons.resReturn(null, 402, '不存在的用户'))
+        return (ctx.body = yapi.commons.resReturn(null, 402, '不存在的使用者'))
       }
 
       return (ctx.body = yapi.commons.resReturn({
@@ -435,17 +435,17 @@ class userController extends baseController {
   }
 
   /**
-   * 删除用户,只有admin用户才有此权限
+   * 刪除使用者,只有admin使用者才有此許可權
    * @interface /user/del
    * @method POST
-   * @param id 用户uid
+   * @param id 使用者uid
    * @category user
    * @foldnumber 10
    * @returns {Object}
    * @example
    */
   async del(ctx) {
-    //根据id删除一个用户
+    //根據id刪除一個使用者
     try {
       if (this.getRole() !== 'admin') {
         return (ctx.body = yapi.commons.resReturn(null, 402, 'Without permission.'))
@@ -454,10 +454,10 @@ class userController extends baseController {
       const userInst = yapi.getInst(userModel)
       const id = ctx.request.body.id
       if (id == this.getUid()) {
-        return (ctx.body = yapi.commons.resReturn(null, 403, '禁止删除管理员'))
+        return (ctx.body = yapi.commons.resReturn(null, 403, '禁止刪除管理員'))
       }
       if (!id) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, 'uid不能为空'))
+        return (ctx.body = yapi.commons.resReturn(null, 400, 'uid不能為空'))
       }
 
       const result = await userInst.del(id)
@@ -469,11 +469,11 @@ class userController extends baseController {
   }
 
   /**
-   * 更新用户个人信息
+   * 更新使用者個人資訊
    * @interface /user/update
    * @method POST
-   * @param uid  用户uid
-   * @param [role] 用户角色,只有管理员有权限修改
+   * @param uid  使用者uid
+   * @param [role] 使用者角色,只有管理員有許可權修改
    * @param [username] String
    * @param [email] String
    * @category user
@@ -482,7 +482,7 @@ class userController extends baseController {
    * @example
    */
   async update(ctx) {
-    //更新用户信息
+    //更新使用者資訊
     try {
       let params = ctx.request.body
 
@@ -492,14 +492,14 @@ class userController extends baseController {
       })
 
       if (this.getRole() !== 'admin' && params.uid != this.getUid()) {
-        return (ctx.body = yapi.commons.resReturn(null, 401, '没有权限'))
+        return (ctx.body = yapi.commons.resReturn(null, 401, '沒有許可權'))
       }
 
       const userInst = yapi.getInst(userModel)
       const id = params.uid
 
       if (!id) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, 'uid不能为空'))
+        return (ctx.body = yapi.commons.resReturn(null, 400, 'uid不能為空'))
       }
 
       const userData = await userInst.findById(id)
@@ -515,9 +515,9 @@ class userController extends baseController {
       params.email && (data.email = params.email)
 
       if (data.email) {
-        const checkRepeat = await userInst.checkRepeat(data.email) //然后检查是否已经存在该用户
+        const checkRepeat = await userInst.checkRepeat(data.email) //然後檢查是否已經存在該使用者
         if (checkRepeat > 0) {
-          return (ctx.body = yapi.commons.resReturn(null, 401, '该email已经注册'))
+          return (ctx.body = yapi.commons.resReturn(null, 401, '該email已經註冊'))
         }
       }
 
@@ -539,10 +539,10 @@ class userController extends baseController {
   }
 
   /**
-   * 上传用户头像
+   * 上傳使用者頭像
    * @interface /user/upload_avatar
    * @method POST
-   * @param {*} basecode  base64编码，通过h5 api传给后端
+   * @param {*} basecode  base64編碼，通過h5 api傳給後端
    * @category user
    * @returns {Object}
    * @example
@@ -552,7 +552,7 @@ class userController extends baseController {
     try {
       let basecode = ctx.request.body.basecode
       if (!basecode) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, 'basecode不能为空'))
+        return (ctx.body = yapi.commons.resReturn(null, 400, 'basecode不能為空'))
       }
       const pngPrefix = 'data:image/png;base64,'
       const jpegPrefix = 'data:image/jpeg;base64,'
@@ -564,11 +564,11 @@ class userController extends baseController {
         basecode = basecode.substr(jpegPrefix.length)
         type = 'image/jpeg'
       } else {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '仅支持jpeg和png格式的图片'))
+        return (ctx.body = yapi.commons.resReturn(null, 400, '僅支援jpeg和png格式的圖片'))
       }
       const strLength = basecode.length
       if (parseInt(strLength - (strLength / 8) * 2) > 200000) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '图片大小不能超过200kb'))
+        return (ctx.body = yapi.commons.resReturn(null, 400, '圖片大小不能超過200kb'))
       }
 
       const avatarInst = yapi.getInst(avatarModel)
@@ -580,7 +580,7 @@ class userController extends baseController {
   }
 
   /**
-   * 根据用户uid头像
+   * 根據使用者uid頭像
    * @interface /user/avatar
    * @method GET
    * @param {*} uid
@@ -611,7 +611,7 @@ class userController extends baseController {
   }
 
   /**
-   * 模糊搜索用户名或者email
+   * 模糊搜索使用者名稱或者email
    * @interface /user/search
    * @method GET
    * @category user
@@ -656,12 +656,12 @@ class userController extends baseController {
   }
 
   /**
-   * 根据路由id初始化项目数据
+   * 根據路由id初始化專案數據
    * @interface /user/project
    * @method GET
    * @category user
    * @foldnumber 10
-   * @param {String} type 可选group|interface|project
+   * @param {String} type 可選group|interface|project
    * @param {Number} id
    * @return {Object}
    * @example

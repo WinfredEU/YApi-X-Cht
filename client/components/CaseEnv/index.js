@@ -1,4 +1,4 @@
-// 测试集合中的环境切换
+// 測試集合中的環境切換
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -39,8 +39,8 @@ export default class CaseEnv extends React.Component {
           header={
             <span>
               {' '}
-              选择测试用例环境
-              <Tooltip title="默认使用测试用例选择的环境">
+              選擇測試用例環境
+              <Tooltip title="預設使用測試用例選擇的環境">
                 {' '}
                 <Icon type="question-circle-o" />{' '}
               </Tooltip>
@@ -75,7 +75,7 @@ export default class CaseEnv extends React.Component {
                           onChange={val => this.props.currProjectEnvChange(val, item._id)}
                         >
                           <Option key="default" value="">
-                            默认环境
+                            預設環境
                           </Option>
 
                           {item.env.map(key => {

@@ -107,7 +107,7 @@ class ProjectMember extends Component {
     });
   };
 
-  // 重新获取列表
+  // 重新獲取列表
 
   reFetchList = () => {
     this.props.getProjectMemberList(this.props.match.params.id).then(res => {
@@ -123,7 +123,7 @@ class ProjectMember extends Component {
     this.addMembers(this.state.inputUids);
   };
 
-  // 增 - 添加成员
+  // 增 - 新增成員
   addMembers = memberUids => {
     this.props
       .addMember({
@@ -140,32 +140,32 @@ class ProjectMember extends Component {
             inputRole: 'dev',
             inputUids: []
           });
-          message.success(`添加成功! 已成功添加 ${addLength} 人，其中 ${existLength} 人已存在`);
-          this.reFetchList(); // 添加成功后重新获取分组成员列表
+          message.success(`新增成功! 已成功新增 ${addLength} 人，其中 ${existLength} 人已存在`);
+          this.reFetchList(); // 新增成功後重新獲取分組成員列表
         }
       });
   };
-  // 添加成员时 选择新增成员权限
+  // 新增成員時 選擇新增成員許可權
   changeNewMemberRole = value => {
     this.setState({
       inputRole: value
     });
   };
 
-  // 删 - 删除分组成员
+  // 刪 - 刪除分組成員
   deleteConfirm = member_uid => {
     return () => {
       const id = this.props.match.params.id;
       this.props.delMember({ id, member_uid }).then(res => {
         if (!res.payload.data.errcode) {
           message.success(res.payload.data.errmsg);
-          this.reFetchList(); // 添加成功后重新获取分组成员列表
+          this.reFetchList(); // 新增成功後重新獲取分組成員列表
         }
       });
     };
   };
 
-  // 改 - 修改成员权限
+  // 改 - 修改成員許可權
   changeUserRole = e => {
     const id = this.props.match.params.id;
     const role = e.split('-')[0];
@@ -173,41 +173,41 @@ class ProjectMember extends Component {
     this.props.changeMemberRole({ id, member_uid, role }).then(res => {
       if (!res.payload.data.errcode) {
         message.success(res.payload.data.errmsg);
-        this.reFetchList(); // 添加成功后重新获取分组成员列表
+        this.reFetchList(); // 新增成功後重新獲取分組成員列表
       }
     });
   };
 
-  // 修改用户是否接收消息通知
+  // 修改使用者是否接收訊息通知
   changeEmailNotice = async (notice, member_uid) => {
     const id = this.props.match.params.id;
     await this.props.changeMemberEmailNotice({ id, member_uid, notice });
-    this.reFetchList(); // 添加成功后重新获取项目成员列表
+    this.reFetchList(); // 新增成功後重新獲取專案成員列表
   };
 
-  // 关闭模态框
+  // 關閉模態框
   handleCancel = () => {
     this.setState({
       visible: false
     });
   };
-  // 关闭批量导入模态框
+  // 關閉批量匯入模態框
   handleModalCancel = () => {
     this.setState({
       modalVisible: false
     });
   };
 
-  // 处理选择项目
+  // 處理選擇專案
   handleChange = key => {
     this.setState({
       selectProjectId: key
     });
   };
 
-  // 确定批量导入模态框
+  // 確定批量匯入模態框
   handleModalOk = async () => {
-    // 获取项目中的成员列表
+    // 獲取專案中的成員列表
     const menberList = await this.props.getProjectMemberList(this.state.selectProjectId);
     const memberUidList = menberList.payload.data.data.map(item => {
       return item.uid;
@@ -238,7 +238,7 @@ class ProjectMember extends Component {
     const columns = [
       {
         title:
-          this.props.projectMsg.name + ' 项目成员 (' + this.state.projectMemberList.length + ') 人',
+          this.props.projectMsg.name + ' 專案成員 (' + this.state.projectMemberList.length + ') 人',
         dataIndex: 'username',
         key: 'username',
         render: (text, record) => {
@@ -246,12 +246,12 @@ class ProjectMember extends Component {
             <div className="m-user">
               <img src={'/api/user/avatar?uid=' + record.uid} className="m-user-img" />
               <p className="m-user-name">{text}</p>
-              <Tooltip placement="top" title="消息通知">
+              <Tooltip placement="top" title="訊息通知">
                 <span>
                   <Switch
                     size="small"
-                    checkedChildren="开"
-                    unCheckedChildren="关"
+                    checkedChildren="開"
+                    unCheckedChildren="關"
                     checked={record.email_notice}
                     disabled={!(isEmailChangeEable || record.uid === this.props.uid)}
                     onChange={e => this.changeEmailNotice(e, record.uid)}
@@ -267,10 +267,10 @@ class ProjectMember extends Component {
           this.state.role === 'owner' || this.state.role === 'admin' ? (
             <div className="btn-container">
               <Button className="btn" type="primary" icon="plus" onClick={this.showAddMemberModal}>
-                添加成员
+                新增成員
               </Button>
               <Button className="btn" icon="plus" onClick={this.showImportMemberModal}>
-                批量导入成员
+                批量匯入成員
               </Button>
             </div>
           ) : (
@@ -287,15 +287,15 @@ class ProjectMember extends Component {
                   className="select"
                   onChange={this.changeUserRole}
                 >
-                  <Option value={'owner-' + record.uid}>组长</Option>
-                  <Option value={'dev-' + record.uid}>开发者</Option>
-                  <Option value={'guest-' + record.uid}>访客</Option>
+                  <Option value={'owner-' + record.uid}>組長</Option>
+                  <Option value={'dev-' + record.uid}>開發者</Option>
+                  <Option value={'guest-' + record.uid}>訪客</Option>
                 </Select>
                 <Popconfirm
                   placement="topRight"
-                  title="你确定要删除吗? "
+                  title="你確定要刪除嗎? "
                   onConfirm={this.deleteConfirm(record.uid)}
-                  okText="确定"
+                  okText="確定"
                   cancelText=""
                 >
                   <Button type="danger" icon="delete" className="btn-danger" />
@@ -303,13 +303,13 @@ class ProjectMember extends Component {
               </div>
             );
           } else {
-            // 非管理员可以看到权限 但无法修改
+            // 非管理員可以看到許可權 但無法修改
             if (record.role === 'owner') {
-              return '组长';
+              return '組長';
             } else if (record.role === 'dev') {
-              return '开发者';
+              return '開發者';
             } else if (record.role === 'guest') {
-              return '访客';
+              return '訪客';
             } else {
               return '';
             }
@@ -317,7 +317,7 @@ class ProjectMember extends Component {
         }
       }
     ];
-    // 获取当前分组下的所有项目名称
+    // 獲取目前分組下的所有專案名稱
     const children = this.props.projectList.map((item, index) => (
       <Option key={index} value={'' + item._id}>
         {item.name}
@@ -329,14 +329,14 @@ class ProjectMember extends Component {
         <div className="m-panel">
           {this.state.visible ? (
             <Modal
-              title="添加成员"
+              title="新增成員"
               visible={this.state.visible}
               onOk={this.handleOk}
               onCancel={this.handleCancel}
             >
               <Row gutter={6} className="modal-input">
                 <Col span="5">
-                  <div className="label usernamelabel">用户名: </div>
+                  <div className="label usernamelabel">使用者名稱: </div>
                 </Col>
                 <Col span="15">
                   <UsernameAutoComplete callbackState={this.onUserSelect} />
@@ -344,13 +344,13 @@ class ProjectMember extends Component {
               </Row>
               <Row gutter={6} className="modal-input">
                 <Col span="5">
-                  <div className="label usernamelabel">权限: </div>
+                  <div className="label usernamelabel">許可權: </div>
                 </Col>
                 <Col span="15">
                   <Select defaultValue="dev" className="select" onChange={this.changeNewMemberRole}>
-                    <Option value="owner">组长</Option>
-                    <Option value="dev">开发者</Option>
-                    <Option value="guest">访客</Option>
+                    <Option value="owner">組長</Option>
+                    <Option value="dev">開發者</Option>
+                    <Option value="guest">訪客</Option>
                   </Select>
                 </Col>
               </Row>
@@ -359,20 +359,20 @@ class ProjectMember extends Component {
             ''
           )}
           <Modal
-            title="批量导入成员"
+            title="批量匯入成員"
             visible={this.state.modalVisible}
             onOk={this.handleModalOk}
             onCancel={this.handleModalCancel}
           >
             <Row gutter={6} className="modal-input">
               <Col span="5">
-                <div className="label usernamelabel">项目名: </div>
+                <div className="label usernamelabel">專案名: </div>
               </Col>
               <Col span="15">
                 <Select
                   showSearch
                   style={{ width: 200 }}
-                  placeholder="请选择项目名称"
+                  placeholder="請選擇專案名稱"
                   optionFilterProp="children"
                   onChange={this.handleChange}
                 >
@@ -392,7 +392,7 @@ class ProjectMember extends Component {
           <Card
             bordered={false}
             title={
-              this.state.groupName + ' 分组成员 ' + '(' + this.state.groupMemberList.length + ') 人'
+              this.state.groupName + ' 分組成員 ' + '(' + this.state.groupMemberList.length + ') 人'
             }
             hoverable={true}
             className="setting-group"
@@ -425,9 +425,9 @@ class ProjectMember extends Component {
                         />
                       ) : null}
                     </p>
-                    {item.role === 'owner' ? <p className="item-role">组长</p> : null}
-                    {item.role === 'dev' ? <p className="item-role">开发者</p> : null}
-                    {item.role === 'guest' ? <p className="item-role">访客</p> : null}
+                    {item.role === 'owner' ? <p className="item-role">組長</p> : null}
+                    {item.role === 'dev' ? <p className="item-role">開發者</p> : null}
+                    {item.role === 'guest' ? <p className="item-role">訪客</p> : null}
                   </div>
                 );
               })

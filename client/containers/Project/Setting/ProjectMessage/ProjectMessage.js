@@ -109,7 +109,7 @@ class ProjectMessage extends Component {
    }
  }
 
-  // 确认修改
+  // 確認修改
   handleOk = e => {
     e.preventDefault()
     const {form, updateProject, projectMsg, groupList} = this.props
@@ -134,7 +134,7 @@ class ProjectMessage extends Component {
               this.props.getProject(this.props.projectId)
               message.success('修改成功! ')
 
-              // 如果如果项目所在的分组位置发生改变
+              // 如果如果專案所在的分組位置發生改變
               this.props.fetchGroupMsg(group_id)
               // this.props.history.push('/group');
               const projectName = htmlFilter(assignValue.name)
@@ -162,17 +162,17 @@ class ProjectMessage extends Component {
   handleShowConfirm = () => {
     const that = this
     confirm({
-      title: `确认删除 ${ that.props.projectMsg.name } 项目吗？`,
+      title: `確認刪除 ${ that.props.projectMsg.name } 專案嗎？`,
       content: (
         <div style={{marginTop: '10px', fontSize: '13px', lineHeight: '25px'}}>
           <Alert
-            message='警告：此操作非常危险,会删除该项目下面所有接口，并且无法恢复!'
+            message='警告：此操作非常危險,會刪除該專案下面所有介面，並且無法恢復!'
             type='warning'
             banner={true}
           />
           <div style={{marginTop: '16px'}}>
             <p style={{marginBottom: '8px'}}>
-              <b>请输入项目名称确认此操作:</b>
+              <b>請輸入專案名稱確認此操作:</b>
             </p>
             <Input id='project_name' size='large' />
           </div>
@@ -181,14 +181,14 @@ class ProjectMessage extends Component {
       onOk() {
         const groupName = trim(document.getElementById('project_name').value)
         if (that.props.projectMsg.name !== groupName) {
-          message.error('项目名称有误')
+          message.error('專案名稱有誤')
           return new Promise((resolve, reject) => {
             reject('error')
           })
         }
         that.props.delProject(that.props.projectId).then(res => {
           if (res.payload.data.errcode == 0) {
-            message.success('删除成功!')
+            message.success('刪除成功!')
             that.props.history.push(`/group/${ that.props.projectMsg.group_id}`)
           }
         })
@@ -198,7 +198,7 @@ class ProjectMessage extends Component {
     })
   };
 
-  // 修改项目头像的背景颜色
+  // 修改專案頭像的背景顏色
   handleChangeProjectColor = e => {
     const {_id, color, icon, logo} = this.props.projectMsg
     this.props.upsetProject({id: _id, color: e.target.value || color, icon, logo: logo}).then(res => {
@@ -208,7 +208,7 @@ class ProjectMessage extends Component {
     })
   };
 
-  // 修改项目头像的图标
+  // 修改專案頭像的圖示
   handleChangeProjectIcon = e => {
     const {_id, color, icon} = this.props.projectMsg
     this.props.upsetProject({id: _id, color, icon: e.target.value || icon, logo: null}).then(res => {
@@ -218,7 +218,7 @@ class ProjectMessage extends Component {
     })
   };
 
-  // 点击“查看危险操作”按钮
+  // 點選「檢視危險操作」按鈕
   handleToggleDangerOptions = () => {
     // console.log(this.state.showDangerOptions);
     this.setState({
@@ -239,7 +239,7 @@ class ProjectMessage extends Component {
       }//${
         location.hostname
       }${location.port !== '' ? `:${ location.port}` : ''
-      }/mock/${projectMsg._id}${projectMsg.basepath}+$接口请求路径`
+      }/mock/${projectMsg._id}${projectMsg.basepath}+$介面請求路徑`
     let initFormValues = {}
     const {
       name,
@@ -281,7 +281,7 @@ class ProjectMessage extends Component {
     )
     const iconSelector = (
       <Tabs className='project-icon-selector' defaultActiveKey={projectMsg.logo ? '2' : '1'}>
-        <Tabs.TabPane key='1' tab='内置图标'>
+        <Tabs.TabPane key='1' tab='內建圖示'>
           <RadioGroup value={projectMsg.icon} className='icon' onChange={this.handleChangeProjectIcon}>
             {constants.PROJECT_ICON.map(item => {
               return (
@@ -292,7 +292,7 @@ class ProjectMessage extends Component {
             })}
           </RadioGroup>
         </Tabs.TabPane>
-        <Tabs.TabPane key='2' tab='上传图标'>
+        <Tabs.TabPane key='2' tab='上傳圖示'>
           <Upload
             accept='.jpg,.jpeg,.png,.svg,.gif'
             name='avatar'
@@ -335,7 +335,7 @@ class ProjectMessage extends Component {
                 : (
                   <div>
                     <Icon type='plus' />
-                    <div className='ant-upload-text'>上传</div>
+                    <div className='ant-upload-text'>上傳</div>
                   </div>
                 )}
           </Upload>
@@ -388,22 +388,22 @@ class ProjectMessage extends Component {
           </Row>
           <hr className='breakline' />
           <Form>
-            <FormItem {...formItemLayout} label='项目ID'>
+            <FormItem {...formItemLayout} label='專案ID'>
               <span>{this.props.projectMsg._id}</span>
             </FormItem>
-            <FormItem {...formItemLayout} label='项目名称'>
+            <FormItem {...formItemLayout} label='專案名稱'>
               {getFieldDecorator('name', {
                 initialValue: initFormValues.name,
-                rules: nameLengthLimit('项目'),
+                rules: nameLengthLimit('專案'),
               })(<Input />)}
             </FormItem>
-            <FormItem {...formItemLayout} label='所属分组'>
+            <FormItem {...formItemLayout} label='所屬分組'>
               {getFieldDecorator('group_id', {
                 initialValue: `${initFormValues.group_id }`,
                 rules: [
                   {
                     required: true,
-                    message: '请选择项目所属的分组!',
+                    message: '請選擇專案所屬的分組!',
                   },
                 ],
               })(
@@ -421,8 +421,8 @@ class ProjectMessage extends Component {
               {...formItemLayout}
               label={(
                 <span>
-                  接口基本路径&nbsp;
-                  <Tooltip title='基本路径为空表示根路径'>
+                  介面基本路徑&nbsp;
+                  <Tooltip title='基本路徑為空表示根路徑'>
                     <Icon type='question-circle-o' />
                   </Tooltip>
                 </span>
@@ -432,7 +432,7 @@ class ProjectMessage extends Component {
                 rules: [
                   {
                     required: false,
-                    message: '请输入基本路径! ',
+                    message: '請輸入基本路徑! ',
                   },
                 ],
               })(<Input />)}
@@ -443,7 +443,7 @@ class ProjectMessage extends Component {
               label={(
                 <span>
                   MOCK地址&nbsp;
-                  <Tooltip title='具体使用方法请查看文档'>
+                  <Tooltip title='具體使用方法請檢視文件'>
                     <Icon type='question-circle-o' />
                   </Tooltip>
                 </span>
@@ -466,8 +466,8 @@ class ProjectMessage extends Component {
               {...formItemLayout}
               label={(
                 <span>
-                  tag 信息&nbsp;
-                  <Tooltip title='定义 tag 信息，过滤接口'>
+                  tag 資訊&nbsp;
+                  <Tooltip title='定義 tag 資訊，過濾介面'>
                     <Icon type='question-circle-o' />
                   </Tooltip>
                 </span>
@@ -479,8 +479,8 @@ class ProjectMessage extends Component {
               {...formItemLayout}
               label={(
                 <span>
-                  mock严格模式&nbsp;
-                  <Tooltip title='开启后 mock 请求会对 query，body form 的必须字段和 json schema 进行校验'>
+                  mock嚴格模式&nbsp;
+                  <Tooltip title='開啟后 mock 請求會對 query，body form 的必須欄位和 json schema 進行校驗'>
                     <Icon type='question-circle-o' />
                   </Tooltip>
                 </span>
@@ -488,14 +488,14 @@ class ProjectMessage extends Component {
               {getFieldDecorator('strice', {
                 valuePropName: 'checked',
                 initialValue: initFormValues.strice,
-              })(<Switch checkedChildren='开' unCheckedChildren='关' />)}
+              })(<Switch checkedChildren='開' unCheckedChildren='關' />)}
             </FormItem>
             <FormItem
               {...formItemLayout}
               label={(
                 <span>
-                  开启json5&nbsp;
-                  <Tooltip title='开启后可在接口 body 和返回值中写 json 字段'>
+                  開啟json5&nbsp;
+                  <Tooltip title='開啟后可在介面 body 和返回值中寫 json 欄位'>
                     <Icon type='question-circle-o' />
                   </Tooltip>
                 </span>
@@ -503,16 +503,16 @@ class ProjectMessage extends Component {
               {getFieldDecorator('is_json5', {
                 valuePropName: 'checked',
                 initialValue: initFormValues.is_json5,
-              })(<Switch checkedChildren='开' unCheckedChildren='关' />)}
+              })(<Switch checkedChildren='開' unCheckedChildren='關' />)}
             </FormItem>
-            <FormItem {...formItemLayout} label='默认开启消息通知'>
+            <FormItem {...formItemLayout} label='預設開啟訊息通知'>
               {getFieldDecorator('switch_notice', {
                 valuePropName: 'checked',
                 initialValue: initFormValues.switch_notice,
-              })(<Switch checkedChildren='开' unCheckedChildren='关' />)}
+              })(<Switch checkedChildren='開' unCheckedChildren='關' />)}
             </FormItem>
 
-            <FormItem {...formItemLayout} label='权限'>
+            <FormItem {...formItemLayout} label='許可權'>
               {getFieldDecorator('project_type', {
                 rules: [
                   {
@@ -524,13 +524,13 @@ class ProjectMessage extends Component {
                 <RadioGroup>
                   <Radio value='private' className='radio'>
                     <Icon type='lock' />私有<br />
-                    <span className='radio-desc'>只有组长和项目开发者可以索引并查看项目信息</span>
+                    <span className='radio-desc'>只有組長和專案開發者可以索引並檢視專案資訊</span>
                   </Radio>
                   <br />
                   {projectMsg.role === 'admin' && (
                     <Radio value='public' className='radio'>
-                      <Icon type='unlock' />公开<br />
-                      <span className='radio-desc'>任何人都可以索引并查看项目信息</span>
+                      <Icon type='unlock' />公開<br />
+                      <span className='radio-desc'>任何人都可以索引並檢視專案資訊</span>
                     </Radio>
                   )}
 
@@ -550,12 +550,12 @@ class ProjectMessage extends Component {
             </Button>
           </div>
 
-          {/* 只有组长和管理员有权限删除项目 */}
+          {/* 只有組長和管理員有許可權刪除專案 */}
           {projectMsg.role === 'owner' || projectMsg.role === 'admin' ? (
             <div className='danger-container'>
               <div className='title'>
                 <h2 className='content'>
-                  <Icon type='exclamation-circle-o' /> 危险操作
+                  <Icon type='exclamation-circle-o' /> 危險操作
                 </h2>
                 <Button onClick={this.handleToggleDangerOptions}>
                   查 看<Icon type={this.state.showDangerOptions ? 'up' : 'down'} />
@@ -564,16 +564,16 @@ class ProjectMessage extends Component {
               {this.state.showDangerOptions ? (
                 <Card hoverable={true} className='card-danger'>
                   <div className='card-danger-content'>
-                    <h3>删除项目</h3>
-                    <p>项目一旦删除，将无法恢复数据，请慎重操作！</p>
-                    <p>只有组长和管理员有权限删除项目。</p>
+                    <h3>刪除專案</h3>
+                    <p>專案一旦刪除，將無法恢復數據，請慎重操作！</p>
+                    <p>只有組長和管理員有許可權刪除專案。</p>
                   </div>
                   <Button
                     type='danger'
                     ghost={true}
                     className='card-danger-btn'
                     onClick={this.handleShowConfirm}>
-                    删除
+                    刪除
                   </Button>
                 </Card>
               ) : null}

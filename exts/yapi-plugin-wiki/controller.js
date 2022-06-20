@@ -17,7 +17,7 @@ class wikiController extends baseController {
   }
 
   /**
-   * 获取wiki信息
+   * 獲取wiki資訊
    * @interface wiki_desc/get
    * @method get
    * @category statistics
@@ -28,7 +28,7 @@ class wikiController extends baseController {
     try {
       let project_id = ctx.request.query.project_id;
       if (!project_id) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空'));
+        return (ctx.body = yapi.commons.resReturn(null, 400, '專案id不能為空'));
       }
       let result = await this.Model.get(project_id);
       return (ctx.body = yapi.commons.resReturn(result));
@@ -38,7 +38,7 @@ class wikiController extends baseController {
   }
 
   /**
-   * 保存wiki信息
+   * 儲存wiki資訊
    * @interface wiki_desc/get
    * @method get
    * @category statistics
@@ -56,12 +56,12 @@ class wikiController extends baseController {
       });
 
       if (!params.project_id) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空'));
+        return (ctx.body = yapi.commons.resReturn(null, 400, '專案id不能為空'));
       }
       if (!this.$tokenAuth) {
         let auth = await this.checkAuth(params.project_id, 'project', 'edit');
         if (!auth) {
-          return (ctx.body = yapi.commons.resReturn(null, 400, '没有权限'));
+          return (ctx.body = yapi.commons.resReturn(null, 400, '沒有許可權'));
         }
       }
 
@@ -70,7 +70,7 @@ class wikiController extends baseController {
       const username = this.getUsername();
       const uid = this.getUid();
 
-      // 如果当前数据库里面没有数据
+      // 如果目前數據庫裡面沒有數據
       let result = await this.Model.get(params.project_id);
       if (!result) {
         let data = Object.assign(params, {
@@ -117,7 +117,7 @@ class wikiController extends baseController {
         let project = await this.projectModel.getBaseInfo(params.project_id);
 
         yapi.commons.sendNotice(params.project_id, {
-          title: `${username} 更新了wiki说明`,
+          title: `${username} 更新了wiki說明`,
           content: `<html>
           <head>
           <meta charset="utf-8" />
@@ -127,18 +127,18 @@ class wikiController extends baseController {
           </style>
           </head>
           <body>
-          <div><h3>${username}更新了wiki说明</h3>
-          <p>修改用户: ${username}</p>
-          <p>修改项目: <a href="${wikiUrl}">${project.name}</a></p>
-          <p>详细改动日志: ${this.diffHTML(diffView)}</p></div>
+          <div><h3>${username}更新了wiki說明</h3>
+          <p>修改使用者: ${username}</p>
+          <p>修改專案: <a href="${wikiUrl}">${project.name}</a></p>
+          <p>詳細改動日誌: ${this.diffHTML(diffView)}</p></div>
           </body>
           </html>`
         });
       }
 
-      // 保存修改日志信息
+      // 儲存修改日誌資訊
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${uid}">${username}</a> 更新了 <a href="${wikiUrl}">wiki</a> 的信息`,
+        content: `<a href="/user/profile/${uid}">${username}</a> 更新了 <a href="${wikiUrl}">wiki</a> 的資訊`,
         type: 'project',
         uid,
         username: username,
@@ -152,7 +152,7 @@ class wikiController extends baseController {
   }
   diffHTML(html) {
     if (html.length === 0) {
-      return `<span style="color: #555">没有改动，该操作未改动wiki数据</span>`;
+      return `<span style="color: #555">沒有改動，該操作未改動wiki數據</span>`;
     }
 
     return html.map(item => {
@@ -163,14 +163,14 @@ class wikiController extends baseController {
     });
   }
 
-  // 处理编辑冲突
+  // 處理編輯衝突
   async wikiConflict(ctx) {
     try {
       let result;
       ctx.websocket.on('message', async message => {
         let id = parseInt(ctx.query.id, 10);
         if (!id) {
-          return ctx.websocket.send('id 参数有误');
+          return ctx.websocket.send('id 參數有誤');
         }
         result = await this.Model.get(id);
         let data = await this.websocketMsgMap(message, result);
@@ -194,21 +194,21 @@ class wikiController extends baseController {
     return map[msg](result);
   }
 
-  // socket 开始链接
+  // socket 開始鏈接
   async startFunc(result) {
     if (result && result.edit_uid === this.getUid()) {
       await this.Model.upEditUid(result._id, 0);
     }
   }
 
-  // socket 结束链接
+  // socket 結束鏈接
   async endFunc(result) {
     if (result) {
       await this.Model.upEditUid(result._id, 0);
     }
   }
 
-  // 正在编辑
+  // 正在編輯
   async editorFunc(result) {
     let userInst, userinfo, data;
     if (result && result.edit_uid !== 0 && result.edit_uid !== this.getUid()) {

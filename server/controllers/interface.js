@@ -169,30 +169,30 @@ class interfaceController extends baseController {
   }
 
   /**
-   * 添加项目分组
+   * 新增專案分組
    * @interface /interface/add
    * @method POST
    * @category interface
    * @foldnumber 10
-   * @param {Number}   project_id 项目id，不能为空
-   * @param {String}   title 接口标题，不能为空
-   * @param {String}   path 接口请求路径，不能为空
-   * @param {String}   method 请求方式
-   * @param {Array}  [req_headers] 请求的header信息
-   * @param {String}  [req_headers[].name] 请求的header信息名
-   * @param {String}  [req_headers[].value] 请求的header信息值
-   * @param {Boolean}  [req_headers[].required] 是否是必须，默认为否
+   * @param {Number}   project_id 專案id，不能為空
+   * @param {String}   title 介面標題，不能為空
+   * @param {String}   path 介面請求路徑，不能為空
+   * @param {String}   method 請求方式
+   * @param {Array}  [req_headers] 請求的header資訊
+   * @param {String}  [req_headers[].name] 請求的header資訊名
+   * @param {String}  [req_headers[].value] 請求的header資訊值
+   * @param {Boolean}  [req_headers[].required] 是否是必須，預設為否
    * @param {String}  [req_headers[].desc] header描述
-   * @param {String}  [req_body_type] 请求参数方式，有["form", "json", "text", "xml"]四种
-   * @param {Array} [req_params] name, desc两个参数
-   * @param {Mixed}  [req_body_form] 请求参数,如果请求方式是form，参数是Array数组，其他格式请求参数是字符串
-   * @param {String} [req_body_form[].name] 请求参数名
-   * @param {String} [req_body_form[].value] 请求参数值，可填写生成规则（mock）。如@email，随机生成一条email
-   * @param {String} [req_body_form[].type] 请求参数类型，有["text", "file"]两种
-   * @param {String} [req_body_other]  非form类型的请求参数可保存到此字段
-   * @param {String}  [res_body_type] 相应信息的数据格式，有["json", "text", "xml"]三种
-   * @param {String} [res_body] 响应信息，可填写任意字符串，如果res_body_type是json,则会调用mock功能
-   * @param  {String} [desc] 接口描述
+   * @param {String}  [req_body_type] 請求參數方式，有["form", "json", "text", "xml"]四種
+   * @param {Array} [req_params] name, desc兩個參數
+   * @param {Mixed}  [req_body_form] 請求參數,如果請求方式是form，參數是Array陣列，其他格式請求參數是字串
+   * @param {String} [req_body_form[].name] 請求參數名
+   * @param {String} [req_body_form[].value] 請求參數值，可填寫產生規則（mock）。如@email，隨機產生一條email
+   * @param {String} [req_body_form[].type] 請求參數型別，有["text", "file"]兩種
+   * @param {String} [req_body_other]  非form型別的請求參數可儲存到此欄位
+   * @param {String}  [res_body_type] 相應資訊的數據格式，有["json", "text", "xml"]三種
+   * @param {String} [res_body] 響應資訊，可填寫任意字串，如果res_body_type是json,則會呼叫mock功能
+   * @param  {String} [desc] 介面描述
    * @returns {Object}
    * @example ./api/interface/add.json
    */
@@ -203,7 +203,7 @@ class interfaceController extends baseController {
       let auth = await this.checkAuth(params.project_id, 'project', 'edit');
 
       if (!auth) {
-        return (ctx.body = yapi.commons.resReturn(null, 40033, '没有权限'));
+        return (ctx.body = yapi.commons.resReturn(null, 40033, '沒有許可權'));
       }
     }
     params.method = params.method || 'GET';
@@ -222,7 +222,7 @@ class interfaceController extends baseController {
       return (ctx.body = yapi.commons.resReturn(
         null,
         400,
-        'path第一位必需为 /, 只允许由 字母数字-/_:.! 组成'
+        'path第一位必需為 /, 只允許由 字母數字-/_:.! 組成'
       ));
     }
 
@@ -244,7 +244,7 @@ class interfaceController extends baseController {
       return (ctx.body = yapi.commons.resReturn(
         null,
         40022,
-        '已存在的接口:' + params.path + '[' + params.method + ']'
+        '已存在的介面:' + params.path + '[' + params.method + ']'
       ));
     }
 
@@ -263,13 +263,13 @@ class interfaceController extends baseController {
       data.type = 'static';
     }
 
-    // 新建接口的人成为项目dev  如果不存在的话
-    // 命令行导入时无法获知导入接口人的信息，其uid 为 999999
+    // 新建介面的人成為專案dev  如果不存在的話
+    // 命令列匯入時無法獲知匯入介面人的資訊，其uid 為 999999
     let uid = this.getUid();
 
     if (this.getRole() !== 'admin' && uid !== 999999) {
       let userdata = await yapi.commons.getUserdata(uid, 'dev');
-      // 检查一下是否有这个人
+      // 檢查一下是否有這個人
       let check = await this.projectModel.checkMemberRepeat(params.project_id, uid);
       if (check === 0 && userdata) {
         await this.projectModel.addMember(params.project_id, [userdata]);
@@ -280,9 +280,9 @@ class interfaceController extends baseController {
     yapi.emitHook('interface_add', result).then();
     this.catModel.get(params.catid).then(cate => {
       let username = this.getUsername();
-      let title = `<a href="/user/profile/${this.getUid()}">${username}</a> 为分类 <a href="/project/${
+      let title = `<a href="/user/profile/${this.getUid()}">${username}</a> 為分類 <a href="/project/${
         params.project_id
-      }/interface/api/cat_${params.catid}">${cate.name}</a> 添加了接口 <a href="/project/${
+      }/interface/api/cat_${params.catid}">${cate.name}</a> 新增了介面 <a href="/project/${
         params.project_id
       }/interface/api/${result._id}">${data.title}</a> `;
 
@@ -300,30 +300,30 @@ class interfaceController extends baseController {
   }
 
   /**
-   * 保存接口数据，如果接口存在则更新数据，如果接口不存在则添加数据
+   * 儲存介面數據，如果介面存在則更新數據，如果介面不存在則新增數據
    * @interface /interface/save
    * @method  post
    * @category interface
    * @foldnumber 10
-   * @param {Number}   project_id 项目id，不能为空
-   * @param {String}   title 接口标题，不能为空
-   * @param {String}   path 接口请求路径，不能为空
-   * @param {String}   method 请求方式
-   * @param {Array}  [req_headers] 请求的header信息
-   * @param {String}  [req_headers[].name] 请求的header信息名
-   * @param {String}  [req_headers[].value] 请求的header信息值
-   * @param {Boolean}  [req_headers[].required] 是否是必须，默认为否
+   * @param {Number}   project_id 專案id，不能為空
+   * @param {String}   title 介面標題，不能為空
+   * @param {String}   path 介面請求路徑，不能為空
+   * @param {String}   method 請求方式
+   * @param {Array}  [req_headers] 請求的header資訊
+   * @param {String}  [req_headers[].name] 請求的header資訊名
+   * @param {String}  [req_headers[].value] 請求的header資訊值
+   * @param {Boolean}  [req_headers[].required] 是否是必須，預設為否
    * @param {String}  [req_headers[].desc] header描述
-   * @param {String}  [req_body_type] 请求参数方式，有["form", "json", "text", "xml"]四种
-   * @param {Array} [req_params] name, desc两个参数
-   * @param {Mixed}  [req_body_form] 请求参数,如果请求方式是form，参数是Array数组，其他格式请求参数是字符串
-   * @param {String} [req_body_form[].name] 请求参数名
-   * @param {String} [req_body_form[].value] 请求参数值，可填写生成规则（mock）。如@email，随机生成一条email
-   * @param {String} [req_body_form[].type] 请求参数类型，有["text", "file"]两种
-   * @param {String} [req_body_other]  非form类型的请求参数可保存到此字段
-   * @param {String}  [res_body_type] 相应信息的数据格式，有["json", "text", "xml"]三种
-   * @param {String} [res_body] 响应信息，可填写任意字符串，如果res_body_type是json,则会调用mock功能
-   * @param  {String} [desc] 接口描述
+   * @param {String}  [req_body_type] 請求參數方式，有["form", "json", "text", "xml"]四種
+   * @param {Array} [req_params] name, desc兩個參數
+   * @param {Mixed}  [req_body_form] 請求參數,如果請求方式是form，參數是Array陣列，其他格式請求參數是字串
+   * @param {String} [req_body_form[].name] 請求參數名
+   * @param {String} [req_body_form[].value] 請求參數值，可填寫產生規則（mock）。如@email，隨機產生一條email
+   * @param {String} [req_body_form[].type] 請求參數型別，有["text", "file"]兩種
+   * @param {String} [req_body_other]  非form型別的請求參數可儲存到此欄位
+   * @param {String}  [res_body_type] 相應資訊的數據格式，有["json", "text", "xml"]三種
+   * @param {String} [res_body] 響應資訊，可填寫任意字串，如果res_body_type是json,則會呼叫mock功能
+   * @param  {String} [desc] 介面描述
    * @returns {Object}
    */
 
@@ -333,7 +333,7 @@ class interfaceController extends baseController {
     if (!this.$tokenAuth) {
       let auth = await this.checkAuth(params.project_id, 'project', 'edit');
       if (!auth) {
-        return (ctx.body = yapi.commons.resReturn(null, 40033, '没有权限'));
+        return (ctx.body = yapi.commons.resReturn(null, 40033, '沒有許可權'));
       }
     }
     params.method = params.method || 'GET';
@@ -345,7 +345,7 @@ class interfaceController extends baseController {
       return (ctx.body = yapi.commons.resReturn(
         null,
         400,
-        'path第一位必需为 /, 只允许由 字母数字-/_:.! 组成'
+        'path第一位必需為 /, 只允許由 字母數字-/_:.! 組成'
       ));
     }
 
@@ -384,30 +384,30 @@ class interfaceController extends baseController {
       }
     }
     ctx.body = yapi.commons.resReturn(result);
-    // return ctx.body = yapi.commons.resReturn(null, 400, 'path第一位必需为 /, 只允许由 字母数字-/_:.! 组成');
+    // return ctx.body = yapi.commons.resReturn(null, 400, 'path第一位必需為 /, 只允許由 字母數字-/_:.! 組成');
   }
 
   /**
-   * 获取项目分组
+   * 獲取專案分組
    * @interface /interface/get
    * @method GET
    * @category interface
    * @foldnumber 10
-   * @param {Number}   id 接口id，不能为空
+   * @param {Number}   id 介面id，不能為空
    * @returns {Object}
    * @example ./api/interface/get.json
    */
   async get(ctx) {
     let params = ctx.params;
     if (!params.id) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '接口id不能为空'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, '介面id不能為空'));
     }
 
     try {
       let result = await this.Model.get(params.id);
       if(this.$tokenAuth){
         if(params.project_id !== result.project_id){
-          ctx.body = yapi.commons.resReturn(null, 400, 'token有误')
+          ctx.body = yapi.commons.resReturn(null, 400, 'token有誤')
           return;
         }
       }
@@ -419,7 +419,7 @@ class interfaceController extends baseController {
       let project = await this.projectModel.getBaseInfo(result.project_id);
       if (project.project_type === 'private') {
         if ((await this.checkAuth(project._id, 'project', 'view')) !== true) {
-          return (ctx.body = yapi.commons.resReturn(null, 406, '没有权限'));
+          return (ctx.body = yapi.commons.resReturn(null, 406, '沒有許可權'));
         }
       }
       yapi.emitHook('interface_get', result).then();
@@ -434,14 +434,14 @@ class interfaceController extends baseController {
   }
 
   /**
-   * 接口列表
+   * 介面列表
    * @interface /interface/list
    * @method GET
    * @category interface
    * @foldnumber 10
-   * @param {Number}   project_id 项目id，不能为空
-   * @param {Number}   page 当前页
-   * @param {Number}   limit 每一页限制条数
+   * @param {Number}   project_id 專案id，不能為空
+   * @param {Number}   page 目前頁
+   * @param {Number}   limit 每一頁限制條數
    * @returns {Object}
    * @example ./api/interface/list.json
    */
@@ -453,15 +453,15 @@ class interfaceController extends baseController {
       tag = ctx.request.query.tag;
     let project = await this.projectModel.getBaseInfo(project_id);
     if (!project) {
-      return (ctx.body = yapi.commons.resReturn(null, 407, '不存在的项目'));
+      return (ctx.body = yapi.commons.resReturn(null, 407, '不存在的專案'));
     }
     if (project.project_type === 'private') {
       if ((await this.checkAuth(project._id, 'project', 'view')) !== true) {
-        return (ctx.body = yapi.commons.resReturn(null, 406, '没有权限'));
+        return (ctx.body = yapi.commons.resReturn(null, 406, '沒有許可權'));
       }
     }
     if (!project_id) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, '專案id不能為空'));
     }
 
     try {
@@ -520,7 +520,7 @@ class interfaceController extends baseController {
       tag = ctx.request.query.tag;
 
     if (!catid) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, 'catid不能为空'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, 'catid不能為空'));
     }
     try {
       let catdata = await this.catModel.get(catid);
@@ -528,7 +528,7 @@ class interfaceController extends baseController {
       let project = await this.projectModel.getBaseInfo(catdata.project_id);
       if (project.project_type === 'private') {
         if ((await this.checkAuth(project._id, 'project', 'view')) !== true) {
-          return (ctx.body = yapi.commons.resReturn(null, 406, '没有权限'));
+          return (ctx.body = yapi.commons.resReturn(null, 406, '沒有許可權'));
         }
       }
 
@@ -566,16 +566,16 @@ class interfaceController extends baseController {
   async listByMenu(ctx) {
     let project_id = ctx.params.project_id;
     if (!project_id) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, '專案id不能為空'));
     }
 
     let project = await this.projectModel.getBaseInfo(project_id);
     if (!project) {
-      return (ctx.body = yapi.commons.resReturn(null, 406, '不存在的项目'));
+      return (ctx.body = yapi.commons.resReturn(null, 406, '不存在的專案'));
     }
     if (project.project_type === 'private') {
       if ((await this.checkAuth(project._id, 'project', 'view')) !== true) {
-        return (ctx.body = yapi.commons.resReturn(null, 406, '没有权限'));
+        return (ctx.body = yapi.commons.resReturn(null, 406, '沒有許可權'));
       }
     }
 
@@ -599,28 +599,28 @@ class interfaceController extends baseController {
   }
 
   /**
-   * 编辑接口
+   * 編輯介面
    * @interface /interface/up
    * @method POST
    * @category interface
    * @foldnumber 10
-   * @param {Number}   id 接口id，不能为空
-   * @param {String}   [path] 接口请求路径
-   * @param {String}   [method] 请求方式
-   * @param {Array}  [req_headers] 请求的header信息
-   * @param {String}  [req_headers[].name] 请求的header信息名
-   * @param {String}  [req_headers[].value] 请求的header信息值
-   * @param {Boolean}  [req_headers[].required] 是否是必须，默认为否
+   * @param {Number}   id 介面id，不能為空
+   * @param {String}   [path] 介面請求路徑
+   * @param {String}   [method] 請求方式
+   * @param {Array}  [req_headers] 請求的header資訊
+   * @param {String}  [req_headers[].name] 請求的header資訊名
+   * @param {String}  [req_headers[].value] 請求的header資訊值
+   * @param {Boolean}  [req_headers[].required] 是否是必須，預設為否
    * @param {String}  [req_headers[].desc] header描述
-   * @param {String}  [req_body_type] 请求参数方式，有["form", "json", "text", "xml"]四种
-   * @param {Mixed}  [req_body_form] 请求参数,如果请求方式是form，参数是Array数组，其他格式请求参数是字符串
-   * @param {String} [req_body_form[].name] 请求参数名
-   * @param {String} [req_body_form[].value] 请求参数值，可填写生成规则（mock）。如@email，随机生成一条email
-   * @param {String} [req_body_form[].type] 请求参数类型，有["text", "file"]两种
-   * @param {String} [req_body_other]  非form类型的请求参数可保存到此字段
-   * @param {String}  [res_body_type] 相应信息的数据格式，有["json", "text", "xml"]三种
-   * @param {String} [res_body] 响应信息，可填写任意字符串，如果res_body_type是json,则会调用mock功能
-   * @param  {String} [desc] 接口描述
+   * @param {String}  [req_body_type] 請求參數方式，有["form", "json", "text", "xml"]四種
+   * @param {Mixed}  [req_body_form] 請求參數,如果請求方式是form，參數是Array陣列，其他格式請求參數是字串
+   * @param {String} [req_body_form[].name] 請求參數名
+   * @param {String} [req_body_form[].value] 請求參數值，可填寫產生規則（mock）。如@email，隨機產生一條email
+   * @param {String} [req_body_form[].type] 請求參數型別，有["text", "file"]兩種
+   * @param {String} [req_body_other]  非form型別的請求參數可儲存到此欄位
+   * @param {String}  [res_body_type] 相應資訊的數據格式，有["json", "text", "xml"]三種
+   * @param {String} [res_body] 響應資訊，可填寫任意字串，如果res_body_type是json,則會呼叫mock功能
+   * @param  {String} [desc] 介面描述
    * @returns {Object}
    * @example ./api/interface/up.json
    */
@@ -643,12 +643,12 @@ class interfaceController extends baseController {
 
     let interfaceData = await this.Model.get(id);
     if (!interfaceData) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '不存在的接口'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, '不存在的介面'));
     }
     if (!this.$tokenAuth) {
       let auth = await this.checkAuth(interfaceData.project_id, 'project', 'edit');
       if (!auth) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '没有权限'));
+        return (ctx.body = yapi.commons.resReturn(null, 400, '沒有許可權'));
       }
     }
 
@@ -667,7 +667,7 @@ class interfaceController extends baseController {
         return (ctx.body = yapi.commons.resReturn(
           null,
           400,
-          'path第一位必需为 /, 只允许由 字母数字-/_:.! 组成'
+          'path第一位必需為 /, 只允許由 字母數字-/_:.! 組成'
         ));
       }
       params.query_path = {};
@@ -695,7 +695,7 @@ class interfaceController extends baseController {
         return (ctx.body = yapi.commons.resReturn(
           null,
           401,
-          '已存在的接口:' + params.path + '[' + params.method + ']'
+          '已存在的介面:' + params.path + '[' + params.method + ']'
         ));
       }
     }
@@ -721,14 +721,14 @@ class interfaceController extends baseController {
     this.catModel.get(interfaceData.catid).then(cate => {
       let diffView2 = showDiffMsg(jsondiffpatch, formattersHtml, logData);
       if (diffView2.length <= 0) {
-          return; // 没有变化时，不写日志
+          return; // 沒有變化時，不寫日誌
       }
       yapi.commons.saveLog({
         content: `<a href="/user/profile/${this.getUid()}">${username}</a> 
-                    更新了分类 <a href="/project/${cate.project_id}/interface/api/cat_${
+                    更新了分類 <a href="/project/${cate.project_id}/interface/api/cat_${
           data.catid
         }">${cate.name}</a> 
-                    下的接口 <a href="/project/${cate.project_id}/interface/api/${id}">${
+                    下的介面 <a href="/project/${cate.project_id}/interface/api/${id}">${
           interfaceData.title
         }</a><p>${params.message}</p>`,
         type: 'project',
@@ -761,7 +761,7 @@ class interfaceController extends baseController {
       }/interface/api/${id}`;
 
       yapi.commons.sendNotice(interfaceData.project_id, {
-        title: `${username} 更新了接口`,
+        title: `${username} 更新了介面`,
         content: `<html>
         <head>
         <style>
@@ -770,12 +770,12 @@ class interfaceController extends baseController {
         </style>
         </head>
         <body>
-        <div><h3>${username}更新了接口(${data.title})</h3>
-        <p>项目名：${project.name} </p>
-        <p>修改用户: ${username}</p>
-        <p>接口名: <a href="${interfaceUrl}">${data.title}</a></p>
-        <p>接口路径: [${data.method}]${data.path}</p>
-        <p>详细改动日志: ${this.diffHTML(diffView)}</p></div>
+        <div><h3>${username}更新了介面(${data.title})</h3>
+        <p>專案名：${project.name} </p>
+        <p>修改使用者: ${username}</p>
+        <p>介面名: <a href="${interfaceUrl}">${data.title}</a></p>
+        <p>介面路徑: [${data.method}]${data.path}</p>
+        <p>詳細改動日誌: ${this.diffHTML(diffView)}</p></div>
         </body>
         </html>`
       });
@@ -788,7 +788,7 @@ class interfaceController extends baseController {
 
   diffHTML(html) {
     if (html.length === 0) {
-      return `<span style="color: #555">没有改动，该操作未改动Api数据</span>`;
+      return `<span style="color: #555">沒有改動，該操作未改動Api數據</span>`;
     }
 
     return html.map(item => {
@@ -800,12 +800,12 @@ class interfaceController extends baseController {
   }
 
   /**
-   * 删除接口
+   * 刪除介面
    * @interface /interface/del
    * @method GET
    * @category interface
    * @foldnumber 10
-   * @param {Number}   id 接口id，不能为空
+   * @param {Number}   id 介面id，不能為空
    * @returns {Object}
    * @example ./api/interface/del.json
    */
@@ -815,7 +815,7 @@ class interfaceController extends baseController {
       let id = ctx.request.body.id;
 
       if (!id) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '接口id不能为空'));
+        return (ctx.body = yapi.commons.resReturn(null, 400, '介面id不能為空'));
       }
 
       let data = await this.Model.get(id);
@@ -823,7 +823,7 @@ class interfaceController extends baseController {
       if (data.uid != this.getUid()) {
         let auth = await this.checkAuth(data.project_id, 'project', 'danger');
         if (!auth) {
-          return (ctx.body = yapi.commons.resReturn(null, 400, '没有权限'));
+          return (ctx.body = yapi.commons.resReturn(null, 400, '沒有許可權'));
         }
       }
 
@@ -834,9 +834,9 @@ class interfaceController extends baseController {
       let username = this.getUsername();
       this.catModel.get(data.catid).then(cate => {
         yapi.commons.saveLog({
-          content: `<a href="/user/profile/${this.getUid()}">${username}</a> 删除了分类 <a href="/project/${
+          content: `<a href="/user/profile/${this.getUid()}">${username}</a> 刪除了分類 <a href="/project/${
             cate.project_id
-          }/interface/api/cat_${data.catid}">${cate.name}</a> 下的接口 "${data.title}"`,
+          }/interface/api/cat_${data.catid}">${cate.name}</a> 下的介面 "${data.title}"`,
           type: 'project',
           uid: this.getUid(),
           username: username,
@@ -849,7 +849,7 @@ class interfaceController extends baseController {
       ctx.body = yapi.commons.resReturn(null, 402, err.message);
     }
   }
-  // 处理编辑冲突
+  // 處理編輯衝突
   async solveConflict(ctx) {
     try {
       let id = parseInt(ctx.query.id, 10),
@@ -858,7 +858,7 @@ class interfaceController extends baseController {
         userinfo,
         data;
       if (!id) {
-        return ctx.websocket.send('id 参数有误');
+        return ctx.websocket.send('id 參數有誤');
       }
       result = await this.Model.get(id);
 
@@ -895,17 +895,17 @@ class interfaceController extends baseController {
       });
 
       if (!params.project_id) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空'));
+        return (ctx.body = yapi.commons.resReturn(null, 400, '專案id不能為空'));
       }
       if (!this.$tokenAuth) {
         let auth = await this.checkAuth(params.project_id, 'project', 'edit');
         if (!auth) {
-          return (ctx.body = yapi.commons.resReturn(null, 400, '没有权限'));
+          return (ctx.body = yapi.commons.resReturn(null, 400, '沒有許可權'));
         }
       }
 
       if (!params.name) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '名称不能为空'));
+        return (ctx.body = yapi.commons.resReturn(null, 400, '名稱不能為空'));
       }
 
       let result = await this.catModel.save({
@@ -919,7 +919,7 @@ class interfaceController extends baseController {
 
       let username = this.getUsername();
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 添加了分类  <a href="/project/${
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 新增了分類  <a href="/project/${
           params.project_id
         }/interface/api/cat_${result._id}">${params.name}</a>`,
         type: 'project',
@@ -943,7 +943,7 @@ class interfaceController extends baseController {
 
       let auth = await this.checkAuth(cate.project_id, 'project', 'edit');
       if (!auth) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '没有权限'));
+        return (ctx.body = yapi.commons.resReturn(null, 400, '沒有許可權'));
       }
 
       let result = await this.catModel.up(params.catid, {
@@ -953,7 +953,7 @@ class interfaceController extends baseController {
       });
 
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了分类 <a href="/project/${
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了分類 <a href="/project/${
           cate.project_id
         }/interface/api/cat_${params.catid}">${cate.name}</a>`,
         type: 'project',
@@ -973,21 +973,21 @@ class interfaceController extends baseController {
       let id = ctx.request.body.catid;
       let catData = await this.catModel.get(id);
       if (!catData) {
-        ctx.body = yapi.commons.resReturn(null, 400, '不存在的分类');
+        ctx.body = yapi.commons.resReturn(null, 400, '不存在的分類');
       }
 
       if (catData.uid !== this.getUid()) {
         let auth = await this.checkAuth(catData.project_id, 'project', 'danger');
         if (!auth) {
-          return (ctx.body = yapi.commons.resReturn(null, 400, '没有权限'));
+          return (ctx.body = yapi.commons.resReturn(null, 400, '沒有許可權'));
         }
       }
 
       let username = this.getUsername();
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 删除了分类 "${
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 刪除了分類 "${
           catData.name
-        }" 及该分类下的接口`,
+        }" 及該分類下的介面`,
         type: 'project',
         uid: this.getUid(),
         username: username,
@@ -1013,12 +1013,12 @@ class interfaceController extends baseController {
   }
 
   /**
-   * 获取分类列表
+   * 獲取分類列表
    * @interface /interface/getCatMenu
    * @method GET
    * @category interface
    * @foldnumber 10
-   * @param {Number}   project_id 项目id，不能为空
+   * @param {Number}   project_id 專案id，不能為空
    * @returns {Object}
    * @example ./api/interface/getCatMenu
    */
@@ -1027,14 +1027,14 @@ class interfaceController extends baseController {
     let project_id = ctx.params.project_id;
 
     if (!project_id || isNaN(project_id)) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, '專案id不能為空'));
     }
 
     try {
       let project = await this.projectModel.getBaseInfo(project_id);
       if (project.project_type === 'private') {
         if ((await this.checkAuth(project._id, 'project', 'edit')) !== true) {
-          return (ctx.body = yapi.commons.resReturn(null, 406, '没有权限'));
+          return (ctx.body = yapi.commons.resReturn(null, 406, '沒有許可權'));
         }
       }
       let res = await this.catModel.list(project_id);
@@ -1045,7 +1045,7 @@ class interfaceController extends baseController {
   }
 
   /**
-   * 获取自定义接口字段数据
+   * 獲取自定義介面欄位數據
    * @interface /interface/get_custom_field
    * @method GET
    * @category interface
@@ -1058,24 +1058,24 @@ class interfaceController extends baseController {
     let params = ctx.request.query;
 
     if (Object.keys(params).length !== 1) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '参数数量错误'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, '參數數量錯誤'));
     }
     let customFieldName = Object.keys(params)[0];
     let customFieldValue = params[customFieldName];
 
     try {
-      //  查找有customFieldName的分组（group）
+      //  查詢有customFieldName的分組（group）
       let groups = await this.groupModel.getcustomFieldName(customFieldName);
       if (groups.length === 0) {
-        return (ctx.body = yapi.commons.resReturn(null, 404, '没有找到对应自定义接口'));
+        return (ctx.body = yapi.commons.resReturn(null, 404, '沒有找到對應自定義介面'));
       }
 
-      // 在每个分组（group）下查找对应project的id值
+      // 在每個分組（group）下查詢對應project的id值
       let interfaces = [];
       for (let i = 0; i < groups.length; i++) {
         let projects = await this.projectModel.list(groups[i]._id);
 
-        // 在每个项目（project）中查找interface下的custom_field_value
+        // 在每個專案（project）中查詢interface下的custom_field_value
         for (let j = 0; j < projects.length; j++) {
           let data = {};
           let inter = await this.Model.getcustomFieldValue(projects[j]._id, customFieldValue);
@@ -1108,7 +1108,7 @@ class interfaceController extends baseController {
   }
 
   /**
-   * 更新多个接口case index
+   * 更新多個介面case index
    * @interface /interface/up_index
    * @method POST
    * @category col
@@ -1122,7 +1122,7 @@ class interfaceController extends baseController {
     try {
       let params = ctx.request.body;
       if (!params || !Array.isArray(params)) {
-        ctx.body = yapi.commons.resReturn(null, 400, '请求参数必须是数组');
+        ctx.body = yapi.commons.resReturn(null, 400, '請求參數必須是陣列');
       }
       params.forEach(item => {
         if (item.id) {
@@ -1142,7 +1142,7 @@ class interfaceController extends baseController {
   }
 
   /**
-   * 更新多个接口cat index
+   * 更新多個介面cat index
    * @interface /interface/up_cat_index
    * @method POST
    * @category col
@@ -1156,7 +1156,7 @@ class interfaceController extends baseController {
     try {
       let params = ctx.request.body;
       if (!params || !Array.isArray(params)) {
-        ctx.body = yapi.commons.resReturn(null, 400, '请求参数必须是数组');
+        ctx.body = yapi.commons.resReturn(null, 400, '請求參數必須是陣列');
       }
       params.forEach(item => {
         if (item.id) {
@@ -1186,21 +1186,21 @@ class interfaceController extends baseController {
     return (ctx.body = res);
   }
 
-  // 获取开放接口数据
+  // 獲取開放介面數據
   async listByOpen(ctx) {
     let project_id = ctx.request.query.project_id;
 
     if (!project_id) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空'));
+      return (ctx.body = yapi.commons.resReturn(null, 400, '專案id不能為空'));
     }
 
     let project = await this.projectModel.getBaseInfo(project_id);
     if (!project) {
-      return (ctx.body = yapi.commons.resReturn(null, 406, '不存在的项目'));
+      return (ctx.body = yapi.commons.resReturn(null, 406, '不存在的專案'));
     }
     if (project.project_type === 'private') {
       if ((await this.checkAuth(project._id, 'project', 'view')) !== true) {
-        return (ctx.body = yapi.commons.resReturn(null, 406, '没有权限'));
+        return (ctx.body = yapi.commons.resReturn(null, 406, '沒有許可權'));
       }
     }
 

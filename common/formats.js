@@ -34,15 +34,15 @@ const formats = [
   },
   {
     name: 'image',
-    title: '图片链接',
+    title: '圖片鏈接',
   },
   {
     name: 'imageData',
-    title: '图片',
+    title: '圖片',
   },
   {
     name: 'email',
-    title: '邮箱',
+    title: '郵箱',
   },
   {
     name: 'paragraph',
@@ -54,11 +54,11 @@ const formats = [
   },
   {
     name: 'word',
-    title: '单词',
+    title: '單詞',
   },
   {
     name: 'title',
-    title: '标题',
+    title: '標題',
   },
   {
     name: 'name',
@@ -66,7 +66,7 @@ const formats = [
   },
   {
     name: 'region',
-    title: '地区',
+    title: '地區',
   },
   {
     name: 'province',
@@ -78,22 +78,22 @@ const formats = [
   },
   {
     name: 'county',
-    title: '国家',
+    title: '國家',
   },
   {
     name: 'mobile',
-    title: '手机号',
+    title: '手機號',
   },
   {
     name: 'cparagraph',
-    title: '中文本',
+    title: '中文字',
   },
   {
     name: 'cname',
     title: '中文姓名',
   },
   {
-    title: '中文标题',
+    title: '中文標題',
     name: 'ctitle',
   },
 ]

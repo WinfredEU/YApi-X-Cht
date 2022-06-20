@@ -94,11 +94,11 @@ const CaseReport = function(props) {
             </Row>
           ) : null}
         </TabPane>
-        <TabPane className="case-report-pane" tab="验证结果" key="valid">
+        <TabPane className="case-report-pane" tab="驗證結果" key="valid">
           {props.validRes ? (
             <Row className="case-report">
               <Col className="case-report-title" span="6">
-                验证结果
+                驗證結果
               </Col>
               <Col span="18"><pre>
                 {validRes}  

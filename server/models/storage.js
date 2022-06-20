@@ -25,7 +25,7 @@ class stroageModel extends baseModel {
       data: {
         type: String,
         default: ''
-      } //用于原始数据存储
+      } //用於原始數據儲存
     };
   }
   save(key, data = {}, isInsert = false) {

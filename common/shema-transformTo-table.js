@@ -13,7 +13,7 @@ exports.schemaTransformToTable = schema => {
   }
 }
 
-//  自动添加type
+//  自動新增type
 
 function checkJsonSchema(json) {
   const newJson = Object.assign({}, json)
@@ -123,7 +123,7 @@ const SchemaArray = (data, index) => {
   data.items = data.items || {type: 'string'}
   const items = checkJsonSchema(data.items)
   const optionForm = mapping(items, index)
-  //  处理array嵌套array的问题
+  //  處理array巢狀array的問題
   let children = optionForm
   if (!_.isArray(optionForm) && !_.isUndefined(optionForm)) {
     optionForm.key = `array-${ fieldNum++}`

@@ -88,7 +88,7 @@ export default class InterfaceCaseContent extends Component {
     this.props.history.push('/project/' + params.id + '/interface/case/' + currCaseId);
     await this.props.fetchCaseData(currCaseId);
     this.props.setColData({ currCaseId: +currCaseId, currColId, isShowCol: false });
-    // 获取当前case 下的环境变量
+    // 獲取目前case 下的環境變數
     await this.props.getEnv(this.props.currCase.project_id);
     // await this.getCurrEnv()
 
@@ -190,7 +190,7 @@ export default class InterfaceCaseContent extends Component {
       <div style={{ padding: '6px 0' }} className="case-content">
         <div className="case-title">
           {!isEditingCasename && (
-            <Tooltip title="点击编辑" placement="bottom">
+            <Tooltip title="點選編輯" placement="bottom">
               <div className="case-name" onClick={this.triggerEditCasename}>
                 {currCase.casename}
               </div>
@@ -211,7 +211,7 @@ export default class InterfaceCaseContent extends Component {
               className="text"
               to={`/project/${currCase.project_id}/interface/api/${currCase.interface_id}`}
             >
-              对应接口
+              對應介面
             </Link>
           </span>
         </div>
@@ -220,7 +220,7 @@ export default class InterfaceCaseContent extends Component {
             <Postman
               data={data}
               type="case"
-              saveTip="更新保存修改"
+              saveTip="更新儲存修改"
               save={this.updateCase}
               ref={this.savePostmanRef}
               interfaceId={currCase.interface_id}

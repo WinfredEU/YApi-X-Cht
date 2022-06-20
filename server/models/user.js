@@ -24,7 +24,7 @@ class userModel extends baseModel {
       role: String,
       add_time: Number,
       up_time: Number,
-      type: {type: String, enum: ['site', 'third'], default: 'site'}, //site用户是网站注册用户, third是第三方登录过来的用户
+      type: {type: String, enum: ['site', 'third'], default: 'site'}, //site使用者是網站註冊使用者, third是第三方登錄過來的使用者
     }
   }
 
@@ -43,7 +43,7 @@ class userModel extends baseModel {
     return this.model
       .find()
       .select('_id username email role type  add_time up_time study')
-      .exec() //显示id name email role
+      .exec() //顯示id name email role
   }
 
   findByUids(uids) {

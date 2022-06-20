@@ -32,13 +32,13 @@ class Setting extends Component {
     return (
       <div className='g-row'>
         <Tabs type='card' className='has-affix-footer tabs-large'>
-          <TabPane key='1' tab='项目配置'>
+          <TabPane key='1' tab='專案配置'>
             <ProjectMessage projectId={+id} />
           </TabPane>
-          <TabPane key='2' tab='环境配置'>
+          <TabPane key='2' tab='環境配置'>
             <ProjectEnv projectId={+id} />
           </TabPane>
-          <TabPane key='3' tab='请求配置'>
+          <TabPane key='3' tab='請求配置'>
             <ProjectRequest projectId={+id} />
           </TabPane>
           {this.props.curProjectRole !== 'guest' ? (
@@ -46,7 +46,7 @@ class Setting extends Component {
               <ProjectToken projectId={+id} curProjectRole={this.props.curProjectRole} />
             </TabPane>
           ) : null}
-          <TabPane key='5' tab='全局mock脚本'>
+          <TabPane key='5' tab='全域性mock指令碼'>
             <ProjectMock projectId={+id} />
           </TabPane>
           {Object.keys(routers).map(key => {

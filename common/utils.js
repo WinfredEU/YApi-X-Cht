@@ -4,13 +4,13 @@ const stringUtils = require('./power-string.js').utils
 const json5 = require('json5')
 const Ajv = require('ajv')
 /**
- * 作用：解析规则串 key ，然后根据规则串的规则以及路径找到在 json 中对应的数据
- * 规则串：$.{key}.{body||params}.{dataPath} 其中 body 为返回数据，params 为请求数据，datapath 为数据的路径
- * 数组：$.key.body.data.arr[0]._id  (获取 key 所指向请求的返回数据的 arr 数组的第 0 项元素的 _id 属性)
- * 对象：$.key.body.data.obj._id ((获取 key 所指向请求的返回数据的 obj 对象的 _id 属性))
+ * 作用：解析規則串 key ，然後根據規則串的規則以及路徑找到在 json 中對應的數據
+ * 規則串：$.{key}.{body||params}.{dataPath} 其中 body 為返回數據，params 為請求數據，datapath 為數據的路徑
+ * 陣列：$.key.body.data.arr[0]._id  (獲取 key 所指向請求的返回數據的 arr 陣列的第 0 項元素的 _id 屬性)
+ * 對像：$.key.body.data.obj._id ((獲取 key 所指向請求的返回數據的 obj 對象的 _id 屬性))
  *
- * @param String key 规则串
- * @param Object json 数据
+ * @param String key 規則串
+ * @param Object json 數據
  * @returns
  */
 function simpleJsonPathParse(key, json) {
@@ -38,8 +38,8 @@ function simpleJsonPathParse(key, json) {
   return json
 }
 
-// 全局变量 {{ global.value }}
-// value 是在环境变量中定义的字段
+// 全域性變數 {{ global.value }}
+// value 是在環境變數中定義的欄位
 function handleGlobalWord(word, json) {
   if (!word || typeof word !== 'string' || word.indexOf('global.') !== 0) return word
   let keys = word.split('.')
@@ -57,7 +57,7 @@ function handleMockWord(word) {
 /**
  *
  * @param {*} data
- * @param {*} handleValueFn 处理参数值函数
+ * @param {*} handleValueFn 處理參數值函式
  */
 function handleJson(data, handleValueFn) {
   if (!data) {
@@ -231,19 +231,19 @@ exports.timeago = function (timestamp) {
   } else if (days > 0 && mouth <= 0) {
     return `${days }天前`
   } else if (days <= 0 && hours > 0) {
-    return `${hours }小时前`
+    return `${hours }小時前`
   } else if (hours <= 0 && minutes > 0) {
-    return `${minutes }分钟前`
+    return `${minutes }分鐘前`
   } else if (minutes <= 0 && seconds > 0) {
     if (seconds < 30) {
-      return '刚刚'
+      return '剛剛'
     }
     return `${seconds }秒前`
   }
-  return '刚刚'
+  return '剛剛'
 }
 
-// json schema 验证器
+// json schema 驗證器
 exports.schemaValidator = function (schema, params) {
   try {
     const ajv = new Ajv({

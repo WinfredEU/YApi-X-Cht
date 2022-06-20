@@ -17,14 +17,14 @@ class followModel extends baseModel {
   }
 
   /**
-   * @param {Number} uid 用户id
-   * @param {Number} projectid 项目id
-   * @param {String} projectname 项目名
-   * @param {String} icon 项目图标
+   * @param {Number} uid 使用者id
+   * @param {Number} projectid 專案id
+   * @param {String} projectname 專案名
+   * @param {String} icon 專案圖示
    */
 
   save(data) {
-    //关注
+    //關注
     const saveData = {
       uid: data.uid,
       projectid: data.projectid,

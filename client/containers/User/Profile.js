@@ -24,7 +24,7 @@ const EditButton = props => {
       </Button>
     );
   } else if (isAdmin) {
-    // 管理员
+    // 管理員
     return (
       <Button
         icon="edit"
@@ -139,7 +139,7 @@ class Profile extends Component {
           });
 
           this.handleEdit(name + 'Edit', false);
-          message.success('更新用户信息成功');
+          message.success('更新使用者資訊成功');
         } else {
           message.error(data.errmsg);
         }
@@ -177,7 +177,7 @@ class Profile extends Component {
     let password = document.getElementById('password').value;
     let verify_pass = document.getElementById('verify_pass').value;
     if (password != verify_pass) {
-      return message.error('两次输入的密码不一样');
+      return message.error('兩次輸入的密碼不一樣');
     }
     let params = {
       uid: this.state.userinfo.uid,
@@ -190,7 +190,7 @@ class Profile extends Component {
         let data = res.data;
         if (data.errcode === 0) {
           this.handleEdit('secureEdit', false);
-          message.success('修改密码成功');
+          message.success('修改密碼成功');
           if (this.props.curUid === this.state.userinfo.uid) {
             location.reload();
           }
@@ -210,7 +210,7 @@ class Profile extends Component {
     const Option = Select.Option;
     let userinfo = this.state.userinfo;
     let _userinfo = this.state._userinfo;
-    let roles = { admin: '管理员', member: '会员' };
+    let roles = { admin: '管理員', member: '會員' };
     let userType = '';
     if (this.props.userType === 'third') {
       userType = false;
@@ -220,14 +220,14 @@ class Profile extends Component {
       userType = false;
     }
 
-    // 用户名信息修改
+    // 使用者名稱資訊修改
     if (this.state.usernameEdit === false) {
       userNameEditHtml = (
         <div>
           <span className="text">{userinfo.username}</span>&nbsp;&nbsp;
           {/*<span className="text-button"  onClick={() => { this.handleEdit('usernameEdit', true) }}><Icon type="edit" />修改</span>*/}
           {/* {btn} */}
-          {/* 站点登陆才能编辑 */}
+          {/* 站點登陸才能編輯 */}
           {userType && (
             <EditButton
               userType={userType}
@@ -246,7 +246,7 @@ class Profile extends Component {
             value={_userinfo.username}
             name="username"
             onChange={this.changeUserinfo}
-            placeholder="用户名"
+            placeholder="使用者名稱"
           />
           <ButtonGroup className="edit-buttons">
             <Button
@@ -264,20 +264,20 @@ class Profile extends Component {
               }}
               type="primary"
             >
-              确定
+              確定
             </Button>
           </ButtonGroup>
         </div>
       );
     }
-    // 邮箱信息修改
+    // 郵箱資訊修改
     if (this.state.emailEdit === false) {
       emailEditHtml = (
         <div>
           <span className="text">{userinfo.email}</span>&nbsp;&nbsp;
           {/*<span className="text-button" onClick={() => { this.handleEdit('emailEdit', true) }} ><Icon type="edit" />修改</span>*/}
           {/* {btn} */}
-          {/* 站点登陆才能编辑 */}
+          {/* 站點登陸才能編輯 */}
           {userType && (
             <EditButton
               admin={userinfo.role === 'admin'}
@@ -314,7 +314,7 @@ class Profile extends Component {
                 this.updateUserinfo('email');
               }}
             >
-              确定
+              確定
             </Button>
           </ButtonGroup>
         </div>
@@ -330,8 +330,8 @@ class Profile extends Component {
     } else {
       roleEditHtml = (
         <Select defaultValue={_userinfo.role} onChange={this.changeRole} style={{ width: 150 }}>
-          <Option value="admin">管理员</Option>
-          <Option value="member">会员</Option>
+          <Option value="admin">管理員</Option>
+          <Option value="member">會員</Option>
         </Select>
       );
     }
@@ -358,13 +358,13 @@ class Profile extends Component {
             style={{
               display: this.props.curRole === 'admin' && userinfo.role != 'admin' ? 'none' : ''
             }}
-            placeholder="旧的密码"
+            placeholder="舊的密碼"
             type="password"
             name="old_password"
             id="old_password"
           />
-          <Input placeholder="新的密码" type="password" name="password" id="password" />
-          <Input placeholder="确认密码" type="password" name="verify_pass" id="verify_pass" />
+          <Input placeholder="新的密碼" type="password" name="password" id="password" />
+          <Input placeholder="確認密碼" type="password" name="verify_pass" id="verify_pass" />
           <ButtonGroup className="edit-buttons">
             <Button
               className="edit-button"
@@ -375,7 +375,7 @@ class Profile extends Component {
               取消
             </Button>
             <Button className="edit-button" onClick={this.updatePassword} type="primary">
-              确定
+              確定
             </Button>
           </ButtonGroup>
         </div>
@@ -385,15 +385,15 @@ class Profile extends Component {
       <div className="user-profile">
         <div className="user-item-body">
           {userinfo.uid === this.props.curUid ? (
-            <h3>个人设置</h3>
+            <h3>個人設定</h3>
           ) : (
-            <h3>{userinfo.username} 资料设置</h3>
+            <h3>{userinfo.username} 資料設定</h3>
           )}
 
           <Row className="avatarCon" type="flex" justify="start">
             <Col span={24}>
               {userinfo.uid === this.props.curUid ? (
-                <AvatarUpload uid={userinfo.uid}>点击上传头像</AvatarUpload>
+                <AvatarUpload uid={userinfo.uid}>點選上傳頭像</AvatarUpload>
               ) : (
                 <div className="avatarImg">
                   <img src={`/api/user/avatar?uid=${userinfo.uid}`} />
@@ -403,12 +403,12 @@ class Profile extends Component {
           </Row>
           <Row className="user-item" type="flex" justify="start">
             <div className="maoboli" />
-            <Col span={4}>用户id</Col>
+            <Col span={4}>使用者id</Col>
             <Col span={12}>{userinfo.uid}</Col>
           </Row>
           <Row className="user-item" type="flex" justify="start">
             <div className="maoboli" />
-            <Col span={4}>用户名</Col>
+            <Col span={4}>使用者名稱</Col>
             <Col span={12}>{userNameEditHtml}</Col>
           </Row>
           <Row className="user-item" type="flex" justify="start">
@@ -433,24 +433,24 @@ class Profile extends Component {
             justify="start"
           >
             <div className="maoboli" />
-            <Col span={4}>登陆方式</Col>
-            <Col span={12}>{userinfo.type === 'site' ? '站点登陆' : '第三方登陆'}</Col>
+            <Col span={4}>登陸方式</Col>
+            <Col span={12}>{userinfo.type === 'site' ? '站點登陸' : '第三方登陸'}</Col>
           </Row>
           <Row className="user-item" type="flex" justify="start">
             <div className="maoboli" />
-            <Col span={4}>创建账号时间</Col>
+            <Col span={4}>建立賬號時間</Col>
             <Col span={12}>{formatTime(userinfo.add_time)}</Col>
           </Row>
           <Row className="user-item" type="flex" justify="start">
             <div className="maoboli" />
-            <Col span={4}>更新账号时间</Col>
+            <Col span={4}>更新賬號時間</Col>
             <Col span={12}>{formatTime(userinfo.up_time)}</Col>
           </Row>
 
           {userType ? (
             <Row className="user-item" type="flex" justify="start">
               <div className="maoboli" />
-              <Col span={4}>密码</Col>
+              <Col span={4}>密碼</Col>
               <Col span={12}>{secureEditHtml}</Col>
             </Row>
           ) : (
@@ -509,7 +509,7 @@ class AvatarUpload extends Component {
       <div className="avatar-box">
         <Tooltip
           placement="right"
-          title={<div>点击头像更换 (只支持jpg、png格式且大小不超过200kb的图片)</div>}
+          title={<div>點選頭像更換 (只支援jpg、png格式且大小不超過200kb的圖片)</div>}
         >
           <div>
             <Upload
@@ -537,11 +537,11 @@ function beforeUpload(file) {
   const isJPG = file.type === 'image/jpeg';
   const isPNG = file.type === 'image/png';
   if (!isJPG && !isPNG) {
-    message.error('图片的格式只能为 jpg、png！');
+    message.error('圖片的格式只能為 jpg、png！');
   }
   const isLt2M = file.size / 1024 / 1024 < 0.2;
   if (!isLt2M) {
-    message.error('图片必须小于 200kb!');
+    message.error('圖片必須小於 200kb!');
   }
 
   return (isPNG || isJPG) && isLt2M;

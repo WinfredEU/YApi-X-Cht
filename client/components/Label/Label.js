@@ -38,7 +38,7 @@ export default class Label extends Component {
               <div>
                 <p>
                   {this.props.desc} &nbsp;&nbsp;
-                  <Tooltip title="编辑简介">
+                  <Tooltip title="編輯簡介">
                     <Icon onClick={this.toggle} className="interface-delete-icon" type="edit" />
                   </Tooltip>
                 </p>

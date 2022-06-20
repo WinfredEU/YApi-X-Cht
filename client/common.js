@@ -79,8 +79,8 @@ exports.formatTime = timestamp => {
   return moment.unix(timestamp).format('YYYY-MM-DD HH:mm:ss')
 }
 
-// 防抖函数，减少高频触发的函数执行的频率
-// 请在 constructor 里使用:
+// 防抖函式，減少高頻觸發的函式執行的頻率
+// 請在 constructor 里使用:
 // import { debounce } from '$/common';
 // this.func = debounce(this.func, 400);
 exports.debounce = (func, wait) => {
@@ -91,7 +91,7 @@ exports.debounce = (func, wait) => {
   }
 }
 
-// 从 Javascript 对象中选取随机属性
+// 從 Javascript 對像中選取隨機屬性
 exports.pickRandomProperty = obj => {
   let result
   let count = 0
@@ -138,9 +138,9 @@ exports.handleApiPath = path => {
   return path
 }
 
-// 名称限制 constants.NAME_LIMIT 字符
+// 名稱限制 constants.NAME_LIMIT 字元
 exports.nameLengthLimit = type => {
-  // 返回字符串长度，汉字计数为2
+  // 返回字串長度，漢字計數為2
   const strLength = str => {
     let length = 0
     for (let i = 0; i < str.length; i++) {
@@ -148,7 +148,7 @@ exports.nameLengthLimit = type => {
     }
     return length
   }
-  // 返回 form中的 rules 校验规则
+  // 返回 form中的 rules 校驗規則
   return [
     {
       required: true,
@@ -156,11 +156,11 @@ exports.nameLengthLimit = type => {
         const len = value ? strLength(value) : 0
         if (len > constants.NAME_LIMIT) {
           callback(
-            `请输入${ type }名称，长度不超过${ constants.NAME_LIMIT }字符(中文算作2字符)!`,
+            `請輸入${ type }名稱，長度不超過${ constants.NAME_LIMIT }字元(中文算作2字元)!`,
           )
         } else if (len === 0) {
           callback(
-            `请输入${ type }名称，长度不超过${ constants.NAME_LIMIT }字符(中文算作2字符)!`,
+            `請輸入${ type }名稱，長度不超過${ constants.NAME_LIMIT }字元(中文算作2字元)!`,
           )
         } else {
           return callback()
@@ -170,14 +170,14 @@ exports.nameLengthLimit = type => {
   ]
 }
 
-// 去除所有html标签只保留文字
+// 去除所有html標籤只保留文字
 
 exports.htmlFilter = html => {
   const reg = /<\/?.+?\/?>/g
-  return html.replace(reg, '') || '新项目'
+  return html.replace(reg, '') || '新專案'
 }
 
-// 实现 Object.entries() 方法
+// 實現 Object.entries() 方法
 exports.entries = obj => {
   const res = []
   for (const key in obj) {
@@ -193,10 +193,10 @@ exports.getMockText = mockTpl => {
   }
 }
 /**
- * 合并后新的对象属性与 Obj 一致，nextObj 有对应属性则取 nextObj 属性值，否则取 Obj 属性值
- * @param  {Object} Obj     旧对象
- * @param  {Object} nextObj 新对象
- * @return {Object}           合并后的对象
+ * 合併后新的對象屬性與 Obj 一致，nextObj 有對應屬性則取 nextObj 屬性值，否則取 Obj 屬性值
+ * @param  {Object} Obj     舊對像
+ * @param  {Object} nextObj 新對像
+ * @return {Object}           合併后的對象
  */
 exports.safeAssign = (Obj, nextObj) => {
   const keys = Object.keys(nextObj)
@@ -210,14 +210,14 @@ exports.safeAssign = (Obj, nextObj) => {
   }, {})
 }
 
-// 交换数组的位置
+// 交換陣列的位置
 exports.arrayChangeIndex = (arr, start, end) => {
   const newArr = [].concat(arr)
   // newArr[start] = arr[end];
   // newArr[end] = arr[start];
   const startItem = newArr[start]
   newArr.splice(start, 1)
-  // end自动加1
+  // end自動加1
   newArr.splice(end, 0, startItem)
   const changes = []
   newArr.forEach((item, index) => {

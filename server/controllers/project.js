@@ -149,7 +149,7 @@ class projectController extends baseController {
   }
 
   /**
-   * 判断分组名称是否重复
+   * 判斷分組名稱是否重複
    * @interface /project/check_project_name
    * @method get
    */
@@ -160,12 +160,12 @@ class projectController extends baseController {
       const group_id = ctx.request.query.group_id
 
       if (!name) {
-        return (ctx.body = yapi.commons.resReturn(null, 401, '项目名不能为空'))
+        return (ctx.body = yapi.commons.resReturn(null, 401, '專案名不能為空'))
       }
       const checkRepeat = await this.Model.checkNameRepeat(name, group_id)
 
       if (checkRepeat > 0) {
-        return (ctx.body = yapi.commons.resReturn(null, 401, '已存在的项目名'))
+        return (ctx.body = yapi.commons.resReturn(null, 401, '已存在的專案名'))
       }
 
       ctx.body = yapi.commons.resReturn({})
@@ -175,17 +175,17 @@ class projectController extends baseController {
   }
 
   /**
-   * 添加项目分组
+   * 新增專案分組
    * @interface /project/add
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {String} name 项目名称，不能为空
-   * @param {String} basepath 项目基本路径，不能为空
-   * @param {Number} group_id 项目分组id，不能为空
-   * @param {Number} group_name 项目分组名称，不能为空
+   * @param {String} name 專案名稱，不能為空
+   * @param {String} basepath 專案基本路徑，不能為空
+   * @param {Number} group_id 專案分組id，不能為空
+   * @param {Number} group_name 專案分組名稱，不能為空
    * @param {String} project_type private public
-   * @param  {String} [desc] 项目描述
+   * @param  {String} [desc] 專案描述
    * @returns {Object}
    * @example ./api/project/add.json
    */
@@ -193,19 +193,19 @@ class projectController extends baseController {
     const params = ctx.params
 
     if ((await this.checkAuth(params.group_id, 'group', 'edit')) !== true) {
-      return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'))
+      return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'))
     }
 
     const checkRepeat = await this.Model.checkNameRepeat(params.name, params.group_id)
 
     if (checkRepeat > 0) {
-      return (ctx.body = yapi.commons.resReturn(null, 401, '已存在的项目名'))
+      return (ctx.body = yapi.commons.resReturn(null, 401, '已存在的專案名'))
     }
 
     params.basepath = params.basepath || ''
 
     if ((params.basepath = this.handleBasepath(params.basepath)) === false) {
-      return (ctx.body = yapi.commons.resReturn(null, 401, 'basepath格式有误'))
+      return (ctx.body = yapi.commons.resReturn(null, 401, 'basepath格式有誤'))
     }
 
     const data = {
@@ -230,31 +230,31 @@ class projectController extends baseController {
     const catInst = yapi.getInst(interfaceCatModel)
     if (result._id) {
       await colInst.save({
-        name: '公共测试集',
+        name: '公共測試集',
         project_id: result._id,
-        desc: '公共测试集',
+        desc: '公共測試集',
         uid: this.getUid(),
         add_time: yapi.commons.time(),
         up_time: yapi.commons.time(),
       })
       await catInst.save({
-        name: '公共分类',
+        name: '公共分類',
         project_id: result._id,
-        desc: '公共分类',
+        desc: '公共分類',
         uid: this.getUid(),
         add_time: yapi.commons.time(),
         up_time: yapi.commons.time(),
       })
     }
     const uid = this.getUid()
-    // 将项目添加者变成项目组长,除admin以外
+    // 將專案新增者變成專案組長,除admin以外
     if (this.getRole() !== 'admin') {
       const userdata = await yapi.commons.getUserdata(uid, 'owner')
       await this.Model.addMember(result._id, [userdata])
     }
     const username = this.getUsername()
     yapi.commons.saveLog({
-      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 添加了项目 <a href="/project/${
+      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 新增了專案 <a href="/project/${
         result._id
       }">${params.name}</a>`,
       type: 'project',
@@ -267,17 +267,17 @@ class projectController extends baseController {
   }
 
   /**
-   * 拷贝项目分组
+   * 拷貝專案分組
    * @interface /project/copy
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {String} name 项目名称，不能为空
-   * @param {String} basepath 项目基本路径，不能为空
-   * @param {Number} group_id 项目分组id，不能为空
-   * @param {Number} group_name 项目分组名称，不能为空
+   * @param {String} name 專案名稱，不能為空
+   * @param {String} basepath 專案基本路徑，不能為空
+   * @param {Number} group_id 專案分組id，不能為空
+   * @param {Number} group_name 專案分組名稱，不能為空
    * @param {String} project_type private public
-   * @param  {String} [desc] 项目描述
+   * @param  {String} [desc] 專案描述
    * @returns {Object}
    * @example ./api/project/add.json
    */
@@ -285,10 +285,10 @@ class projectController extends baseController {
     try {
       const params = ctx.params
 
-      // 拷贝项目的ID
+      // 拷貝專案的ID
       const copyId = params._id
       if ((await this.checkAuth(params.group_id, 'group', 'edit')) !== true) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'))
       }
 
       params.basepath = params.basepath || ''
@@ -309,15 +309,15 @@ class projectController extends baseController {
       // 增加集合
       if (result._id) {
         await colInst.save({
-          name: '公共测试集',
+          name: '公共測試集',
           project_id: result._id,
-          desc: '公共测试集',
+          desc: '公共測試集',
           uid: this.getUid(),
           add_time: yapi.commons.time(),
           up_time: yapi.commons.time(),
         })
 
-        // 拷贝接口列表
+        // 拷貝介面列表
         const cat = params.cat
         for (let i = 0; i < cat.length; i++) {
           const item = cat[i]
@@ -331,10 +331,10 @@ class projectController extends baseController {
           }
           const catResult = await catInst.save(catDate)
 
-          // 获取每个集合中的interface
+          // 獲取每個集合中的interface
           const interfaceData = await this.interfaceModel.listByInterStatus(item._id)
 
-          // 将interfaceData存到新的catID中
+          // 將interfaceData存到新的catID中
           for (let key = 0; key < interfaceData.length; key++) {
             const interfaceItem = interfaceData[key].toObject()
             const data = Object.assign(interfaceItem, {
@@ -356,7 +356,7 @@ class projectController extends baseController {
       const copyProjectMembers = copyProject.members
 
       const uid = this.getUid()
-      // 将项目添加者变成项目组长,除admin以外
+      // 將專案新增者變成專案組長,除admin以外
       if (this.getRole() !== 'admin') {
         const userdata = await yapi.commons.getUserdata(uid, 'owner')
         const check = await this.Model.checkMemberRepeat(copyId, uid)
@@ -366,13 +366,13 @@ class projectController extends baseController {
       }
       await this.Model.addMember(result._id, copyProjectMembers)
 
-      // 在每个测试结合下添加interface
+      // 在每個測試結合下新增interface
 
       const username = this.getUsername()
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 复制了项目 ${
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 複製了專案 ${
           params.preName
-        } 为 <a href="/project/${result._id}">${params.name}</a>`,
+        } 為 <a href="/project/${result._id}">${params.name}</a>`,
         type: 'project',
         uid,
         username: username,
@@ -385,20 +385,20 @@ class projectController extends baseController {
   }
 
   /**
-   * 添加项目成员
+   * 新增專案成員
    * @interface /project/add_member
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
-   * @param {Array} member_uid 项目成员uid,不能为空
+   * @param {Number} id 專案id，不能為空
+   * @param {Array} member_uid 專案成員uid,不能為空
    * @returns {Object}
    * @example ./api/project/add_member.json
    */
   async addMember(ctx) {
     const params = ctx.params
     if ((await this.checkAuth(params.id, 'project', 'edit')) !== true) {
-      return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'))
+      return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'))
     }
 
     params.role = ['owner', 'dev', 'guest'].find(v => v === params.role) || 'dev'
@@ -426,7 +426,7 @@ class projectController extends baseController {
       members = members.join('、')
       const username = this.getUsername()
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 添加了项目成员 ${members}`,
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 新增了專案成員 ${members}`,
         type: 'project',
         uid: this.getUid(),
         username: username,
@@ -441,13 +441,13 @@ class projectController extends baseController {
     })
   }
   /**
-   * 删除项目成员
+   * 刪除專案成員
    * @interface /project/del_member
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
-   * @param {member_uid} uid 项目成员uid,不能为空
+   * @param {Number} id 專案id，不能為空
+   * @param {member_uid} uid 專案成員uid,不能為空
    * @returns {Object}
    * @example ./api/project/del_member.json
    */
@@ -458,11 +458,11 @@ class projectController extends baseController {
 
       const check = await this.Model.checkMemberRepeat(params.id, params.member_uid)
       if (check === 0) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '项目成员不存在'))
+        return (ctx.body = yapi.commons.resReturn(null, 400, '專案成員不存在'))
       }
 
       if ((await this.checkAuth(params.id, 'project', 'danger')) !== true) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'))
       }
 
       const result = await this.Model.delMember(params.id, params.member_uid)
@@ -472,7 +472,7 @@ class projectController extends baseController {
         .findById(params.member_uid)
         .then(member => {
           yapi.commons.saveLog({
-            content: `<a href="/user/profile/${this.getUid()}">${username}</a> 删除了项目中的成员 <a href="/user/profile/${
+            content: `<a href="/user/profile/${this.getUid()}">${username}</a> 刪除了專案中的成員 <a href="/user/profile/${
               params.member_uid
             }">${member ? member.username : ''}</a>`,
             type: 'project',
@@ -488,12 +488,12 @@ class projectController extends baseController {
   }
 
   /**
-   * 获取项目成员列表
+   * 獲取專案成員列表
    * @interface /project/get_member_list
    * @method GET
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
+   * @param {Number} id 專案id，不能為空
    * @return {Object}
    * @example ./api/project/get_member_list.json
    */
@@ -501,7 +501,7 @@ class projectController extends baseController {
   async getMemberList(ctx) {
     const params = ctx.params
     if (!params.id) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空'))
+      return (ctx.body = yapi.commons.resReturn(null, 400, '專案id不能為空'))
     }
 
     const project = await this.Model.get(params.id)
@@ -509,27 +509,27 @@ class projectController extends baseController {
   }
 
   /**
-   * 获取项目信息
+   * 獲取專案資訊
    * @interface /project/get
    * @method GET
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
+   * @param {Number} id 專案id，不能為空
    * @returns {Object}
    * @example ./api/project/get.json
    */
 
   async get(ctx) {
     const params = ctx.params
-    const projectId = params.id || params.project_id // 通过 token 访问
+    const projectId = params.id || params.project_id // 通過 token 訪問
     let result = await this.Model.getBaseInfo(projectId)
 
     if (!result) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '不存在的项目'))
+      return (ctx.body = yapi.commons.resReturn(null, 400, '不存在的專案'))
     }
     if (result.project_type === 'private') {
       if ((await this.checkAuth(result._id, 'project', 'view')) !== true) {
-        return (ctx.body = yapi.commons.resReturn(null, 406, '没有权限'))
+        return (ctx.body = yapi.commons.resReturn(null, 406, '沒有許可權'))
       }
     }
     result = result.toObject()
@@ -546,12 +546,12 @@ class projectController extends baseController {
   }
 
   /**
-   * 获取项目列表
+   * 獲取專案列表
    * @interface /project/list
    * @method GET
    * @category project
    * @foldnumber 10
-   * @param {Number} group_id 项目group_id，不能为空
+   * @param {Number} group_id 專案group_id，不能為空
    * @returns {Object}
    * @example ./api/project/list.json
    */
@@ -581,7 +581,7 @@ class projectController extends baseController {
         const f = _.find(follow, fol => {
           return fol.projectid === item._id
         })
-        // 排序：收藏的项目放前面
+        // 排序：收藏的專案放前面
         if (f) {
           item.follow = true
           project_list.unshift(item)
@@ -605,12 +605,12 @@ class projectController extends baseController {
   }
 
   /**
-   * 删除项目
+   * 刪除專案
    * @interface /project/del
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
+   * @param {Number} id 專案id，不能為空
    * @returns {Object}
    * @example ./api/project/del.json
    */
@@ -619,7 +619,7 @@ class projectController extends baseController {
     const id = ctx.params.id
 
     if ((await this.checkAuth(id, 'project', 'danger')) !== true) {
-      return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'))
+      return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'))
     }
 
     const interfaceInst = yapi.getInst(interfaceModel)
@@ -634,14 +634,14 @@ class projectController extends baseController {
   }
 
   /**
-   * 修改项目成员角色
+   * 修改專案成員角色
    * @interface /project/change_member_role
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {String} id 项目id
-   * @param {String} member_uid 项目成员uid
-   * @param {String} role 权限 ['owner'|'dev']
+   * @param {String} id 專案id
+   * @param {String} member_uid 專案成員uid
+   * @param {String} role 許可權 ['owner'|'dev']
    * @returns {Object}
    * @example
    */
@@ -651,17 +651,17 @@ class projectController extends baseController {
 
     const check = await projectInst.checkMemberRepeat(params.id, params.member_uid)
     if (check === 0) {
-      return (ctx.body = yapi.commons.resReturn(null, 400, '项目成员不存在'))
+      return (ctx.body = yapi.commons.resReturn(null, 400, '專案成員不存在'))
     }
     if ((await this.checkAuth(params.id, 'project', 'danger')) !== true) {
-      return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'))
+      return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'))
     }
 
     params.role = ['owner', 'dev', 'guest'].find(v => v === params.role) || 'dev'
     const rolename = {
-      owner: '组长',
-      dev: '开发者',
-      guest: '访客',
+      owner: '組長',
+      dev: '開發者',
+      guest: '訪客',
     }
 
     const result = await projectInst.changeMemberRole(params.id, params.member_uid, params.role)
@@ -672,9 +672,9 @@ class projectController extends baseController {
       .findById(params.member_uid)
       .then(member => {
         yapi.commons.saveLog({
-          content: `<a href="/user/profile/${this.getUid()}">${username}</a> 修改了项目中的成员 <a href="/user/profile/${
+          content: `<a href="/user/profile/${this.getUid()}">${username}</a> 修改了專案中的成員 <a href="/user/profile/${
             params.member_uid
-          }">${member.username}</a> 的角色为 "${rolename[params.role]}"`,
+          }">${member.username}</a> 的角色為 "${rolename[params.role]}"`,
           type: 'project',
           uid: this.getUid(),
           username: username,
@@ -685,14 +685,14 @@ class projectController extends baseController {
   }
 
   /**
-   * 修改项目成员是否收到邮件通知
+   * 修改專案成員是否收到郵件通知
    * @interface /project/change_member_email_notice
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {String} id 项目id
-   * @param {String} member_uid 项目成员uid
-   * @param {String} role 权限 ['owner'|'dev']
+   * @param {String} id 專案id
+   * @param {String} member_uid 專案成員uid
+   * @param {String} role 許可權 ['owner'|'dev']
    * @returns {Object}
    * @example
    */
@@ -702,7 +702,7 @@ class projectController extends baseController {
       const projectInst = yapi.getInst(projectModel)
       const check = await projectInst.checkMemberRepeat(params.id, params.member_uid)
       if (check === 0) {
-        return (ctx.body = yapi.commons.resReturn(null, 400, '项目成员不存在'))
+        return (ctx.body = yapi.commons.resReturn(null, 400, '專案成員不存在'))
       }
 
       const result = await projectInst.changeMemberEmailNotice(
@@ -717,14 +717,14 @@ class projectController extends baseController {
   }
 
   /**
-   * 项目头像设置
+   * 專案頭像設定
    * @interface /project/upset
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
-   * @param {String} icon 项目icon
-   * @param {Array} color 项目color
+   * @param {Number} id 專案id，不能為空
+   * @param {String} icon 專案icon
+   * @param {Array} color 專案color
    * @returns {Object}
    * @example ./api/project/upset
    */
@@ -733,7 +733,7 @@ class projectController extends baseController {
     const id = ctx.request.body.id
     const data = {}
     if ((await this.checkAuth(id, 'project', 'danger')) !== true) {
-      return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'))
+      return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'))
     }
     const fm = yapi.getInst(fileModel)
     if (logo) {
@@ -752,7 +752,7 @@ class projectController extends baseController {
     data.icon = icon
     data.logo = logo
     if (!id) {
-      return (ctx.body = yapi.commons.resReturn(null, 405, '项目id不能为空'))
+      return (ctx.body = yapi.commons.resReturn(null, 405, '專案id不能為空'))
     }
     try {
       const result = await this.Model.up(id, data)
@@ -764,7 +764,7 @@ class projectController extends baseController {
       this.followModel.updateById(this.getUid(), id, data).then(() => {
         const username = this.getUsername()
         yapi.commons.saveLog({
-          content: `<a href="/user/profile/${this.getUid()}">${username}</a> 修改了项目图标、颜色`,
+          content: `<a href="/user/profile/${this.getUid()}">${username}</a> 修改了專案圖示、顏色`,
           type: 'project',
           uid: this.getUid(),
           username: username,
@@ -777,15 +777,15 @@ class projectController extends baseController {
   }
 
   /**
-   * 编辑项目
+   * 編輯專案
    * @interface /project/up
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
-   * @param {String} name 项目名称，不能为空
-   * @param {String} basepath 项目基本路径，不能为空
-   * @param {String} [desc] 项目描述
+   * @param {Number} id 專案id，不能為空
+   * @param {String} name 專案名稱，不能為空
+   * @param {String} basepath 專案基本路徑，不能為空
+   * @param {String} [desc] 專案描述
    * @returns {Object}
    * @example ./api/project/up.json
    */
@@ -805,18 +805,18 @@ class projectController extends baseController {
       })
 
       if (!id) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '项目id不能为空'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, '專案id不能為空'))
       }
 
       if ((await this.checkAuth(id, 'project', 'danger')) !== true) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'))
       }
 
       const projectData = await this.Model.get(id)
 
       if (params.basepath) {
         if ((params.basepath = this.handleBasepath(params.basepath)) === false) {
-          return (ctx.body = yapi.commons.resReturn(null, 401, 'basepath格式有误'))
+          return (ctx.body = yapi.commons.resReturn(null, 401, 'basepath格式有誤'))
         }
       }
 
@@ -827,7 +827,7 @@ class projectController extends baseController {
       if (params.name) {
         const checkRepeat = await this.Model.checkNameRepeat(params.name, params.group_id)
         if (checkRepeat > 0) {
-          return (ctx.body = yapi.commons.resReturn(null, 401, '已存在的项目名'))
+          return (ctx.body = yapi.commons.resReturn(null, 401, '已存在的專案名'))
         }
       }
 
@@ -840,7 +840,7 @@ class projectController extends baseController {
       const result = await this.Model.up(id, data)
       const username = this.getUsername()
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了项目 <a href="/project/${id}/interface/api">${
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了專案 <a href="/project/${id}/interface/api">${
           projectData.name
         }</a>`,
         type: 'project',
@@ -856,15 +856,15 @@ class projectController extends baseController {
   }
 
   /**
-   * 编辑项目
+   * 編輯專案
    * @interface /project/up_env
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
-   * @param {Array} [env] 项目环境配置
-   * @param {String} [env[].name] 环境名称
-   * @param {String} [env[].domain] 环境域名
+   * @param {Number} id 專案id，不能為空
+   * @param {Array} [env] 專案環境配置
+   * @param {String} [env[].name] 環境名稱
+   * @param {String} [env[].domain] 環境域名
    * @param {Array}  [env[].header] header
    * @returns {Object}
    * @example
@@ -874,15 +874,15 @@ class projectController extends baseController {
       const id = ctx.request.body.id
       const params = ctx.request.body
       if (!id) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '项目id不能为空'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, '專案id不能為空'))
       }
 
       if ((await this.checkAuth(id, 'project', 'edit')) !== true) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'))
       }
 
       if (!params.env || !Array.isArray(params.env)) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, 'env参数格式有误'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, 'env參數格式有誤'))
       }
 
       const projectData = await this.Model.get(id)
@@ -893,14 +893,14 @@ class projectController extends baseController {
       data.env = params.env
       const isRepeat = this.arrRepeat(data.env, 'name')
       if (isRepeat) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '环境变量名重复'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, '環境變數名重複'))
       }
       const result = await this.Model.up(id, data)
       const username = this.getUsername()
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了项目 <a href="/project/${id}/interface/api">${
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了專案 <a href="/project/${id}/interface/api">${
           projectData.name
-        }</a> 的环境`,
+        }</a> 的環境`,
         type: 'project',
         uid: this.getUid(),
         username: username,
@@ -913,14 +913,14 @@ class projectController extends baseController {
   }
 
   /**
-   * 编辑项目
+   * 編輯專案
    * @interface /project/up_tag
    * @method POST
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
-   * @param {Array} [tag] 项目tag配置
-   * @param {String} [tag[].name] tag名称
+   * @param {Number} id 專案id，不能為空
+   * @param {Array} [tag] 專案tag配置
+   * @param {String} [tag[].name] tag名稱
    * @param {String} [tag[].desc] tag描述
    * @returns {Object}
    * @example
@@ -930,15 +930,15 @@ class projectController extends baseController {
       const id = ctx.request.body.id
       const params = ctx.request.body
       if (!id) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '项目id不能为空'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, '專案id不能為空'))
       }
 
       if ((await this.checkAuth(id, 'project', 'edit')) !== true) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'))
       }
 
       if (!params.tag || !Array.isArray(params.tag)) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, 'tag参数格式有误'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, 'tag參數格式有誤'))
       }
 
       const projectData = await this.Model.get(id)
@@ -950,7 +950,7 @@ class projectController extends baseController {
       const result = await this.Model.up(id, data)
       const username = this.getUsername()
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了项目 <a href="/project/${id}/interface/api">${
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了專案 <a href="/project/${id}/interface/api">${
           projectData.name
         }</a> 的tag`,
         type: 'project',
@@ -965,12 +965,12 @@ class projectController extends baseController {
   }
 
   /**
-   * 获取项目的环境变量值
+   * 獲取專案的環境變數值
    * @interface /project/get_env
    * @method GET
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
+   * @param {Number} id 專案id，不能為空
 
    * @returns {Object}
    * @example
@@ -981,12 +981,12 @@ class projectController extends baseController {
       const project_id = ctx.request.query.project_id
       // let params = ctx.request.body;
       if (!project_id) {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '项目id不能为空'))
+        return (ctx.body = yapi.commons.resReturn(null, 405, '專案id不能為空'))
       }
 
-      // 去掉权限判断
+      // 去掉許可權判斷
       // if ((await this.checkAuth(project_id, 'project', 'edit')) !== true) {
-      //   return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'));
+      //   return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'));
       // }
 
       const env = await this.Model.getByEnv(project_id)
@@ -1004,12 +1004,12 @@ class projectController extends baseController {
   }
 
   /**
-   * 获取token数据
+   * 獲取token數據
    * @interface /project/token
    * @method GET
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
+   * @param {Number} id 專案id，不能為空
    * @param {String} q
    * @return {Object}
    */
@@ -1039,12 +1039,12 @@ class projectController extends baseController {
   }
 
   /**
-   * 更新token数据
+   * 更新token數據
    * @interface /project/update_token
    * @method GET
    * @category project
    * @foldnumber 10
-   * @param {Number} id 项目id，不能为空
+   * @param {Number} id 專案id，不能為空
    * @param {String} q
    * @return {Object}
    */
@@ -1063,7 +1063,7 @@ class projectController extends baseController {
         token = getToken(token)
         result.token = token
       } else {
-        ctx.body = yapi.commons.resReturn(null, 402, '没有查到token信息')
+        ctx.body = yapi.commons.resReturn(null, 402, '沒有查到token資訊')
       }
 
       ctx.body = yapi.commons.resReturn(result)
@@ -1073,7 +1073,7 @@ class projectController extends baseController {
   }
 
   /**
-   * 模糊搜索项目名称或者分组名称或接口名称
+   * 模糊搜索專案名稱或者分組名稱或介面名稱
    * @interface /project/search
    * @method GET
    * @category project
@@ -1137,13 +1137,13 @@ class projectController extends baseController {
     return (ctx.body = yapi.commons.resReturn(queryList, 0, 'ok'))
   }
 
-  // 输入 swagger url 的时候 node 端请求数据
+  // 輸入 swagger url 的時候 node 端請求數據
   async swaggerUrl(ctx) {
     try {
       const {url} = ctx.request.query
       const {data} = await axios.get(url)
       if (data == null || typeof data !== 'object') {
-        throw new Error('返回数据格式不是 JSON')
+        throw new Error('返回數據格式不是 JSON')
       }
       ctx.body = yapi.commons.resReturn(data)
     } catch (err) {

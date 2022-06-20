@@ -55,7 +55,7 @@ module.exports = function() {
     });
   });
 
-  // MockServer生成mock数据后触发
+  // MockServer產生mock數據后觸發
   this.bindHook('mock_after', function(context) {
     let interfaceId = context.interfaceData._id;
     let projectId = context.projectData._id;

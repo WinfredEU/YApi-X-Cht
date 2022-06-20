@@ -16,8 +16,8 @@ const CountOverview = props => (
   <Row type="flex" justify="space-start" className="m-row">
     <Col className="gutter-row" span={6}>
       <span>
-        分组总数
-        <Tooltip placement="rightTop" title="统计yapi中一共开启了多少可见的公共分组">
+        分組總數
+        <Tooltip placement="rightTop" title="統計yapi中一共開啟了多少可見的公共分組">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -25,8 +25,8 @@ const CountOverview = props => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        项目总数
-        <Tooltip placement="rightTop" title="统计yapi中建立的所有项目总数">
+        專案總數
+        <Tooltip placement="rightTop" title="統計yapi中建立的所有專案總數">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -34,8 +34,8 @@ const CountOverview = props => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        接口总数
-        <Tooltip placement="rightTop" title="统计yapi所有项目中的所有接口总数">
+        介面總數
+        <Tooltip placement="rightTop" title="統計yapi所有專案中的所有介面總數">
           {/*<a href="javascript:void(0)" className="m-a-help">?</a>*/}
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
@@ -44,8 +44,8 @@ const CountOverview = props => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        测试接口总数
-        <Tooltip placement="rightTop" title="统计yapi所有项目中的所有测试接口总数">
+        測試介面總數
+        <Tooltip placement="rightTop" title="統計yapi所有專案中的所有測試介面總數">
           {/*<a href="javascript:void(0)" className="m-a-help">?</a>*/}
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
@@ -63,10 +63,10 @@ const StatusOverview = props => (
   <Row type="flex" justify="space-start" className="m-row">
     <Col className="gutter-row" span={6}>
       <span>
-        操作系统类型
+        操作系統型別
         <Tooltip
           placement="rightTop"
-          title="操作系统类型,返回值有'darwin', 'freebsd', 'linux', 'sunos' , 'win32'"
+          title="操作系統型別,返回值有'darwin', 'freebsd', 'linux', 'sunos' , 'win32'"
         >
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
@@ -75,8 +75,8 @@ const StatusOverview = props => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        cpu负载
-        <Tooltip placement="rightTop" title="cpu的总负载情况">
+        cpu負載
+        <Tooltip placement="rightTop" title="cpu的總負載情況">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -84,8 +84,8 @@ const StatusOverview = props => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        系统空闲内存总量 / 内存总量
-        <Tooltip placement="rightTop" title="系统空闲内存总量 / 内存总量">
+        系統空閑記憶體總量 / 記憶體總量
+        <Tooltip placement="rightTop" title="系統空閑記憶體總量 / 記憶體總量">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -95,8 +95,8 @@ const StatusOverview = props => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        邮箱状态
-        <Tooltip placement="rightTop" title="检测配置文件中配置邮箱的状态">
+        郵箱狀態
+        <Tooltip placement="rightTop" title="檢測配置檔案中配置郵箱的狀態">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -141,13 +141,13 @@ class statisticsPage extends Component {
   }
 
   async componentWillMount() {
-    this.props.setBreadcrumb([{ name: '系统信息' }]);
+    this.props.setBreadcrumb([{ name: '系統資訊' }]);
     this.getStatisData();
     this.getSystemStatusData();
     this.getGroupData();
   }
 
-  // 获取统计数据
+  // 獲取統計數據
   async getStatisData() {
     let result = await axios.get('/api/plugin/statismock/count');
     if (result.data.errcode === 0) {
@@ -158,7 +158,7 @@ class statisticsPage extends Component {
     }
   }
 
-  // 获取系统信息
+  // 獲取系統資訊
 
   async getSystemStatusData() {
     let result = await axios.get('/api/plugin/statismock/get_system_status');
@@ -170,7 +170,7 @@ class statisticsPage extends Component {
     }
   }
 
-  // 获取分组详细信息
+  // 獲取分組詳細資訊
 
   async getGroupData() {
     let result = await axios.get('/api/plugin/statismock/group_data_statis');
@@ -191,11 +191,11 @@ class statisticsPage extends Component {
     return (
       <div className="g-statistic">
         <div className="content">
-          <h2 className="title">系统状况</h2>
+          <h2 className="title">系統狀況</h2>
           <div className="system-content">
             <StatusOverview data={status} />
           </div>
-          <h2 className="title">数据统计</h2>
+          <h2 className="title">數據統計</h2>
           <div>
             <CountOverview date={count} />
             <StatisTable dataSource={dataTotal} />

@@ -73,7 +73,7 @@ export default class ProjectInterfaceSync extends Component {
         let assignValue = Object.assign(params, values);
         await axios.post('/api/plugin/autoSync/save', assignValue).then(res => {
           if (res.data.errcode === 0) {
-            message.success('保存成功');
+            message.success('儲存成功');
           } else {
             message.error(res.data.errmsg);
           }
@@ -88,17 +88,17 @@ export default class ProjectInterfaceSync extends Component {
     try{
       await this.props.handleSwaggerUrlData(value);
     } catch(e) {
-      callback('swagger地址不正确');
+      callback('swagger地址不正確');
     } 
     callback()
   }
 
   componentWillMount() {
-    //查询同步任务
+    //查詢同步任務
     this.setState({
       sync_data: {}
     });
-    //默认每份钟同步一次,取一个随机数
+    //預設每份鐘同步一次,取一個隨機數
     this.setState({
       random_corn: '*/2 * * * *'
     });
@@ -117,7 +117,7 @@ export default class ProjectInterfaceSync extends Component {
     }
   }
 
-  // 是否开启
+  // 是否開啟
   onChange = v => {
     let sync_data = this.state.sync_data;
     sync_data.is_sync_open = v;
@@ -130,7 +130,7 @@ export default class ProjectInterfaceSync extends Component {
     if(!value)return;
     value = value.trim();
     if(value.split(/ +/).length > 5){
-      callback('不支持秒级别的设置，建议使用 "*/10 * * * *" ,每隔10分钟更新')
+      callback('不支援秒級別的設定，建議使用 "*/10 * * * *" ,每隔10分鐘更新')
     }
     callback()
   }
@@ -141,36 +141,36 @@ export default class ProjectInterfaceSync extends Component {
       <div className="m-panel">
         <Form>
           <FormItem
-            label="是否开启自动同步"
+            label="是否開啟自動同步"
             {...formItemLayout}
           >
             <Switch
               checked={this.state.sync_data.is_sync_open}
               onChange={this.onChange}
-              checkedChildren="开"
-              unCheckedChildren="关"
+              checkedChildren="開"
+              unCheckedChildren="關"
             />
-            {this.state.sync_data.last_sync_time != null ? (<div>上次更新时间:<span className="logtime">{formatTime(this.state.sync_data.last_sync_time)}</span></div>) : null}
+            {this.state.sync_data.last_sync_time != null ? (<div>上次更新時間:<span className="logtime">{formatTime(this.state.sync_data.last_sync_time)}</span></div>) : null}
           </FormItem>
 
           <div>
             <FormItem {...formItemLayout} label={
               <span className="label">
-                数据同步&nbsp;
+                數據同步&nbsp;
                 <Tooltip
                   title={
                     <div>
                       <h3 style={{ color: 'white' }}>普通模式</h3>
-                      <p>不导入已存在的接口</p>
+                      <p>不匯入已存在的介面</p>
                       <br />
-                      <h3 style={{ color: 'white' }}>智能合并</h3>
+                      <h3 style={{ color: 'white' }}>智慧合併</h3>
                       <p>
-                        已存在的接口，将合并返回数据的 response，适用于导入了 swagger
-                        数据，保留对数据结构的改动
+                        已存在的介面，將合併返回數據的 response，適用於匯入了 swagger
+                        數據，保留對數據結構的改動
                       </p>
                       <br />
-                      <h3 style={{ color: 'white' }}>完全覆盖</h3>
-                      <p>不保留旧数据，完全使用新数据，适用于接口定义完全交给后端定义</p>
+                      <h3 style={{ color: 'white' }}>完全覆蓋</h3>
+                      <p>不保留舊數據，完全使用新數據，適用於介面定義完全交給後端定義</p>
                     </div>
                   }
                 >
@@ -183,25 +183,25 @@ export default class ProjectInterfaceSync extends Component {
                 rules: [
                   {
                     required: true,
-                    message: '请选择同步方式!'
+                    message: '請選擇同步方式!'
                   }
                 ]
               })(
 
                 <Select>
                   <Option value="normal">普通模式</Option>
-                  <Option value="good">智能合并</Option>
-                  <Option value="merge">完全覆盖</Option>
+                  <Option value="good">智慧合併</Option>
+                  <Option value="merge">完全覆蓋</Option>
                 </Select>
               )}
             </FormItem>
 
-            <FormItem {...formItemLayout} label="项目的swagger json地址">
+            <FormItem {...formItemLayout} label="專案的swagger json地址">
               {getFieldDecorator('sync_json_url', {
                 rules: [
                   {
                     required: true,
-                    message: '输入swagger地址'
+                    message: '輸入swagger地址'
                   },
                   {
                     validator: this.validSwaggerUrl
@@ -212,12 +212,12 @@ export default class ProjectInterfaceSync extends Component {
               })(<Input />)}
             </FormItem>
 
-            <FormItem {...formItemLayout} label={<span>类cron风格表达式(默认10分钟更新一次)&nbsp;<a href="https://blog.csdn.net/shouldnotappearcalm/article/details/89469047">参考</a></span>}>
+            <FormItem {...formItemLayout} label={<span>類cron風格表達式(預設10分鐘更新一次)&nbsp;<a href="https://blog.csdn.net/shouldnotappearcalm/article/details/89469047">參考</a></span>}>
               {getFieldDecorator('sync_cron', {
                 rules: [
                   {
                     required: true,
-                    message: '输入node-schedule的类cron表达式!'
+                    message: '輸入node-schedule的類cron表達式!'
                   },
                   {
                     validator: this.sync_cronCheck
@@ -229,7 +229,7 @@ export default class ProjectInterfaceSync extends Component {
           </div>
           <FormItem {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit" icon="save" size="large" onClick={this.handleSubmit}>
-              保存
+              儲存
             </Button>
           </FormItem>
         </Form>

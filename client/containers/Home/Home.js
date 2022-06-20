@@ -32,7 +32,7 @@ const HomeGuest = () => (
                 href="https://hellosean1025.github.io/yapi"
                 className="item"
               >
-                使用文档
+                使用文件
               </a>
             </div>
           </Col>
@@ -45,13 +45,13 @@ const HomeGuest = () => (
                 <span className="name">YAPI</span>
               </div>
               <div className="detail">
-                高效、易用、功能强大的API管理平台<br />
-                <span className="desc">旨在为开发、产品、测试人员提供更优雅的接口管理服务</span>
+                高效、易用、功能強大的API管理平臺<br />
+                <span className="desc">旨在為開發、產品、測試人員提供更優雅的介面管理服務</span>
               </div>
               <div className="btn-group">
                 <Link to="/login">
                   <Button type="primary" className="btn-home btn-login">
-                    登录 / 注册
+                    登錄 / 註冊
                   </Button>
                 </Link>
                 {ThirdLogin != null ? <ThirdLogin /> : null}
@@ -68,27 +68,27 @@ const HomeGuest = () => (
     </div>
     <div className="feat-part section-feature">
       <div className="container home-section">
-        <h3 className="title">为API开发者设计的管理平台</h3>
+        <h3 className="title">為API開發者設計的管理平臺</h3>
         <span className="desc">
-          YApi让接口开发更简单高效，让接口的管理更具可读性、可维护性，让团队协作更合理。
+          YApi讓介面開發更簡單高效，讓介面的管理更具可讀性、可維護性，讓團隊協作更合理。
         </span>
         <Row key="feat-motion-row">
           <Col span={8} className="section-item" key="feat-wrapper-1">
             <Icon type="appstore-o" className="img" />
-            <h4 className="title">项目管理</h4>
-            <span className="desc">提供基本的项目分组，项目管理，接口管理功能</span>
+            <h4 className="title">專案管理</h4>
+            <span className="desc">提供基本的專案分組，專案管理，介面管理功能</span>
           </Col>
           <Col span={8} className="section-item" key="feat-wrapper-2">
             <Icon type="api" className="img" />
-            <h4 className="title">接口管理</h4>
+            <h4 className="title">介面管理</h4>
             <span className="desc">
-              友好的接口文档，基于websocket的多人协作接口编辑功能和类postman测试工具，让多人协作成倍提升开发效率
+              友好的介面文件，基於websocket的多人協作介面編輯功能和類postman測試工具，讓多人協作成倍提升開發效率
             </span>
           </Col>
           <Col span={8} className="section-item" key="feat-wrapper-3">
             <Icon type="database" className="img" />
             <h4 className="title">MockServer</h4>
-            <span className="desc">基于Mockjs，使用简单功能强大</span>
+            <span className="desc">基於Mockjs，使用簡單功能強大</span>
           </Col>
         </Row>
       </div>
@@ -100,15 +100,15 @@ const HomeGuest = () => (
         <div className="m-bg-mask m-bg-mask2" />
       </div>
       <div className="container skew-container">
-        <h3 className="title">功能强大的 Mock 服务</h3>
-        <span className="desc">你想要的 Mock 服务都在这里</span>
+        <h3 className="title">功能強大的 Mock 服務</h3>
+        <span className="desc">你想要的 Mock 服務都在這裡</span>
         <Row className="row-card">
           <Col lg={12} xs={24} className="section-card">
-            <Card title="Mock 规则">
+            <Card title="Mock 規則">
               <p className="mock-desc">
-                通过学习一些简单的 Mock
-                模板规则即可轻松编写接口，这将大大提高定义接口的效率，并且无需为编写 Mock 数据烦恼:
-                所有的数据都可以实时随机生成。
+                通過學習一些簡單的 Mock
+                模板規則即可輕鬆編寫介面，這將大大提高定義介面的效率，並且無需為編寫 Mock 數據煩惱:
+                所有的數據都可以實時隨機產生。
               </p>
               <div className="code">
                 <ol start="1">
@@ -193,10 +193,10 @@ const HomeGuest = () => (
             </Card>
           </Col>
           <Col lg={12} xs={24} className="section-card mock-after">
-            <Card title="生成的 Mock 数据">
+            <Card title="產生的 Mock 數據">
               <p className="mock-desc">
-                生成的 Mock 数据可以直接用 ajax
-                请求使用，也可以通过服务器代理使用（不需要修改项目一行代码）
+                產生的 Mock 數據可以直接用 ajax
+                請求使用，也可以通過伺服器代理使用（不需要修改專案一行程式碼）
               </p>
               <div className="code">
                 <ol start="1">
@@ -285,21 +285,21 @@ const HomeGuest = () => (
           <Col lg={7} xs={10} className="section-card">
             <Card>
               <div className="section-block block-first">
-                <h4>超级管理员(* N)</h4>
-                <p className="item"> - 创建分组</p>
-                <p className="item"> - 分配组长</p>
-                <p className="item"> - 管理所有成员信息</p>
+                <h4>超級管理員(* N)</h4>
+                <p className="item"> - 建立分組</p>
+                <p className="item"> - 分配組長</p>
+                <p className="item"> - 管理所有成員資訊</p>
               </div>
               <div className="section-block block-second">
-                <h4>组长(* N)</h4>
-                <p className="item"> - 创建项目</p>
-                <p className="item"> - 管理分组或项目的信息</p>
-                <p className="item"> - 管理开发者与成员</p>
+                <h4>組長(* N)</h4>
+                <p className="item"> - 建立專案</p>
+                <p className="item"> - 管理分組或專案的資訊</p>
+                <p className="item"> - 管理開發者與成員</p>
               </div>
               <div className="section-block block-third">
-                <h4>开发者(* N) / 成员(* N)</h4>
-                <p className="item"> - 不允许创建分组</p>
-                <p className="item"> - 不允许修改分组或项目信息</p>
+                <h4>開發者(* N) / 成員(* N)</h4>
+                <p className="item"> - 不允許建立分組</p>
+                <p className="item"> - 不允許修改分組或專案資訊</p>
               </div>
             </Card>
           </Col>
@@ -307,11 +307,11 @@ const HomeGuest = () => (
             <Icon type="team" className="icon" />
             <h3 className="title">扁平化管理模式</h3>
             <p className="desc">
-              接口管理的逻辑较为复杂，操作频率高，层层审批将严重拖慢生产效率，因此传统的金字塔管理模式并不适用。
+              介面管理的邏輯較為複雜，操作頻率高，層層審批將嚴重拖慢生產效率，因此傳統的金字塔管理模式並不適用。
             </p>
             <p className="desc">
               YAPI
-              将扁平化管理模式的思想引入到产品的权限管理中，超级管理员拥有最高的权限，并将权限分配给若干组长，超级管理员只需管理组长即可，实际上管理YAPI各大分组与项目的是“组长”。组长对分组或项目负责，一般由BU负责人/项目负责人担任。
+              將扁平化管理模式的思想引入到產品的許可權管理中，超級管理員擁有最高的許可權，並將許可權分配給若干組長，超級管理員只需管理組長即可，實際上管理YAPI各大分組與專案的是「組長」。組長對分組或專案負責，一般由BU負責人/專案負責人擔任。
             </p>
           </Col>
         </Row>
@@ -360,19 +360,19 @@ class Home extends Component {
         <div className="row-tip">
           <div className="container">
             <div className="tip-title">
-              <h3 className="title">准备好使用了吗？</h3>
-              <p className="desc">注册账号尽请使用吧，查看使用文档了解更多信息</p>
+              <h3 className="title">準備好使用了嗎？</h3>
+              <p className="desc">註冊賬號盡請使用吧，檢視使用文件瞭解更多資訊</p>
             </div>
             <div className="tip-btns">
               <div className="btn-group">
                 <Link to="/login">
                   <Button type="primary" className="btn-home btn-login">
-                    登录 / 注册
+                    登錄 / 註冊
                   </Button>
                 </Link>
                 <Button className="btn-home btn-home-normal">
                   <a target="_blank" rel="noopener noreferrer" href="https://hellosean1025.github.io/yapi">
-                    使用文档
+                    使用文件
                   </a>
                 </Button>
               </div>
@@ -386,20 +386,20 @@ class Home extends Component {
 
 // Home.defaultProps={
 //   introList:[{
-//     title:"接口管理",
-//     des:"满足你的所有接口管理需求。不再需要为每个项目搭建独立的接口管理平台和编写离线的接口文档，其权限管理和项目日志让协作开发不再痛苦。",
+//     title:"介面管理",
+//     des:"滿足你的所有介面管理需求。不再需要為每個專案搭建獨立的介面管理平臺和編寫離線的介面文件，其許可權管理和專案日誌讓協作開發不再痛苦。",
 //     detail:[
-//       {title:"团队协作",des:"多成员协作，掌握项目进度",iconType:"team"},
-//       {title:"权限管理",des:"设置每个成员的操作权限",iconType:"usergroup-add"},
-//       {title:"项目日志",des:"推送项目情况，掌握更新动态",iconType:"schedule"}
+//       {title:"團隊協作",des:"多成員協作，掌握專案進度",iconType:"team"},
+//       {title:"許可權管理",des:"設定每個成員的操作許可權",iconType:"usergroup-add"},
+//       {title:"專案日誌",des:"推送專案情況，掌握更新動態",iconType:"schedule"}
 //     ],
 //     img:"./image/demo-img.jpg"
 //   },{
-//     title:"接口测试",
-//     des:"一键即可得到返回结果。根据用户的输入接口信息如协议、URL、接口名、请求头、请求参数、mock规则生成Mock接口，这些接口会自动生成模拟数据。",
+//     title:"介面測試",
+//     des:"一鍵即可得到返回結果。根據使用者的輸入介面資訊如協議、URL、介面名、請求頭、請求參數、mock規則產生Mock介面，這些介面會自動產生模擬數據。",
 //     detail:[
-//       {title:"编辑接口",des:"团队开发时任何人都可以在权限许可下创建、修改接口",iconType:"tags-o"},
-//       {title:"mock请求",des:"创建者可以自由构造需要的数据，支持复杂的生成逻辑",iconType:"fork"}
+//       {title:"編輯介面",des:"團隊開發時任何人都可以在許可權許可下建立、修改介面",iconType:"tags-o"},
+//       {title:"mock請求",des:"建立者可以自由構造需要的數據，支援複雜的產生邏輯",iconType:"fork"}
 //     ],
 //     img:"./image/demo-img.jpg"
 //   }

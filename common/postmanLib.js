@@ -58,8 +58,8 @@ async function httpRequestByNode(options) {
         res: {
           status: 500,
           body: isNode
-            ? '请求出错, 内网服务器自动化测试无法访问到，请检查是否为内网服务器！'
-            : '请求出错',
+            ? '請求出錯, 內網伺服器自動化測試無法訪問到，請檢查是否為內網伺服器！'
+            : '請求出錯',
         },
       }
     }
@@ -242,7 +242,7 @@ function sandboxByBrowser(context = {}, script) {
  * @param {*} defaultOptions
  * @param {*} preScript
  * @param {*} afterScript
- * @param {*} commonContext  负责传递一些业务信息，crossRequest 不关注具体传什么，只负责当中间人
+ * @param {*} commonContext  負責傳遞一些業務資訊，crossRequest 不關注具體傳什麼，只負責當中間人
  */
 async function crossRequest(defaultOptions, preScript, afterScript, commonContext = {}) {
   const options = Object.assign({}, defaultOptions)
@@ -256,13 +256,13 @@ async function crossRequest(defaultOptions, preScript, afterScript, commonContex
       return urlObj.href
     },
     set href(val) {
-      throw new Error('context.href 不能被赋值')
+      throw new Error('context.href 不能被賦值')
     },
     get hostname() {
       return urlObj.hostname
     },
     set hostname(val) {
-      throw new Error('context.hostname 不能被赋值')
+      throw new Error('context.hostname 不能被賦值')
     },
 
     get caseId() {
@@ -270,7 +270,7 @@ async function crossRequest(defaultOptions, preScript, afterScript, commonContex
     },
 
     set caseId(val) {
-      throw new Error('context.caseId 不能被赋值')
+      throw new Error('context.caseId 不能被賦值')
     },
 
     method: options.method,
@@ -324,7 +324,7 @@ async function crossRequest(defaultOptions, preScript, afterScript, commonContex
           res = json_parse(data.res.body)
           data.res.body = res
         }
-        if (!isNode) message = '请求异常，请检查 chrome network 错误信息... https://juejin.im/post/5c888a3e5188257dee0322af 通过该链接查看教程"）'
+        if (!isNode) message = '請求異常，請檢查 chrome network 錯誤資訊... https://juejin.im/post/5c888a3e5188257dee0322af 通過該鏈接檢視教程"）'
         if (isNaN(data.res.status)) {
           reject({
             body: res || message,
@@ -414,7 +414,7 @@ function handleParams(interfaceData, handleValue, requestParams) {
     timeout: 82400000,
   }
 
-  // 对 raw 类型的 form 处理
+  // 對 raw 型別的 form 處理
   try {
     if (interfaceRunData.req_body_type === 'raw') {
       if (headers && headers['Content-Type']) {

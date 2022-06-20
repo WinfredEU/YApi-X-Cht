@@ -109,13 +109,13 @@ function postman(importDataModule) {
       return interfaceData;
     } catch (e) {
       console.error(e);
-      message.error('数据格式有误');
+      message.error('數據格式有誤');
     }
   }
 
   function importHar(data, key) {
     let reflect = {
-      //数据字段映射关系
+      //數據欄位對映關係
       title: 'url',
       path: 'url',
       method: 'method',
@@ -213,14 +213,14 @@ function postman(importDataModule) {
   }
 
   if (!importDataModule || typeof importDataModule !== 'object') {
-    console.error('obj参数必需是一个对象');
+    console.error('obj參數必需是一個對像');
     return null;
   }
 
   importDataModule.har = {
     name: 'HAR',
     run: run,
-    desc: '使用chrome录制请求功能，具体使用请查看文档'
+    desc: '使用chrome錄製請求功能，具體使用請檢視文件'
   };
 }
 

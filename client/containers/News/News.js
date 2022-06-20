@@ -43,18 +43,18 @@ class News extends Component {
     return (
       <div>
         <Subnav
-          default={'动态'}
+          default={'動態'}
           data={[
             {
-              name: '动态',
+              name: '動態',
               path: '/news'
             },
             {
-              name: '测试',
+              name: '測試',
               path: '/follow'
             },
             {
-              name: '设置',
+              name: '設定',
               path: '/follow'
             }
           ]}
@@ -66,7 +66,7 @@ class News extends Component {
               <div className="Mockurl">
                 <span>Mock地址：</span>
                 <p>{this.state.mockURL}</p>
-                <Button type="primary">下载Mock数据</Button>
+                <Button type="primary">下載Mock數據</Button>
               </div>
             </div>
             <NewsTimeline />

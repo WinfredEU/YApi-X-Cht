@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
   }
 };
 
-// 获取关注列表
+// 獲取關注列表
 export function getFollowList(uid) {
   return {
     type: GET_FOLLOW_LIST,
@@ -31,7 +31,7 @@ export function getFollowList(uid) {
   };
 }
 
-// 添加关注
+// 新增關注
 export function addFollow(param) {
   return {
     type: ADD_FOLLOW,
@@ -39,7 +39,7 @@ export function addFollow(param) {
   };
 }
 
-// 删除关注
+// 刪除關注
 export function delFollow(id) {
   return {
     type: DEL_FOLLOW,

@@ -68,7 +68,7 @@ const compareVersions = require('compare-versions');
         try{
           res = JSON.parse(res);
         } catch (e) {
-          console.error('json 解析出错',e.message)
+          console.error('json 解析出錯',e.message)
         }
       }
 
@@ -133,7 +133,7 @@ const compareVersions = require('compare-versions');
   function handleSwagger(data, originTags= []) {
 
     let api = {};
-    //处理基本信息
+    //處理基本資訊
     api.method = data.method.toUpperCase();
     api.title = data.summary || data.path;
     api.desc = data.description;
@@ -145,7 +145,7 @@ const compareVersions = require('compare-versions');
           continue;
         }
 
-        // 如果根路径有 tags，使用根路径 tags,不使用每个接口定义的 tag 做完分类
+        // 如果根路徑有 tags，使用根路徑 tags,不使用每個介面定義的 tag 做完分類
         if(originTags.length > 0 && _.find(originTags, item=>{
           return item.name === data.tags[i]
         })){
@@ -187,7 +187,7 @@ const compareVersions = require('compare-versions');
       }
     }
 
-    //处理response
+    //處理response
     api.res_body = handleResponse(data.responses);
     try {
       JSON.parse(api.res_body);
@@ -196,7 +196,7 @@ const compareVersions = require('compare-versions');
     } catch (e) {
       api.res_body_type = 'raw';
     }
-    //处理参数
+    //處理參數
     function simpleJsonPathParse(key, json) {
       if (!key || typeof key !== 'string' || key.indexOf('#/') !== 0 || key.length <= 2) {
         return null;

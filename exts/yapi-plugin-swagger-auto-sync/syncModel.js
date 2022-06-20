@@ -11,17 +11,17 @@ class syncModel extends baseModel {
     return {
       uid: { type: Number},
       project_id: { type: Number, required: true },
-      //是否开启自动同步
+      //是否開啟自動同步
       is_sync_open: { type: Boolean, default: false },
-      //自动同步定时任务的cron表达式
+      //自動同步定時任務的cron表達式
       sync_cron: String,
-      //自动同步获取json的url
+      //自動同步獲取json的url
       sync_json_url: String,
-      //接口合并模式  good,nomarl等等 意思也就是智能合并,完全覆盖等
+      //介面合併模式  good,nomarl等等 意思也就是智慧合併,完全覆蓋等
       sync_mode: String,
-      //上次成功同步接口时间,
+      //上次成功同步介面時間,
       last_sync_time: Number,
-      //上次同步的swagger 文档内容
+      //上次同步的swagger 文件內容
       old_swagger_content: String,
       add_time: Number,
       up_time: Number,

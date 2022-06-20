@@ -25,7 +25,7 @@ class statisMockController extends baseController {
   }
 
   /**
-   * 获取所有统计总数
+   * 獲取所有統計總數
    * @interface statismock/count
    * @method get
    * @category statistics
@@ -51,7 +51,7 @@ class statisMockController extends baseController {
   }
 
   /**
-   * 获取所有mock接口数据信息
+   * 獲取所有mock介面數據資訊
    * @interface statismock/get
    * @method get
    * @category statistics
@@ -64,9 +64,9 @@ class statisMockController extends baseController {
       let mockDateList = [];
 
       if (!this.getRole() === 'admin') {
-        return (ctx.body = yapi.commons.resReturn(null, 405, '没有权限'));
+        return (ctx.body = yapi.commons.resReturn(null, 405, '沒有許可權'));
       }
-      //  默认时间是30 天为一周期
+      //  預設時間是30 天為一週期
       let dateInterval = commons.getDateRange();
       mockDateList = await this.Model.getDayCount(dateInterval);
       return (ctx.body = yapi.commons.resReturn({ mockCount, mockDateList }));
@@ -76,7 +76,7 @@ class statisMockController extends baseController {
   }
 
   /**
-   * 获取邮箱状态信息
+   * 獲取郵箱狀態資訊
    * @interface statismock/getSystemStatus
    * @method get
    * @category statistics

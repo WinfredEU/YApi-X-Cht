@@ -17,13 +17,13 @@ const plugin = require('client/plugin.js');
 let HeaderMenu = {
   user: {
     path: '/user/profile',
-    name: '个人中心',
+    name: '個人中心',
     icon: 'user',
     adminFlag: false
   },
   solution: {
     path: '/user/list',
-    name: '用户管理',
+    name: '使用者管理',
     icon: 'solution',
     adminFlag: true
   }
@@ -41,7 +41,7 @@ const MenuUser = props => (
       }
       return (
         <Menu.Item key={key}>
-          {item.name === '个人中心' ? (
+          {item.name === '個人中心' ? (
             <Link to={item.path + `/${props.uid}`}>
               <Icon type={item.icon} />
               {item.name}
@@ -66,30 +66,30 @@ const MenuUser = props => (
 const tipFollow = (
   <div className="title-container">
     <h3 className="title">
-      <Icon type="star" /> 关注
+      <Icon type="star" /> 關注
     </h3>
-    <p>这里是你的专属收藏夹，便于你找到自己的项目</p>
+    <p>這裡是你的專屬收藏夾，便於你找到自己的專案</p>
   </div>
 );
 const tipAdd = (
   <div className="title-container">
     <h3 className="title">
-      <Icon type="plus-circle" /> 新建项目
+      <Icon type="plus-circle" /> 新建專案
     </h3>
-    <p>在任何页面都可以快速新建项目</p>
+    <p>在任何頁面都可以快速新建專案</p>
   </div>
 );
 const tipDoc = (
   <div className="title-container">
     <h3 className="title">
-      使用文档 <Tag color="orange">推荐!</Tag>
+      使用文件 <Tag color="orange">推薦!</Tag>
     </h3>
     <p>
-      初次使用 YApi，强烈建议你阅读{' '}
+      初次使用 YApi，強烈建議你閱讀{' '}
       <a target="_blank" href="https://hellosean1025.github.io/yapi/" rel="noopener noreferrer">
-        使用文档
+        使用文件
       </a>
-      ，我们为你提供了通俗易懂的快速入门教程，更有详细的使用说明，欢迎阅读！{' '}
+      ，我們為你提供了通俗易懂的快速入門教程，更有詳細的使用說明，歡迎閱讀！{' '}
     </p>
   </div>
 );
@@ -118,7 +118,7 @@ const ToolUser = props => {
         arrowPointAtCenter
         visible={props.studyTip === 1 && !props.study}
       >
-        <Tooltip placement="bottom" title={'我的关注'}>
+        <Tooltip placement="bottom" title={'我的關注'}>
           <li className="toolbar-li">
             <Link to="/follow">
               <Icon className="dropdown-link" style={{ fontSize: 16 }} type="star" />
@@ -134,7 +134,7 @@ const ToolUser = props => {
         arrowPointAtCenter
         visible={props.studyTip === 2 && !props.study}
       >
-        <Tooltip placement="bottom" title={'新建项目'}>
+        <Tooltip placement="bottom" title={'新建專案'}>
           <li className="toolbar-li">
             <Link to="/add-project">
               <Icon className="dropdown-link" style={{ fontSize: 16 }} type="plus-circle" />
@@ -150,7 +150,7 @@ const ToolUser = props => {
         arrowPointAtCenter
         visible={props.studyTip === 3 && !props.study}
       >
-        <Tooltip placement="bottom" title={'使用文档'}>
+        <Tooltip placement="bottom" title={'使用文件'}>
           <li className="toolbar-li">
             <a target="_blank" href="https://hellosean1025.github.io/yapi" rel="noopener noreferrer">
               <Icon className="dropdown-link" style={{ fontSize: 16 }} type="question-circle" />
@@ -248,7 +248,7 @@ export default class HeaderCom extends Component {
     if (e.key != '/doc') {
       this.props.changeMenuItem(e.key);
       if (!this.props.login) {
-        message.info('请先登录', 1);
+        message.info('請先登錄', 1);
       }
     }
   };

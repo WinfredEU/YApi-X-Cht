@@ -86,7 +86,7 @@ function handleCorsRequest(ctx) {
   ctx.set('Access-Control-Max-Age', 1728000);
   ctx.body = 'ok';
 }
-// 必填字段是否填写好
+// 必填欄位是否填寫好
 function mockValidator(interfaceData, ctx) {
   let i,
     j,
@@ -94,7 +94,7 @@ function mockValidator(interfaceData, ctx) {
     len,
     noRequiredArr = [];
   let method = interfaceData.method.toUpperCase() || 'GET';
-  // query 判断
+  // query 判斷
   for (i = 0, l = interfaceData.req_query.length; i < l; i++) {
     let curQuery = interfaceData.req_query[i];
     if (curQuery && typeof curQuery === 'object' && curQuery.required === '1') {
@@ -103,7 +103,7 @@ function mockValidator(interfaceData, ctx) {
       }
     }
   }
-  // form 表单判断
+  // form 表單判斷
   if (variable.HTTP_METHOD[method].request_body && interfaceData.req_body_type === 'form') {
     for (j = 0, len = interfaceData.req_body_form.length; j < len; j++) {
       let curForm = interfaceData.req_body_form[j];
@@ -121,16 +121,16 @@ function mockValidator(interfaceData, ctx) {
     }
   }
   let validResult;
-  // json schema 判断
+  // json schema 判斷
   if (variable.HTTP_METHOD[method].request_body  && interfaceData.req_body_type === 'json' && interfaceData.req_body_is_json_schema === true) {
     const schema = yapi.commons.json_parse(interfaceData.req_body_other);
     const params = yapi.commons.json_parse(ctx.request.body);
     validResult = schemaValidator(schema, params);
   }
   if (noRequiredArr.length > 0 || (validResult && !validResult.valid)) {
-    let message = `错误信息：`;
-    message += noRequiredArr.length > 0 ? `缺少必须字段 ${noRequiredArr.join(',')}  ` : '';
-    message += validResult && !validResult.valid ? `shema 验证请求参数 ${validResult.message}` : '';
+    let message = `錯誤資訊：`;
+    message += noRequiredArr.length > 0 ? `缺少必須欄位 ${noRequiredArr.join(',')}  ` : '';
+    message += validResult && !validResult.valid ? `shema 驗證請求參數 ${validResult.message}` : '';
 
     return {
       valid: false,
@@ -164,7 +164,7 @@ module.exports = async (ctx, next) => {
   // ctx.set('Access-Control-Allow-Origin', '*');
 
   if (!projectId) {
-    return (ctx.body = yapi.commons.resReturn(null, 400, 'projectId不能为空'));
+    return (ctx.body = yapi.commons.resReturn(null, 400, 'projectId不能為空'));
   }
 
   let projectInst = yapi.getInst(projectModel),
@@ -176,7 +176,7 @@ module.exports = async (ctx, next) => {
   }
 
   if (!project) {
-    return (ctx.body = yapi.commons.resReturn(null, 400, '不存在的项目'));
+    return (ctx.body = yapi.commons.resReturn(null, 400, '不存在的專案'));
   }
 
   let interfaceData, newpath;
@@ -186,7 +186,7 @@ module.exports = async (ctx, next) => {
     newpath = path.substr(project.basepath.length);
     interfaceData = await interfaceInst.getByPath(project._id, newpath, ctx.method);
     let queryPathInterfaceData = await interfaceInst.getByQueryPath(project._id, newpath, ctx.method);
-    //处理query_path情况  url 中有 ?params=xxx
+    //處理query_path情況  url 中有 ?params=xxx
     if (!interfaceData || interfaceData.length != queryPathInterfaceData.length) {
 
       let i,
@@ -222,7 +222,7 @@ module.exports = async (ctx, next) => {
       }
     }
 
-    //处理动态路由
+    //處理動態路由
     if (!interfaceData || interfaceData.length === 0) {
       let newData = await interfaceInst.getVar(project._id, ctx.method);
 
@@ -242,7 +242,7 @@ module.exports = async (ctx, next) => {
       });
 
       if (!findInterface) {
-        //非正常跨域预检请求回应
+        //非正常跨域預檢請求迴應
         if (ctx.method === 'OPTIONS' && ctx.request.header['access-control-request-method']) {
           return handleCorsRequest(ctx);
         }
@@ -250,34 +250,34 @@ module.exports = async (ctx, next) => {
         return (ctx.body = yapi.commons.resReturn(
           null,
           404,
-          `不存在的api, 当前请求path为 ${newpath}， 请求方法为 ${
+          `不存在的api, 目前請求path為 ${newpath}， 請求方法為 ${
             ctx.method
-          } ，请确认是否定义此请求。`
+          } ，請確認是否定義此請求。`
         ));
       }
       interfaceData = [await interfaceInst.get(findInterface._id)];
     }
 
     if (interfaceData.length > 1) {
-      return (ctx.body = yapi.commons.resReturn(null, 405, '存在多个api，请检查数据库'));
+      return (ctx.body = yapi.commons.resReturn(null, 405, '存在多個api，請檢查數據庫'));
     } else {
       interfaceData = interfaceData[0];
     }
 
-    // 必填字段是否填写好
+    // 必填欄位是否填寫好
     if (project.strice) {
       const validResult = mockValidator(interfaceData, ctx);
       if (!validResult.valid) {
         return (ctx.body = yapi.commons.resReturn(
           null,
           404,
-          `接口字段验证不通过, ${validResult.message}`
+          `介面欄位驗證不通過, ${validResult.message}`
         ));
       }
     }
 
     let res;
-    // mock 返回值处理
+    // mock 返回值處理
     res = interfaceData.res_body;
     try {
       if (interfaceData.res_body_type === 'json') {
@@ -289,7 +289,7 @@ module.exports = async (ctx, next) => {
           });
         } else {
           // console.log('header', ctx.request.header['content-type'].indexOf('multipart/form-data'))
-          // 处理 format-data
+          // 處理 format-data
 
           if (
             _.isString(ctx.request.header['content-type']) &&
@@ -326,7 +326,7 @@ module.exports = async (ctx, next) => {
       };
 
       if (project.is_mock_open && project.project_mock_script) {
-        // 项目层面的mock脚本解析
+        // 專案層面的mock指令碼解析
         let script = project.project_mock_script;
         yapi.commons.handleMockScript(script, context);
       }
@@ -375,7 +375,7 @@ module.exports = async (ctx, next) => {
       yapi.commons.log(e, 'error');
       return (ctx.body = {
         errcode: 400,
-        errmsg: '解析出错，请检查。Error: ' + e.message,
+        errmsg: '解析出錯，請檢查。Error: ' + e.message,
         data: null
       });
     }

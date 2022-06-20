@@ -6,92 +6,92 @@ const initPlugins = require('../common/plugin.js').initPlugins
 let extConfig = require('../common/config.js').exts
 
 /**
- * 钩子配置
+ * 鉤子配置
  */
 const hooks = {
   /**
-   * 第三方sso登录钩子，暂只支持设置一个
+   * 第三方sso登錄鉤子，暫只支援設定一個
    * @param ctx
-   * @return 必需返回一个 promise 对象，resolve({username: '', email: ''})
+   * @return 必需返回一個 promise 對象，resolve({username: '', email: ''})
    */
   third_login: {
     type: 'single',
     listener: null,
   },
   /**
-   * 客户端增加接口成功后触发
-   * @param data 接口的详细信息
+   * 客戶端增加介面成功后觸發
+   * @param data 介面的詳細資訊
    */
   interface_add: {
     type: 'multi',
     listener: [],
   },
   /**
-   * 客户端删除接口成功后触发
-   * @param data 接口id
+   * 客戶端刪除介面成功后觸發
+   * @param data 介面id
    */
   interface_del: {
     type: 'multi',
     listener: [],
   },
   /**
-   * 客户端更新接口成功后触发
-   * @param id 接口id
+   * 客戶端更新介面成功后觸發
+   * @param id 介面id
    */
   interface_update: {
     type: 'multi',
     listener: [],
   },
   /**
-   * 客户端获取接口数据列表
-   * @param list 返回接口的数据列表
+   * 客戶端獲取介面數據列表
+   * @param list 返回介面的數據列表
    */
   interface_list: {
     type: 'multi',
     listener: [],
   },
   /**
-   * 客户端获取一条接口信息触发
-   * @param data 接口的详细信息
+   * 客戶端獲取一條介面資訊觸發
+   * @param data 介面的詳細資訊
    */
   interface_get: {
     type: 'multi',
     listener: [],
   },
   /**
-   * 客户端增加一个新项目
-   * @param id 项目id
+   * 客戶端增加一個新專案
+   * @param id 專案id
    */
   project_add: {
     type: 'multi',
     listener: [],
   },
   /**
-   * 客户端更新一个新项目
-   * @param id 项目id
+   * 客戶端更新一個新專案
+   * @param id 專案id
    */
   project_up: {
     type: 'multi',
     listener: [],
   },
   /**
-   * 客户端获取一个项目
-   * @param id 项目id
+   * 客戶端獲取一個專案
+   * @param id 專案id
    */
   project_get: {
     type: 'multi',
     listener: [],
   },
   /**
-   * 客户端删除删除一个项目
-   * @param id 项目id
+   * 客戶端刪除刪除一個專案
+   * @param id 專案id
    */
   project_del: {
     type: 'multi',
     listener: [],
   },
   /**
-     * 导出 markdown 数据
+     * 導出 markdown 數據
      * @param context Object
      * {
      *  projectData: project,
@@ -106,7 +106,7 @@ const hooks = {
     listener: [],
   },
   /**
-     * MockServer生成mock数据后触发
+     * MockServer產生mock數據后觸發
      * @param context Object
      * {
      *  projectData: project,
@@ -121,16 +121,16 @@ const hooks = {
     listener: [],
   },
   /**
-   * 增加路由的钩子
+   * 增加路由的鉤子
    * type Sync
    * @param addPluginRouter Function
    * @info
    * addPLuginPLugin(config)
    *
    * config = {
-   *  path,      // String 路由名称
-   *  method,    // String 请求方法 get post ...
-   *  controller // Class 继承baseController的class
+   *  path,      // String 路由名稱
+   *  method,    // String 請求方法 get post ...
+   *  controller // Class 繼承baseController的class
    *  action     // String controller的Action
    * }
    *
@@ -147,16 +147,16 @@ const hooks = {
     listener: [],
   },
   /**
-   * 增加websocket路由的钩子
+   * 增加websocket路由的鉤子
    * type Sync
    * @param addPluginRouter Function
    * @info
    * addPLuginPLugin(config)
    *
    * config = {
-   *  path,      // String 路由名称
-   *  method,    // String 请求方法 get post ...
-   *  controller // Class 继承baseController的class
+   *  path,      // String 路由名稱
+   *  method,    // String 請求方法 get post ...
+   *  controller // Class 繼承baseController的class
    *  action     // String controller的Action
    * }
    *
@@ -201,7 +201,7 @@ function bindHook(name, listener) {
     hooks[name].listener.push(listener)
   } else {
     if (typeof hooks[name].listener === 'function') {
-      throw new Error(`重复绑定singleHook(${ name }), 请检查`)
+      throw new Error(`重複繫結singleHook(${ name }), 請檢查`)
     }
     hooks[name].listener = listener
   }
@@ -242,7 +242,7 @@ pluginsConfig.forEach(plugin => {
       yapi.path.join(plugin_path, `yapi-plugin-${ plugin.name }/server.js`),
     )
   ) {
-    throw new Error(`config.json配置了插件${plugin},但plugins目录没有找到此插件，请安装此插件`)
+    throw new Error(`config.json配置了外掛${plugin},但plugins目錄沒有找到此外掛，請安裝此外掛`)
   }
   const pluginModule = require(yapi.path.join(
     plugin_path,
@@ -260,7 +260,7 @@ extConfig.forEach(plugin => {
       yapi.path.join(plugin_system_path, `yapi-plugin-${ plugin.name }/server.js`),
     )
   ) {
-    throw new Error(`config.json配置了插件${plugin},但plugins目录没有找到此插件，请安装此插件`)
+    throw new Error(`config.json配置了外掛${plugin},但plugins目錄沒有找到此外掛，請安裝此外掛`)
   }
   const pluginModule = require(yapi.path.join(
     plugin_system_path,
@@ -269,5 +269,5 @@ extConfig.forEach(plugin => {
   pluginModule.call(yapi, plugin.options)
 })
 
-//delete bindHook方法，避免误操作
+//delete bindHook方法，避免誤操作
 delete yapi.bindHook

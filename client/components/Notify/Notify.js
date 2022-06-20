@@ -16,7 +16,7 @@ export default class Notify extends Component {
       if (req.status === 200) {
         this.setState({ newVersion: req.data.data[0] });
       } else {
-        message.error('无法获取新版本信息！');
+        message.error('無法獲取新版本資訊！');
       }
     });
   }
@@ -29,13 +29,13 @@ export default class Notify extends Component {
           <Alert
             message={
               <div>
-                当前版本是：{this.state.version}&nbsp;&nbsp;可升级到: {this.state.newVersion}
+                目前版本是：{this.state.version}&nbsp;&nbsp;可升級到: {this.state.newVersion}
                 &nbsp;&nbsp;&nbsp;
                 <a
                   target="view_window"
                   href="https://github.com/YMFE/yapi/blob/master/CHANGELOG.md"
                 >
-                  版本详情
+                  版本詳情
                 </a>
               </div>
             }

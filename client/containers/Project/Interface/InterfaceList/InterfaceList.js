@@ -95,7 +95,7 @@ class InterfaceList extends Component {
     }
   };
 
-  // 更新分类简介
+  // 更新分類簡介
   handleChangeInterfaceCat = (desc, name) => {
     let params = {
       catid: this.state.catid,
@@ -110,7 +110,7 @@ class InterfaceList extends Component {
       let project_id = this.props.match.params.id;
       await this.props.getProject(project_id);
       await this.props.fetchInterfaceListMenu(project_id);
-      message.success('接口集合简介更新成功');
+      message.success('介面集合簡介更新成功');
     });
   };
 
@@ -145,9 +145,9 @@ class InterfaceList extends Component {
     data.project_id = this.props.curProject._id;
     axios.post('/api/interface/add', data).then(res => {
       if (res.data.errcode !== 0) {
-        return message.error(`${res.data.errmsg}, 你可以在左侧的接口列表中对接口进行删改`);
+        return message.error(`${res.data.errmsg}, 你可以在左側的介面列表中對介面進行刪改`);
       }
-      message.success('接口添加成功');
+      message.success('介面新增成功');
       let interfaceId = res.data.data._id;
       this.props.history.push('/project/' + data.project_id + '/interface/api/' + interfaceId);
       this.props.fetchInterfaceListMenu(data.project_id);
@@ -203,7 +203,7 @@ class InterfaceList extends Component {
 
     const columns = [
       {
-        title: '接口名称',
+        title: '介面名稱',
         dataIndex: 'title',
         key: 'title',
         width: 30,
@@ -216,7 +216,7 @@ class InterfaceList extends Component {
         }
       },
       {
-        title: '接口路径',
+        title: '介面路徑',
         dataIndex: 'path',
         key: 'path',
         width: 50,
@@ -233,7 +233,7 @@ class InterfaceList extends Component {
               >
                 {record.method}
               </span>
-              <Tooltip title="开放接口" placement="topLeft">
+              <Tooltip title="開放介面" placement="topLeft">
                 <span>{record.api_opened && <Icon className="opened" type="eye-o" />}</span>
               </Tooltip>
               <Tooltip title={path} placement="topLeft" overlayClassName="toolTip">
@@ -244,7 +244,7 @@ class InterfaceList extends Component {
         }
       },
       {
-        title: '接口分类',
+        title: '介面分類',
         dataIndex: 'catid',
         key: 'catid',
         width: 28,
@@ -267,7 +267,7 @@ class InterfaceList extends Component {
         }
       },
       {
-        title: '状态',
+        title: '狀態',
         dataIndex: 'status',
         key: 'status',
         width: 24,
@@ -306,7 +306,7 @@ class InterfaceList extends Component {
         key: 'tag',
         width: 14,
         render: text => {
-          let textMsg = text.length > 0 ? text.join('\n') : '未设置';
+          let textMsg = text.length > 0 ? text.join('\n') : '未設定';
           return <div className="table-desc">{textMsg}</div>;
         },
         filters: tagFilter,
@@ -362,7 +362,7 @@ class InterfaceList extends Component {
     return (
       <div style={{ padding: '24px' }}>
         <h2 className="interface-title" style={{ display: 'inline-block', margin: 0 }}>
-          {intername ? intername : '全部接口'}共 ({total}) 个
+          {intername ? intername : '全部介面'}共 ({total}) 個
         </h2>
 
         <Button
@@ -371,7 +371,7 @@ class InterfaceList extends Component {
           type="primary"
           onClick={() => this.setState({ visible: true })}
         >
-          添加接口
+          新增介面
         </Button>
         <div style={{ marginTop: '10px' }}>
           <Label onChange={value => this.handleChangeInterfaceCat(value, intername)} desc={desc} />
@@ -385,7 +385,7 @@ class InterfaceList extends Component {
         />
         {this.state.visible && (
           <Modal
-            title="添加接口"
+            title="新增介面"
             visible={this.state.visible}
             onCancel={() => this.setState({ visible: false })}
             footer={null}

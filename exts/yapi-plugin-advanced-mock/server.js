@@ -46,8 +46,8 @@ module.exports = function() {
     // request.ip
 
     let ip = yapi.commons.getIp(ctx);
-    //   数据库信息查询
-    // 过滤 开启IP
+    //   數據庫資訊查詢
+    // 過濾 開啟IP
     let listWithIp = await caseInst.model
       .find({
         interface_id: interfaceId,
@@ -64,7 +64,7 @@ module.exports = function() {
       }
     });
 
-    // 其他数据
+    // 其他數據
     if (matchList.length === 0) {
       let list = await caseInst.model
         .find({
@@ -110,7 +110,7 @@ module.exports = function() {
     });
     addRouter({
       /**
-       * 保存期望
+       * 儲存期望
        */
       controller: controller,
       method: 'post',
@@ -127,7 +127,7 @@ module.exports = function() {
 
     addRouter({
       /**
-       * 获取期望列表
+       * 獲取期望列表
        */
       controller: controller,
       method: 'get',
@@ -137,7 +137,7 @@ module.exports = function() {
 
     addRouter({
       /**
-       * 删除期望列表
+       * 刪除期望列表
        */
       controller: controller,
       method: 'post',
@@ -147,7 +147,7 @@ module.exports = function() {
 
     addRouter({
       /**
-       * 隐藏期望列表
+       * 隱藏期望列表
        */
       controller: controller,
       method: 'post',
@@ -175,9 +175,9 @@ module.exports = function() {
     let interfaceId = context.interfaceData._id;
     let caseData = await checkCase(context.ctx, interfaceId);
 
-    // 只有开启高级mock才可用
+    // 只有開啟高級mock才可用
     if (caseData && caseData.case_enable) {
-      // 匹配到高级mock
+      // 匹配到高級mock
       let data = await handleByCase(caseData);
 
       context.mockJson = yapi.commons.json_parse(data.res_body);
@@ -205,7 +205,7 @@ module.exports = function() {
       return context;
     }
 
-    // mock 脚本
+    // mock 指令碼
     let script = data.mock_script;
     yapi.commons.handleMockScript(script, context);
   });
